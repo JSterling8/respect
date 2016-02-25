@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Respect Form</title>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="../static/css/splash.css"
+          th:href="@{css/respect-form.css}" rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+</head>
+<body background="img/paper_2.png">
+<center>
+    <div class="table-body">
+
+        <h1>Huddersfield &amp; District Football Association Referee Report Form</h1>
+
+        <table class="table table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <td><center>
+                        <h3>Following some concerns raised at the November Referees' Association Meeting regarding the operation of the new online respect card,
+                            please ensure you read the below instructions carefully and thoroughly.</h3>
+                    </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p> Please ensure that you select the correct League, for district league: division 1 - reserve division 4, for works league: division 1 - division 2,
+                            Inter section competition &amp; Arthur Coupland trophy section A or B, and Kirklees Sunday league: Division 1. For any of the district cup competitions,
+                            please select "Huddersfield FA" under the league drop down, and select the correct cup from the competition drop down.</p>
+
+                        <p> ALL teams are included in the drop down menus, including reserve, 'A' &amp; 'B' teams. If you are officiating on a reserve division fixture, please ensure
+                            you select the correct reserve, 'A' or 'B' teams rather than the first team. For Works league fixtures, all teams are prefixed by 'WL' and can be found at
+                            the bottom of the drop down menu.</p>
+
+                        <p> Where clubs have a district league team and a works league team, e.g. Grange Moor, It is important that you select the correct team for the competition you
+                            are officiating in. Likewise, Kirklees Sunday league teams are prefixed by 'KSL' are are also located at the bottom of the drop down menu.</p>
+
+                        <p> Compulsory questions are marked with a * and MUST be answered or you will not be able to submit your report. When you have answered all of the questions and you are happy that your report is complete, scroll
+                            to the bottom of the page and hit the submit button.</p>
+
+                        <h3><center>If awarding a mark of 5 or less to any of the below questions, please give details as to why</center></h3>
+                    </td>
+                </tr>
+                </thead>
+            </table>
+
+
+            <form action="confirmation" method="post" id="respect-form">
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                        <td>
+                            <font color="red">*Required</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>League:*</b></td>
+                        <td>
+                            <select name="league" id="league" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a League ---</option>
+                                <option value="Huddersfield &amp; District Association Football League">Huddersfield &amp; District Association Football League</option>
+                                <option value="Huddersfield &amp; District Works And Combination League">Huddersfield &amp; District Works And Combination League</option>
+                                <option value="Kirklees Sunday League">Kirklees Sunday League</option>
+                                <option value="Huddersfield FA">Huddersfield FA</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Competition:*</b></td>
+                        <td>
+                            <select name="competition" id="competition" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Competition ---</option>
+                                <option value="Division 1">Division 1</option>
+                                <option value="Division 2">Division 2</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Referee:*</b></td>
+                        <td>
+                            <select name="referee" id="referee" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Referee ---</option>
+                                <option value="Jonathan Sterling">Jonathan Sterling</option>
+                                <option value="Jon Doe">Jon Doe</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><center><h3>Works league teams are prefixed by "WL",<br />
+                            Kirklees Sunday League teams are prefixed by "KSL",<br />
+                            West Riding teams are prefixed by "WR"</h3></center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Home Team:*</b></td>
+                        <td>
+                            <select name="team_home" id="team_home" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select Home Team ---</option>
+                                <option value="Team 1 Test">Team 1 test</option>
+                                <option value="Team 2 Test">Team 2 test</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Away Team:*</b></td>
+                        <td>
+                            <select name="team_away" id="team_away" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select Away Team ---</option>
+                                <option value="Team 1 Test">Team 1 test</option>
+                                <option value="Team 2 Test">Team 2 test</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Date:*</b></td>
+                        <td><input name="date" id="date" type="text" class="form-control" required="required" /></td>
+                    </tr>
+                    <tr>
+                        <td><b>Changing Facilities:*</b><br />
+                            (If you did not visit the changing facilities, <br />
+                            please award a mark of 5)
+                        </td>
+                        <td>
+                            <select name="facilities_score" id="facilities_score" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Comment:</b><br />
+                            If awarding a mark of 5 or less, please give <br />
+                            details as to why. Please also give any other<br />
+                            comments relating to changing facilities as <br />
+                            necessary
+                        </td>
+                        <td>
+                            <textarea name="facilities_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Late Kick Off?*</b><br />
+                            Please ensure that you also submit a late kick<br />
+                            off report to the league secretary</td>
+                        <td>  <label class="radio"><input name="late_ko_yes_no" type="radio" value="yes" required="required">Yes</input></label>
+                            <label class="radio"><input name="late_ko_yes_no" type="radio" value="no" required="required">No</input></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>If yes, how late?</b></td>
+                        <td><input name="late_ko_time"  type="text" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td><b>Who was at fault?</b></td>
+                        <td>  <label class="radio"><input name="late_ko_fault" type="radio" value="home">Home</input></label>
+                            <label class="radio"><input name="late_ko_fault" type="radio" value="away">Away</input></label>
+                            <label class="radio"><input name="late_ko_fault" type="radio" value="both">Both</input></label>
+                            <label class="radio"><input name="late_ko_fault" type="radio" value="neither">Neither</input></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Did the home club provide two footballs compliant with Law 2?*</b></td>
+                        <td>
+                            <label class="radio"><input name="footballs" type="radio" value="yes" required="required">Yes</input></label>
+                            <label class="radio"><input name="footballs" type="radio" value="no" required="required">No</input></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Did the clubs wear numbered shirts?*</b></td>
+                        <td>
+                            <label class="radio"><input name="shirts" type="radio" value="home" required="required">Home</input></label>
+                            <label class="radio"><input name="shirts" type="radio" value="away" required="required">Away</input></label>
+                            <label class="radio"><input name="shirts" type="radio" value="both" required="required">Both</input></label>
+                            <label class="radio"><input name="shirts" type="radio" value="neither" required="required">Neither</input></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Home Spectators Behaviour:*</b></td>
+                        <td>
+                            <select name="spectators_home" id="spectators_home" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Away Spectators Behaviour:*</b></td>
+                        <td>
+                            <select name="spectators_away" id="spectators_away" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Comments:</b><br />
+                            If awarding a mark of 5 or less, please give<br />
+                            comments as to why. Please only give comments<br />
+                            regarding spectators behaviour in this section</td>
+                        <td>
+                            <textarea name="spectators_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Home Club Assistant:*</b></td>
+                        <td>
+                            <select name="assistant_home" id="assistant_home" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Away Club Assistant:*</b></td>
+                        <td>
+                            <select name="assistant_away" id="assistant_away" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Comments:</b><br />
+                            If awarding a mark of 5 or less, please give<br />
+                            comments as to why. Please only give comments<br />
+                            regarding club assistants in this section</td>
+                        <td>
+                            <textarea name="assistant_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Home Captain's Liaison with Referee:*</b></td>
+                        <td>
+                            <select name="captain_liaison_home" id="captain_liaison_home" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Away Captain's Liaison with Referee:*</b></td>
+                        <td>
+                            <select name="captain_liaison_away" id="captain_liaison_away" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Comments:</b><br />
+                            If awarding a mark of 5 or less, please give<br />
+                            comments as to why. Please only give comments<br />
+                            regarding captain's liaison with the referee<br />
+                            in this section</td>
+                        <td>
+                            <textarea name="assistant_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Hospitality, before and after the game:*</b><br />
+                            Please rate the Home club</td>
+                        <td>
+                            <select name="hospitality" id="hospitality" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Did you receive the team sheets at least 10 minutes before kickoff?*</b></td>
+                        <td>  <label class="radio"><input name="team_sheet" type="radio" value="home" required="required">Home</input></label>
+                            <label class="radio"><input name="team_sheet" type="radio" value="away" required="required">Away</input></label>
+                            <label class="radio"><input name="team_sheet" type="radio" value="both" required="required">Both</input></label>
+                            <label class="radio"><input name="team_sheet" type="radio" value="neither" required="required">Neither</input></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Did you contact the HOME club prior to the fixture?*</b></td>
+                        <td>  <label class="radio"><input name="contact" type="radio" value="yes" required="required">Yes</input></label>
+                            <label class="radio"><input name="contact" type="radio" value="no" required="required">No</input></label>
+                            <label class="radio"><input name="contact" type="radio" value="contacted_me" required="required">Club contacted me</input></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Were the captains wearing armbands?*</b></td>
+                        <td>  <label class="radio"><input name="captain_armband" type="radio" value="home" required="required">Home</input></label>
+                            <label class="radio"><input name="captain_armband" type="radio" value="away" required="required">Away</input></label>
+                            <label class="radio"><input name="captain_armband" type="radio" value="both" required="required">Both</input></label>
+                            <label class="radio"><input name="captain_armband" type="radio" value="neither" required="required">Neither</input></label></td>
+                    </tr>
+                    <tr>
+                        <td><b>Home Club Overall Respect Score:*</b></td>
+                        <td>
+                            <select name="overall_home" id="overall_home" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Away Club Overall Respect Score:*</b></td>
+                        <td>
+                            <select name="overall_away" id="overall_away" class="form-control" required="required">
+                                <option value="" disabled="true" selected="true">--- Select a Score ---</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                                <option value='9'>9</option>
+                                <option value='10'>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><center><h3>Please give any general comments below:</h3></center></td>
+                    </tr>
+                    <tr>
+                        <td><b>Additional Comments:</b></td>
+                        <td>
+                            <textarea name="additional_comments" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Your email address:</b></td>
+                        <td><input name="email" type="text" class="form-control" /></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td><button type="submit" class="btn btn-success">Submit</button></td>
+                    </tr>
+                </table>
+            </form>
+    </div>
+</center>
+</body>
+</html>
