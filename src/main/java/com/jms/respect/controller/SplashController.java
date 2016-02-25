@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SplashController {
     @RequestMapping("/")
     public String index() {
+        //TODO If logged in, redirect to panel
+
+        //TODO If not logged in, present with login/register screen
         return "splash";
     }
 }
