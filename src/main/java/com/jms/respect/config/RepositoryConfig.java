@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * Created by anon on 30/01/2016.
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.jms.rater.repository")
+@EnableJpaRepositories(basePackages = "com.jms.respect.repository")
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"com.jms.rater.model", "org.goochjs.glicko2"})
+@EntityScan(basePackages = {"com.jms.respect.model"})
 public class RepositoryConfig {
 }

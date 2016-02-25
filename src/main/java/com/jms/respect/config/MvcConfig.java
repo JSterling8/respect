@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableAutoConfiguration
 @EnableScheduling
-@ComponentScan(basePackages = {"com.jms.rater"})
+@ComponentScan(basePackages = {"com.jms.respect"})
 public class MvcConfig {
+
 }
