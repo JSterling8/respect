@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableJpaRepositories(basePackages = "com.jms.respect.repository")
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"com.jms.respect.model"})
+@EntityScan(basePackages = {"com.jms.respect.dao"})
 public class RepositoryConfig {
 }
