@@ -19,6 +19,14 @@ public class Contact {
     @NotNull
     private String yesNoClub;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Report getReportId() {
         return reportId;
     }

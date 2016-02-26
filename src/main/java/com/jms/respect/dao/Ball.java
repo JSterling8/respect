@@ -19,6 +19,14 @@ public class Ball {
     @NotNull
     private boolean provided;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Report getReportId() {
         return reportId;
     }

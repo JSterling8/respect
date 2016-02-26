@@ -18,6 +18,14 @@ public class Shirt {
     @NotNull
     private String didWear;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Report getReportId() {
         return reportId;
     }

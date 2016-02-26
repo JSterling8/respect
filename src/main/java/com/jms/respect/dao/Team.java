@@ -16,6 +16,14 @@ public class Team {
     @Column(name = "name", columnDefinition = "varchar", length = 255)
     private String name;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public League getLeague() {
         return league;
     }

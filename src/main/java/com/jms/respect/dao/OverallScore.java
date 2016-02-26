@@ -22,6 +22,14 @@ public class OverallScore {
     @NotNull
     private Short awayScore;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Report getReportId() {
         return reportId;
     }

@@ -24,6 +24,14 @@ public class KickOff {
     @Column(name = "fault", columnDefinition = "varchar", length = 255)
     private String fault;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Report getReportId() {
         return reportId;
     }

@@ -25,6 +25,14 @@ public class Spectator {
     @Column(name = "comment", columnDefinition = "varchar")
     private String comment;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Report getReportId() {
         return reportId;
     }

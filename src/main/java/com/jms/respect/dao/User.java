@@ -21,6 +21,14 @@ public class User {
     @Column(name = "password", columnDefinition = "varchar", length = 255)
     private String password;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Referee getRefereeId() {
         return refereeId;
     }
