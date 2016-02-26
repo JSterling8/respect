@@ -51,8 +51,8 @@ public class Report {
     private Set<TeamSheet> teamSheets;
 
     @ManyToOne
-    @JoinColumn(name = "league", referencedColumnName = "id", nullable = false)
-    private League league;
+    @JoinColumn(name = "competition", referencedColumnName = "id", nullable = false)
+    private Competition competition;
 
     @ManyToOne
     @JoinColumn(name = "referee_id", referencedColumnName = "id", nullable = false)
@@ -176,12 +176,12 @@ public class Report {
         this.teamSheets = teamSheets;
     }
 
-    public League getLeague() {
-        return league;
+    public Competition getCompetition() {
+        return competition;
     }
 
-    public void setLeague(League league) {
-        this.league = league;
+    public void setCompetition(Competition competition) {
+        this.competition = competition;
     }
 
     public Referee getRefereeId() {

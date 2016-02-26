@@ -13,14 +13,13 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- TOC entry 2395 (class 1262 OID 25162)
 -- Name: respect; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United Kingdom.1252' LC_CTYPE = 'English_United Kingdom.1252';
+CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8';
 
 
 ALTER DATABASE respect OWNER TO postgres;
@@ -770,7 +769,7 @@ ALTER SEQUENCE referee_id_seq OWNED BY referee.id;
 CREATE TABLE report (
     id integer NOT NULL,
     date date NOT NULL,
-    league integer NOT NULL,
+    competition integer NOT NULL,
     referee_id integer NOT NULL,
     home_team_id integer NOT NULL,
     away_team_id integer NOT NULL
@@ -853,10 +852,10 @@ ALTER SEQUENCE report_id_seq OWNED BY report.id;
 
 --
 -- TOC entry 186 (class 1259 OID 25193)
--- Name: report_league_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: report_competition_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE report_league_seq
+CREATE SEQUENCE report_competition_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -864,15 +863,15 @@ CREATE SEQUENCE report_league_seq
     CACHE 1;
 
 
-ALTER TABLE report_league_seq OWNER TO postgres;
+ALTER TABLE report_competition_seq OWNER TO postgres;
 
 --
 -- TOC entry 2424 (class 0 OID 0)
 -- Dependencies: 186
--- Name: report_league_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: report_competition_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE report_league_seq OWNED BY report.league;
+ALTER SEQUENCE report_competition_seq OWNED BY report.competition;
 
 
 --
@@ -1401,7 +1400,7 @@ ALTER TABLE ONLY report ALTER COLUMN id SET DEFAULT nextval('report_id_seq'::reg
 -- Name: league; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY report ALTER COLUMN league SET DEFAULT nextval('report_league_seq'::regclass);
+ALTER TABLE ONLY report ALTER COLUMN competition SET DEFAULT nextval('report_competition_seq'::regclass);
 
 
 --
@@ -1832,7 +1831,7 @@ SELECT pg_catalog.setval('referee_id_seq', 1, false);
 -- Data for Name: report; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY report (id, date, league, referee_id, home_team_id, away_team_id) FROM stdin;
+COPY report (id, date, competition, referee_id, home_team_id, away_team_id) FROM stdin;
 \.
 
 
@@ -1866,10 +1865,10 @@ SELECT pg_catalog.setval('report_id_seq', 1, false);
 --
 -- TOC entry 2461 (class 0 OID 0)
 -- Dependencies: 186
--- Name: report_league_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: report_competition_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('report_league_seq', 1, false);
+SELECT pg_catalog.setval('report_competition_seq', 1, false);
 
 
 --
@@ -2212,11 +2211,11 @@ ALTER TABLE ONLY report
 
 --
 -- TOC entry 2203 (class 2606 OID 25200)
--- Name: league_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: competition_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY report
-    ADD CONSTRAINT league_fkey FOREIGN KEY (league) REFERENCES league(id);
+    ADD CONSTRAINT competition_fkey FOREIGN KEY (competition) REFERENCES competition(id);
 
 
 --
