@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Respect Form</title>
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
           rel="stylesheet" media="screen" />
-    <link href="../static/css/splash.css"
+    <link href="../static/css/login.css"
           th:href="@{css/respect-form.css}" rel="stylesheet" media="screen"/>
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
@@ -126,16 +126,7 @@
                         <td>
                             <select name="facilities_score" id="facilities_score" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -191,16 +182,7 @@
                         <td>
                             <select name="spectators_home" id="spectators_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -209,16 +191,7 @@
                         <td>
                             <select name="spectators_away" id="spectators_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -236,16 +209,7 @@
                         <td>
                             <select name="assistant_home" id="assistant_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -254,16 +218,7 @@
                         <td>
                             <select name="assistant_away" id="assistant_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -281,16 +236,7 @@
                         <td>
                             <select name="captain_liaison_home" id="captain_liaison_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -299,16 +245,7 @@
                         <td>
                             <select name="captain_liaison_away" id="captain_liaison_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -328,16 +265,7 @@
                         <td>
                             <select name="hospitality" id="hospitality" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -368,16 +296,7 @@
                         <td>
                             <select name="overall_home" id="overall_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
@@ -386,16 +305,7 @@
                         <td>
                             <select name="overall_away" id="overall_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                                <option value='6'>6</option>
-                                <option value='7'>7</option>
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
+                                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
                         </td>
                     </tr>
