@@ -19,9 +19,11 @@ public class User {
     private String email;
 
     @Column(name = "password", columnDefinition = "varchar", length = 255)
+    @NotNull
     private String password;
 
     @Column(name = "type", columnDefinition = "varchar", length = 255)
+    @NotNull
     private String type;
 
     public Integer getId() {

@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5beta1
 -- Dumped by pg_dump version 9.5beta1
 
--- Started on 2016-03-01 17:43:05
+-- Started on 2016-03-01 17:58:36
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -13,6 +13,46 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+
+DROP DATABASE respect;
+--
+-- TOC entry 2395 (class 1262 OID 26858)
+-- Name: respect; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8';
+
+
+ALTER DATABASE respect OWNER TO postgres;
+
+\connect respect
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 6 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+--
+-- TOC entry 2396 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
 
 --
 -- TOC entry 235 (class 3079 OID 12355)
@@ -1137,7 +1177,7 @@ CREATE TABLE "user" (
     id integer NOT NULL,
     referee_id integer NOT NULL,
     email character varying(255) NOT NULL,
-    password character varying(255),
+    password character varying(32767) NOT NULL,
     type character varying(255) NOT NULL
 );
 
@@ -2362,7 +2402,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-03-01 17:43:05
+-- Completed on 2016-03-01 17:58:36
 
 --
 -- PostgreSQL database dump complete
