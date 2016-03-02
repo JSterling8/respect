@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Shirt {
     @Id
-    @SequenceGenerator(name = "shirt_id_seq", sequenceName = "shirt_id_seq")
+    @SequenceGenerator(name = "shirt_id_seq", sequenceName = "shirt_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shirt_id_seq")
     @Column(name = "id", columnDefinition = "serial")
     private Integer id;

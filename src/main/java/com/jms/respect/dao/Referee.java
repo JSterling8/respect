@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Referee {
     @Id
-    @SequenceGenerator(name = "referee_id_seq", sequenceName = "referee_id_seq")
+    @SequenceGenerator(name = "referee_id_seq", sequenceName = "referee_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "referee_id_seq")
     @Column(name = "id", columnDefinition = "serial")
     private Integer id;

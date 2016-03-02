@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class Report {
     @Id
-    @SequenceGenerator(name = "report_id_seq", sequenceName = "report_id_seq")
+    @SequenceGenerator(name = "report_id_seq", sequenceName = "report_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "report_id_seq")
     @Column(name = "id", columnDefinition = "serial")
     private Integer id;
