@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5beta1
 -- Dumped by pg_dump version 9.5beta1
 
--- Started on 2016-03-01 17:58:36
+-- Started on 2016-03-02 18:22:35
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1170,10 +1170,10 @@ ALTER SEQUENCE team_sheet_report_id_seq OWNED BY team_sheet.report_id;
 
 --
 -- TOC entry 232 (class 1259 OID 26998)
--- Name: user; Type: TABLE; Schema: public; Owner: postgres
+-- Name: use; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE "user" (
+CREATE TABLE use (
     id integer NOT NULL,
     referee_id integer NOT NULL,
     email character varying(255) NOT NULL,
@@ -1182,7 +1182,7 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE "user" OWNER TO postgres;
+ALTER TABLE use OWNER TO postgres;
 
 --
 -- TOC entry 233 (class 1259 OID 27004)
@@ -1205,7 +1205,7 @@ ALTER TABLE user_id_seq OWNER TO postgres;
 -- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+ALTER SEQUENCE user_id_seq OWNED BY use.id;
 
 
 --
@@ -1229,7 +1229,7 @@ ALTER TABLE user_referee_id_seq OWNER TO postgres;
 -- Name: user_referee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE user_referee_id_seq OWNED BY "user".referee_id;
+ALTER SEQUENCE user_referee_id_seq OWNED BY use.referee_id;
 
 
 --
@@ -1517,7 +1517,7 @@ ALTER TABLE ONLY team_sheet ALTER COLUMN report_id SET DEFAULT nextval('team_she
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+ALTER TABLE ONLY use ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
@@ -1525,7 +1525,7 @@ ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regcl
 -- Name: referee_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "user" ALTER COLUMN referee_id SET DEFAULT nextval('user_referee_id_seq'::regclass);
+ALTER TABLE ONLY use ALTER COLUMN referee_id SET DEFAULT nextval('user_referee_id_seq'::regclass);
 
 
 --
@@ -2023,10 +2023,11 @@ SELECT pg_catalog.setval('team_sheet_report_id_seq', 1, false);
 --
 -- TOC entry 2388 (class 0 OID 26998)
 -- Dependencies: 232
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: use; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "user" (id, referee_id, email, password, type) FROM stdin;
+COPY use (id, referee_id, email, password, type) FROM stdin;
+1	1	JSterling8@gmail.com	$2a$10$rSxrJ8cgbQ3TtcCXw.HxGeoZD8Y17Cb11fEJNNef82yCJhJWwtyLm	ADMIN
 \.
 
 
@@ -2036,7 +2037,7 @@ COPY "user" (id, referee_id, email, password, type) FROM stdin;
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_id_seq', 1, false);
+SELECT pg_catalog.setval('user_id_seq', 1, true);
 
 
 --
@@ -2107,7 +2108,7 @@ ALTER TABLE ONLY contact
 -- Name: email_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "user"
+ALTER TABLE ONLY use
     ADD CONSTRAINT email_unique UNIQUE (email);
 
 
@@ -2215,7 +2216,7 @@ ALTER TABLE ONLY team_sheet
 -- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "user"
+ALTER TABLE ONLY use
     ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 
@@ -2278,7 +2279,7 @@ ALTER TABLE ONLY report
 -- Name: referee_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "user"
+ALTER TABLE ONLY use
     ADD CONSTRAINT referee_fkey FOREIGN KEY (referee_id) REFERENCES referee(id);
 
 
@@ -2402,7 +2403,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-03-01 17:58:36
+-- Completed on 2016-03-02 18:22:35
 
 --
 -- PostgreSQL database dump complete

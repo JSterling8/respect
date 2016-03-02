@@ -2,7 +2,7 @@ package com.jms.respect.dao;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "user")
+@Table(name = "use")
 @Entity
 public class User {
     @Id
