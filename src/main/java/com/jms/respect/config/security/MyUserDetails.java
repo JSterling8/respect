@@ -10,7 +10,6 @@ import java.util.List;
 
 public class MyUserDetails implements UserDetails {
     private User user;
-    private Collection<? extends GrantedAuthority> grantedAuthorities;
     private List<GrantedAuthority> authorities = new ArrayList<>(1);
 
     public MyUserDetails(User user) {

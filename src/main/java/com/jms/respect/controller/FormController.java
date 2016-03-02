@@ -22,9 +22,6 @@ public class FormController {
 
     @RequestMapping("/form")
     public String index() {
-        //TODO If logged in, redirect to panel
-
-        //TODO If not logged in, present with login/register screen
         return "respect-form";
     }
 
