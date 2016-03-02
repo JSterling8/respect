@@ -19,7 +19,7 @@ public class AccountCreationDto {
 
     @NotNull
     @NotEmpty
-    private Integer refereeLevel;
+    private Short refereeLevel;
 
     @NotNull
     @NotEmpty
@@ -32,7 +32,7 @@ public class AccountCreationDto {
 
     @NotNull
     @NotEmpty
-    private String matchingPassword;
+    private String confirmPassword;
 
     public String getFirstName() {
         return firstName;
@@ -50,11 +50,11 @@ public class AccountCreationDto {
         this.lastName = lastName;
     }
 
-    public Integer getRefereeLevel() {
+    public Short getRefereeLevel() {
         return refereeLevel;
     }
 
-    public void setRefereeLevel(Integer refereeLevel) {
+    public void setRefereeLevel(Short refereeLevel) {
         this.refereeLevel = refereeLevel;
     }
 
@@ -74,11 +74,11 @@ public class AccountCreationDto {
         this.password = password;
     }
 
-    public String getMatchingPassword() {
-        return matchingPassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

@@ -1,5 +1,8 @@
 package com.jms.respect.controller;
 
+import com.jms.respect.dto.AccountCreationDto;
+import com.jms.respect.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -15,6 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class LoginController {
+    private final AccountService accountService;
+
+    @Autowired
+    public LoginController(AccountService accountService) {
+        this.accountService = accountService;
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getLoginPage() {
         return "login";
@@ -28,5 +38,21 @@ public class LoginController {
         }
 
         return "redirect:/login?logout";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String getRegistrationPage() {
+        return "register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(AccountCreationDto accountCreationDto) {
+        boolean registeredSuccessfully = accountService.register(accountCreationDto);
+
+        if (registeredSuccessfully) {
+            return "redirect:/form";
+        } else {
+            return "redirect:/register?error";
+        }
     }
 }
