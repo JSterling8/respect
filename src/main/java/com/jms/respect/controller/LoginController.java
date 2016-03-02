@@ -1,6 +1,6 @@
 package com.jms.respect.controller;
 
-import com.jms.respect.config.security.MyUserDetailsService;
+import com.jms.respect.config.security.RespectUserDetailsService;
 import com.jms.respect.dao.User;
 import com.jms.respect.dto.AccountCreationDto;
 import com.jms.respect.service.AccountService;
@@ -27,12 +27,12 @@ import java.security.InvalidParameterException;
 public class LoginController {
     private final AccountService accountService;
     private final AuthenticationManager authenticationManager;
-    private final MyUserDetailsService userDetailsService;
+    private final RespectUserDetailsService userDetailsService;
 
     @Autowired
     public LoginController(AccountService accountService,
                            AuthenticationManager authenticationManager,
-                           MyUserDetailsService userDetailsService) {
+                           RespectUserDetailsService userDetailsService) {
         this.accountService = accountService;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;

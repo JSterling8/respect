@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class MyUserDetails implements UserDetails {
+public class RespectUserDetails implements UserDetails {
     private User user;
     private List<GrantedAuthority> authorities = new ArrayList<>(1);
 
-    public MyUserDetails(User user) {
+    public RespectUserDetails(User user) {
         this.user = user;
 
         if (user.getType().equalsIgnoreCase("ADMIN")) {
