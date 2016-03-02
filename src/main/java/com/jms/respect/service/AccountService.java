@@ -31,7 +31,7 @@ public class AccountService {
     }
 
     @Transactional(rollbackOn = {Exception.class})
-    public boolean register(AccountCreationDto accountCreationDto) {
+    public User register(AccountCreationDto accountCreationDto) {
         if(emailInUse(accountCreationDto.getEmail())) {
             throw new InvalidParameterException("Email address already in use.");
         }
@@ -40,9 +40,9 @@ public class AccountService {
         referee = refereeRepository.save(referee);
 
         User user = getUserFromAccountCreationDtoAndReferee(accountCreationDto, referee);
-        userRepository.save(user);
+        user = userRepository.save(user);
 
-        return true;
+        return user;
     }
 
     private User getUserFromAccountCreationDtoAndReferee(AccountCreationDto accountCreationDto, Referee referee) {

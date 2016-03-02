@@ -16,8 +16,11 @@ public class MyUserDetails implements UserDetails {
         this.user = user;
 
         if (user.getType().equalsIgnoreCase("ADMIN")) {
-            MyGrantedAdminAuthority adminAuthority = new MyGrantedAdminAuthority();
+            AdminAuthority adminAuthority = new AdminAuthority();
             authorities.add(adminAuthority);
+        } else {
+            UserAuthority userAuthority = new UserAuthority();
+            authorities.add(userAuthority);
         }
     }
 
