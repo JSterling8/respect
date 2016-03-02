@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Entity
 public class Competition {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "competition_id_seq", sequenceName = "competition_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "competition_id_seq")
     @Column(name = "id", columnDefinition = "serial")
     private Integer id;
 

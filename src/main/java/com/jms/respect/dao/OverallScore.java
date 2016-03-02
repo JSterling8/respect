@@ -6,7 +6,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class OverallScore {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "overall_score_id_seq", sequenceName = "overall_score_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "overall_score_id_seq")
     @Column(name = "id", columnDefinition = "serial")
     private Integer id;
 

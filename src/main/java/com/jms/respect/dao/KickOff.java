@@ -6,7 +6,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class KickOff {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "late_kick_off_id_seq", sequenceName = "late_kick_off_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "late_kick_off_id_seq")
     @Column(name = "id", columnDefinition = "serial")
     private Integer id;
 

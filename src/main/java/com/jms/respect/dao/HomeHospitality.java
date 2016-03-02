@@ -6,7 +6,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class HomeHospitality {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "home_hospitality_id_seq", sequenceName = "home_hospitality_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "home_hospitality_id_seq")
     @Column(name = "id", columnDefinition = "serial")
     private Integer id;
 
