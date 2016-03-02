@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.security.InvalidParameterException;
 
 /**
@@ -58,7 +59,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(AccountCreationDto accountCreationDto, HttpServletRequest request) throws ServletException {
+    public String register(@Valid AccountCreationDto accountCreationDto, HttpServletRequest request) throws ServletException {
+        //TODO Tell user why it failed if it does...
         String password = accountCreationDto.getPassword();
 
         User user = null;

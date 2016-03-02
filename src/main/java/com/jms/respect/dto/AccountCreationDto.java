@@ -1,13 +1,19 @@
 package com.jms.respect.dto;
 
+import com.jms.respect.dto.validator.FieldMatch;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by anon on 02/03/2016.
  */
+@FieldMatch.List({
+        @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
+        @FieldMatch(first = "email", second = "confirmEmail", message = "The email fields must match")
+})
 public class AccountCreationDto {
     @NotNull
     @NotEmpty
@@ -18,20 +24,22 @@ public class AccountCreationDto {
     private String lastName;
 
     @NotNull
-    @NotEmpty
     private Short refereeLevel;
 
     @NotNull
-    @NotEmpty
     @Email
     private String email;
 
     @NotNull
-    @NotEmpty
+    @Email
+    private String confirmEmail;
+
+    @NotNull
+    @Size(min = 6, max = 100)
     private String password;
 
     @NotNull
-    @NotEmpty
+    @Size(min = 6, max = 100)
     private String confirmPassword;
 
     public String getFirstName() {
@@ -60,6 +68,14 @@ public class AccountCreationDto {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getConfirmEmail() {
+        return confirmEmail;
+    }
+
+    public void setConfirmEmail(String confirmEmail) {
+        this.confirmEmail = confirmEmail;
     }
 
     public void setEmail(String email) {
