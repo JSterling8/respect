@@ -35,11 +35,10 @@ public class AccountCreationDto {
     private String confirmEmail;
 
     @NotNull
-    @Size(min = 6, max = 100)
+    @Size(min = 6, max = 100, message = "Password must be 6-100 characters long")
     private String password;
 
     @NotNull
-    @Size(min = 6, max = 100)
     private String confirmPassword;
 
     public String getFirstName() {

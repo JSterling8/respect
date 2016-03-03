@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,20 +65,20 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView register(@ModelAttribute("registrationForm") @Valid AccountCreationDto accountCreationDto,
+    public ModelAndView register(@ModelAttribute("accountCreationDto") @Valid AccountCreationDto accountCreationDto,
                                  BindingResult result) throws ServletException {
         if(result.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView("/register");
             modelAndView.addObject(accountCreationDto);
             return modelAndView;
         }
-        String password = accountCreationDto.getPassword();
 
         User user;
         try {
             user = accountService.register(accountCreationDto);
         } catch (InvalidParameterException e) {
-            //TODO Tell user why it failed if it does...
+            ObjectError error = new ObjectError("accountCreationDto", e.getMessage());
+            result.addError(error);
 
             ModelAndView modelAndView = new ModelAndView("/register");
             modelAndView.addObject(accountCreationDto);
@@ -85,7 +86,7 @@ public class LoginController {
         }
 
         if (user != null) {
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(), password);
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(accountCreationDto.getEmail(), accountCreationDto.getPassword());
             token = (UsernamePasswordAuthenticationToken) authenticationManager.authenticate(token);
 
             if(token.isAuthenticated()) {
