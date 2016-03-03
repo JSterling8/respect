@@ -64,46 +64,55 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
-        ModelAndView modelAndView = new ModelAndView("register");
-        modelAndView.addObject("accountCreationDto", new AccountCreationDto());
-        return modelAndView;
+        if(!isLoggedIn()) {
+            ModelAndView modelAndView = new ModelAndView("register");
+            modelAndView.addObject("accountCreationDto", new AccountCreationDto());
+
+            return modelAndView;
+        } else {
+            return new ModelAndView("/form");
+        }
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@ModelAttribute("accountCreationDto") @Valid AccountCreationDto accountCreationDto,
                                  BindingResult result) throws ServletException {
-        if(result.hasErrors()) {
-            ModelAndView modelAndView = new ModelAndView("/register");
-            modelAndView.addObject(accountCreationDto);
-            return modelAndView;
-        }
-
-        User user;
-        try {
-            user = accountService.register(accountCreationDto);
-        } catch (InvalidParameterException e) {
-            ObjectError error = new ObjectError("accountCreationDto", e.getMessage());
-            result.addError(error);
-
-            ModelAndView modelAndView = new ModelAndView("/register");
-            modelAndView.addObject(accountCreationDto);
-            return modelAndView;
-        }
-
-        if (user != null) {
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(accountCreationDto.getEmail(), accountCreationDto.getPassword());
-            token = (UsernamePasswordAuthenticationToken) authenticationManager.authenticate(token);
-
-            if(token.isAuthenticated()) {
-                SecurityContextHolder.getContext().setAuthentication(token);
-
-                return new ModelAndView("redirect:/form");
+        if(!isLoggedIn()) {
+            if (result.hasErrors()) {
+                ModelAndView modelAndView = new ModelAndView("/register");
+                modelAndView.addObject(accountCreationDto);
+                return modelAndView;
             }
-        }
 
-        ModelAndView modelAndView = new ModelAndView("/register");
-        modelAndView.addObject(accountCreationDto);
-        return modelAndView;
+            User user;
+            try {
+                user = accountService.register(accountCreationDto);
+            } catch (InvalidParameterException e) {
+                ObjectError error = new ObjectError("accountCreationDto", e.getMessage());
+                result.addError(error);
+
+                ModelAndView modelAndView = new ModelAndView("/register");
+                modelAndView.addObject(accountCreationDto);
+                return modelAndView;
+            }
+
+            if (user != null) {
+                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(accountCreationDto.getEmail(), accountCreationDto.getPassword());
+                token = (UsernamePasswordAuthenticationToken) authenticationManager.authenticate(token);
+
+                if (token.isAuthenticated()) {
+                    SecurityContextHolder.getContext().setAuthentication(token);
+
+                    return new ModelAndView("redirect:/form");
+                }
+            }
+
+            ModelAndView modelAndView = new ModelAndView("/register");
+            modelAndView.addObject(accountCreationDto);
+            return modelAndView;
+        } else {
+            return new ModelAndView("/form");
+        }
     }
 
     public boolean isLoggedIn() {
