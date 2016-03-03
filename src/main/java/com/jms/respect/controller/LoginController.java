@@ -5,6 +5,7 @@ import com.jms.respect.dao.User;
 import com.jms.respect.dto.AccountCreationDto;
 import com.jms.respect.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,9 +43,13 @@ public class LoginController {
         this.userDetailsService = userDetailsService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login", "/index"}, method = RequestMethod.GET)
     public String getLoginPage() {
-        return "login";
+        if(isLoggedIn()) {
+            return "respect-form";
+        } else {
+            return "login";
+        }
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -99,5 +104,11 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView("/register");
         modelAndView.addObject(accountCreationDto);
         return modelAndView;
+    }
+
+    public boolean isLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication != null && !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
 }
