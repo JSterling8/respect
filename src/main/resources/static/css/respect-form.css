@@ -1,4 +1,12 @@
+textarea {
+    resize: vertical;
+}
+
 .table-body {
-    margin-right: 33%;
-    margin-left: 33%;
+    margin-right: 30%;
+    margin-left: 30%;
+}
+
+.red {
+    color: red;
 }
