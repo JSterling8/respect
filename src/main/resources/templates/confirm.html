@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Confirm Form Details</title>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="../static/css/general.css"
+          th:href="@{css/respect-form.css}" rel="stylesheet" media="screen"/>
+    <div class = "navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="dashboard" class="navbar-brand">Dashboard</a></li>
+                    <li><a href="form" class="navbar-brand">Form</a></li>
+                    <li th:if="${isAdmin}"><a href="admin" class="navbar-brand">Admin</a></li>
+                    <li><a href='logout' class="navbar-brand">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</head>
+<body background="img/paper_2.png">
+<center>
+    <div class="table-body">
+        <h1>Confirm Form Details</h1>
+        <table class="table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Section</th>
+                    <th>Input</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>League</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Competition</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Referee</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Home Team</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Away Team</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Facilities Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Facilities Comment</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Late Kickoff</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>How Late</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Late Kickoff Fault</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Two Footballs Provided</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Teams Wearing Numbered Shirts</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Home Spectators Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Away Spectators Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Spectators Comment</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Home Club Assistant Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Away Club Assistant Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Club Assistant Comment</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Home Captain's Liaison</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Away Captain's Liaison</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Captain's Liaison Comment</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Hospitality Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Team Sheets From Teams 10 Minutes Before Kickoff</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Did You Contact the Home Club</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Were the Captains Wearing Armbands</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Overall Home Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Overall Away Score</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+            <tr>
+                <td>Additional Comments</td>
+                <td th:text="${form.league.name}"></td>
+            </tr>
+        </table>
+    </div>
+</center>
+</body>
+</html>
