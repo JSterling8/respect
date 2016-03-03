@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by anon on 25/02/2016.
@@ -21,8 +22,10 @@ public class FormController {
     }
 
     @RequestMapping("/form")
-    public String index() {
-        return "respect-form";
+    public ModelAndView getForm() {
+        ModelAndView modelAndView = new ModelAndView("respect-form");
+        modelAndView.addObject("admin", true);
+        return modelAndView;
     }
 
     @RequestMapping("/all-reports")
