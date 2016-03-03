@@ -11,8 +11,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,20 +57,31 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String getRegistrationPage() {
-        return "register";
+    public ModelAndView getRegistrationPage() {
+        ModelAndView modelAndView = new ModelAndView("register");
+        modelAndView.addObject("accountCreationDto", new AccountCreationDto());
+        return modelAndView;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@Valid AccountCreationDto accountCreationDto, HttpServletRequest request) throws ServletException {
-        //TODO Tell user why it failed if it does...
+    public ModelAndView register(@ModelAttribute("registrationForm") @Valid AccountCreationDto accountCreationDto,
+                                 BindingResult result) throws ServletException {
+        if(result.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("/register");
+            modelAndView.addObject(accountCreationDto);
+            return modelAndView;
+        }
         String password = accountCreationDto.getPassword();
 
-        User user = null;
+        User user;
         try {
             user = accountService.register(accountCreationDto);
         } catch (InvalidParameterException e) {
-            return "redirect:/register?error";
+            //TODO Tell user why it failed if it does...
+
+            ModelAndView modelAndView = new ModelAndView("/register");
+            modelAndView.addObject(accountCreationDto);
+            return modelAndView;
         }
 
         if (user != null) {
@@ -77,10 +91,12 @@ public class LoginController {
             if(token.isAuthenticated()) {
                 SecurityContextHolder.getContext().setAuthentication(token);
 
-                return "redirect:/form";
+                return new ModelAndView("redirect:/form");
             }
         }
 
-        return "redirect:/register?error";
+        ModelAndView modelAndView = new ModelAndView("/register");
+        modelAndView.addObject(accountCreationDto);
+        return modelAndView;
     }
 }

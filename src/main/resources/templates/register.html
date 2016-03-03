@@ -13,30 +13,32 @@
 </head>
 <body background="img/paper_2.png">
 <div class="col-sm-4 container float-center">
-    <div th:if="${param.error}">Invalid details entered.</div>
-    <form class="form-signin horizontal" th:action="@{/register}" method="POST">
-        <h2 class="form-signin-heading">Sign In</h2>
+    <form class="form-signin horizontal" name="registrationForm" id="registration-form" th:object="${accountCreationDto}" th:action="@{/register}" method="POST">
+        <h2 class="form-signin-heading">Register</h2>
+        <div th:if="${#fields.hasErrors()}">
+            <p th:each="err : ${#fields.errors()}" th:text="${err}">...</p>
+        </div>
         <div class="form-group">
             <label for="first-name" class="sr-only">First Name</label>
-            <input type="text" id="first-name" name="firstName" class="form-control" placeholder="First Name" required="required" th:autofocus="autofocus" />
+            <input type="text" id="first-name" name="firstName" class="form-control" placeholder="First Name" required="required" th:autofocus="autofocus" th:value="${accountCreationDto.firstName}"/>
         </div>
         <div class="form-group">
             <label for="last-name" class="sr-only">Last Name</label>
-            <input type="test" id="last-name" name="lastName" class="form-control" placeholder="Last Name" required="required" />
+            <input type="test" id="last-name" name="lastName" class="form-control" placeholder="Last Name" required="required" th:value="${accountCreationDto.lastName}" />
         </div>
         <div class="form-group">
             <label for="email" class="sr-only">Email</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="required" />
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="required" th:value="${accountCreationDto.email}" />
         </div>
         <div class="form-group">
             <label for="confirm-email" class="sr-only">Email</label>
-            <input type="email" id="confirm-email" name="confirmEmail" class="form-control" placeholder="Confirm Email" required="required" />
+            <input type="email" id="confirm-email" name="confirmEmail" class="form-control" placeholder="Confirm Email" required="required" th:value="${accountCreationDto.confirmEmail}"/>
         </div>
         <div class="form-group">
             <label for="referee-level" class="sr-only">Referee Level</label>
-            <select id="referee-level" name="refereeLevel" class="form-control" required="required">
-                <option value="" disabled="true" selected="true">--- Select Level ---</option>
-                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
+            <select id="referee-level" name="refereeLevel" class="form-control" required="required" th:value="${accountCreationDto.refereeLevel}">
+                <option value="" disabled="true" th:selected="${accountCreationDto.refereeLevel == null}">--- Select Level ---</option>
+                <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" th:selected="${i == accountCreationDto.refereeLevel}"/>
                 <option value="-1">N/A</option>
             </select>
         </div>
