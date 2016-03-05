@@ -24,7 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    //FIXME Take out /confirm after done developing itw
                     .antMatchers("/", "/home", "/register*").permitAll()
                     .antMatchers("/webjars/**", "/img/**", "/css/**").permitAll()
                     .anyRequest().authenticated()
@@ -35,8 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/form", true)
                 .permitAll()
                 .and()
+                .csrf()
+                    .disable()
                 .logout()
-                .permitAll();
+                    .permitAll();
     }
 
     @Autowired

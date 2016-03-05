@@ -76,7 +76,7 @@
             </table>
 
 
-            <form action="confirmation" method="post" id="respect-form">
+            <form action="/confirm" method="post" id="respect-form" th:object="${form}">
                 <table class="table table-bordered table-condensed">
                     <col width="35%" />
                     <col width="65%" />
@@ -126,7 +126,7 @@
                     <tr>
                         <td><b>Home Team:*</b></td>
                         <td>
-                            <select name="team_home" id="team_home" class="form-control" required="required">
+                            <select name="homeTeam" id="team_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select Home Team ---</option>
                                 <option value="Team 1 Test">Team 1 test</option>
                                 <option value="Team 2 Test">Team 2 test</option>
@@ -136,7 +136,7 @@
                     <tr>
                         <td><b>Away Team:*</b></td>
                         <td>
-                            <select name="team_away" id="team_away" class="form-control" required="required">
+                            <select name="awayTeam" id="team_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select Away Team ---</option>
                                 <option value="Team 1 Test">Team 1 test</option>
                                 <option value="Team 2 Test">Team 2 test</option>
@@ -153,7 +153,7 @@
                             please award a mark of 5)
                         </td>
                         <td>
-                            <select name="facilities_score" id="facilities_score" class="form-control" required="required">
+                            <select name="changingFacilityScore" id="facilities_score" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -167,49 +167,49 @@
                             necessary
                         </td>
                         <td>
-                            <textarea name="facilities_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                            <textarea name="changingFacilityComment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td><b>Late Kick Off?*</b><br />
                             Please ensure that you also submit a late kick<br />
                             off report to the league secretary</td>
-                        <td>  <label class="radio"><input name="late_ko_yes_no" type="radio" value="yes" required="required">Yes</input></label>
-                            <label class="radio"><input name="late_ko_yes_no" type="radio" value="no" required="required">No</input></label>
+                        <td>  <label class="radio"><input name="kickOffLate" type="radio" value="yes" required="required">Yes</input></label>
+                            <label class="radio"><input name="kickOffLate" type="radio" value="no" required="required">No</input></label>
                         </td>
                     </tr>
                     <tr>
                         <td><b>If yes, how late?</b></td>
-                        <td><input name="late_ko_time"  type="text" class="form-control" /></td>
+                        <td><input name="kickOffHowLate"  type="text" class="form-control" /></td>
                     </tr>
                     <tr>
                         <td><b>Who was at fault?</b></td>
-                        <td>  <label class="radio"><input name="late_ko_fault" type="radio" value="home">Home</input></label>
-                            <label class="radio"><input name="late_ko_fault" type="radio" value="away">Away</input></label>
-                            <label class="radio"><input name="late_ko_fault" type="radio" value="both">Both</input></label>
-                            <label class="radio"><input name="late_ko_fault" type="radio" value="neither">Neither</input></label>
+                        <td>  <label class="radio"><input name="kickOffFault" type="radio" value="home">Home</input></label>
+                            <label class="radio"><input name="kickOffFault" type="radio" value="away">Away</input></label>
+                            <label class="radio"><input name="kickOffFault" type="radio" value="both">Both</input></label>
+                            <label class="radio"><input name="kickOffFault" type="radio" value="neither">Neither</input></label>
                         </td>
                     </tr>
                     <tr>
                         <td><b>Did the home club provide two footballs compliant with Law 2?*</b></td>
                         <td>
-                            <label class="radio"><input name="footballs" type="radio" value="yes" required="required">Yes</input></label>
-                            <label class="radio"><input name="footballs" type="radio" value="no" required="required">No</input></label>
+                            <label class="radio"><input name="ball" type="radio" value="yes" required="required">Yes</input></label>
+                            <label class="radio"><input name="ball" type="radio" value="no" required="required">No</input></label>
                         </td>
                     </tr>
                     <tr>
                         <td><b>Did the clubs wear numbered shirts?*</b></td>
                         <td>
-                            <label class="radio"><input name="shirts" type="radio" value="home" required="required">Home</input></label>
-                            <label class="radio"><input name="shirts" type="radio" value="away" required="required">Away</input></label>
-                            <label class="radio"><input name="shirts" type="radio" value="both" required="required">Both</input></label>
-                            <label class="radio"><input name="shirts" type="radio" value="neither" required="required">Neither</input></label>
+                            <label class="radio"><input name="shirt" type="radio" value="home" required="required">Home</input></label>
+                            <label class="radio"><input name="shirt" type="radio" value="away" required="required">Away</input></label>
+                            <label class="radio"><input name="shirt" type="radio" value="both" required="required">Both</input></label>
+                            <label class="radio"><input name="shirt" type="radio" value="neither" required="required">Neither</input></label>
                         </td>
                     </tr>
                     <tr>
                         <td><b>Home Spectators Behaviour:*</b></td>
                         <td>
-                            <select name="spectators_home" id="spectators_home" class="form-control" required="required">
+                            <select name="spectatorHome" id="spectators_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -218,7 +218,7 @@
                     <tr>
                         <td><b>Away Spectators Behaviour:*</b></td>
                         <td>
-                            <select name="spectators_away" id="spectators_away" class="form-control" required="required">
+                            <select name="spectatorAway" id="spectators_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -230,13 +230,13 @@
                             comments as to why. Please only give comments<br />
                             regarding spectators behaviour in this section</td>
                         <td>
-                            <textarea name="spectators_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                            <textarea name="spectatorComment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td><b>Home Club Assistant:*</b></td>
                         <td>
-                            <select name="assistant_home" id="assistant_home" class="form-control" required="required">
+                            <select name="assistantHome" id="assistant_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -245,7 +245,7 @@
                     <tr>
                         <td><b>Away Club Assistant:*</b></td>
                         <td>
-                            <select name="assistant_away" id="assistant_away" class="form-control" required="required">
+                            <select name="assistantAway" id="assistant_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -257,13 +257,13 @@
                             comments as to why. Please only give comments<br />
                             regarding club assistants in this section</td>
                         <td>
-                            <textarea name="assistant_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                            <textarea name="assistantComment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td><b>Home Captain's Liaison with Referee:*</b></td>
                         <td>
-                            <select name="captain_liaison_home" id="captain_liaison_home" class="form-control" required="required">
+                            <select name="captainLiaisonHome" id="captain_liaison_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -272,7 +272,7 @@
                     <tr>
                         <td><b>Away Captain's Liaison with Referee:*</b></td>
                         <td>
-                            <select name="captain_liaison_away" id="captain_liaison_away" class="form-control" required="required">
+                            <select name="captainLiaisonAway" id="captain_liaison_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -285,7 +285,7 @@
                             regarding captain's liaison with the referee<br />
                             in this section</td>
                         <td>
-                            <textarea name="assistant_comment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                            <textarea name="captainLiaisonComment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -300,10 +300,10 @@
                     </tr>
                     <tr>
                         <td><b>Did you receive the team sheets at least 10 minutes before kickoff?*</b></td>
-                        <td>  <label class="radio"><input name="team_sheet" type="radio" value="home" required="required">Home</input></label>
-                            <label class="radio"><input name="team_sheet" type="radio" value="away" required="required">Away</input></label>
-                            <label class="radio"><input name="team_sheet" type="radio" value="both" required="required">Both</input></label>
-                            <label class="radio"><input name="team_sheet" type="radio" value="neither" required="required">Neither</input></label>
+                        <td>  <label class="radio"><input name="teamSheet" type="radio" value="home" required="required">Home</input></label>
+                            <label class="radio"><input name="teamSheet" type="radio" value="away" required="required">Away</input></label>
+                            <label class="radio"><input name="teamSheet" type="radio" value="both" required="required">Both</input></label>
+                            <label class="radio"><input name="teamSheet" type="radio" value="neither" required="required">Neither</input></label>
                         </td>
                     </tr>
                     <tr>
@@ -315,15 +315,15 @@
                     </tr>
                     <tr>
                         <td><b>Were the captains wearing armbands?*</b></td>
-                        <td>  <label class="radio"><input name="captain_armband" type="radio" value="home" required="required">Home</input></label>
-                            <label class="radio"><input name="captain_armband" type="radio" value="away" required="required">Away</input></label>
-                            <label class="radio"><input name="captain_armband" type="radio" value="both" required="required">Both</input></label>
-                            <label class="radio"><input name="captain_armband" type="radio" value="neither" required="required">Neither</input></label></td>
+                        <td>  <label class="radio"><input name="captainArmband" type="radio" value="home" required="required">Home</input></label>
+                            <label class="radio"><input name="captainArmband" type="radio" value="away" required="required">Away</input></label>
+                            <label class="radio"><input name="captainArmband" type="radio" value="both" required="required">Both</input></label>
+                            <label class="radio"><input name="captainArmband" type="radio" value="neither" required="required">Neither</input></label></td>
                     </tr>
                     <tr>
                         <td><b>Home Club Overall Respect Score:*</b></td>
                         <td>
-                            <select name="overall_home" id="overall_home" class="form-control" required="required">
+                            <select name="overallScoreHome" id="overall_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -332,7 +332,7 @@
                     <tr>
                         <td><b>Away Club Overall Respect Score:*</b></td>
                         <td>
-                            <select name="overall_away" id="overall_away" class="form-control" required="required">
+                            <select name="overallScoreAway" id="overall_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Score ---</option>
                                 <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" />
                             </select>
@@ -344,7 +344,7 @@
                     <tr>
                         <td><b>Additional Comments:</b></td>
                         <td>
-                            <textarea name="additional_comments" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
+                            <textarea name="overallScoreComment" form="respect-form" class="form-control" rows="3" columns="6" style="width:100%; height:100px;"></textarea>
                         </td>
                     </tr>
                     <tr></tr>
