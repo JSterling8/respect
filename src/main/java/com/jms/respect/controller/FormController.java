@@ -5,6 +5,7 @@ import com.jms.respect.config.security.RespectUserDetails;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dto.Form;
 import com.jms.respect.repository.ReportRepository;
+import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class FormController {
     private final ReportRepository reportRepository;
+    private final FormService formService;
 
     @Autowired
-    public FormController(ReportRepository reportRepository) {
+    public FormController(ReportRepository reportRepository,
+                          FormService formService) {
         this.reportRepository = reportRepository;
+        this.formService = formService;
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
@@ -42,8 +46,9 @@ public class FormController {
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public ModelAndView submitForm(Form form) {
-        ModelAndView modelAndView = new ModelAndView("sucess");
+        formService.submitForm(form);
 
+        ModelAndView modelAndView = new ModelAndView("sucess");
         modelAndView.addObject("form", form);
 
         return modelAndView;
