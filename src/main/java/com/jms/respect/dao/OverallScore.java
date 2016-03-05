@@ -23,6 +23,9 @@ public class OverallScore {
     @NotNull
     private Short awayScore;
 
+    @Column(name = "comment", columnDefinition = "varchar")
+    private String comment;
+
     public Integer getId() {
         return id;
     }
@@ -53,5 +56,13 @@ public class OverallScore {
 
     public void setAwayScore(Short awayScore) {
         this.awayScore = awayScore;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

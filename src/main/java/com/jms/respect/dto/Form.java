@@ -12,28 +12,28 @@ public class Form {
     private String homeTeam;
     private String awayTeam;
     private Date date;
-    private Integer changingFacilityScore;
+    private Short changingFacilityScore;
     private String changingFacilityComment;
     private String kickOffLate;
     private String kickOffHowLate;
     private String kickOffFault;
     private String ball;
     private String shirt;
-    private Integer spectatorHome;
-    private Integer spectatorAway;
+    private Short spectatorHome;
+    private Short spectatorAway;
     private String spectatorComment;
-    private Integer assistantHome;
-    private Integer assistantAway;
+    private Short assistantHome;
+    private Short assistantAway;
     private String assistantComment;
-    private Integer captainLiaisonHome;
-    private Integer captainLiaisonAway;
+    private Short captainLiaisonHome;
+    private Short captainLiaisonAway;
     private String captainLiaisonComment;
-    private Integer hospitality;
+    private Short hospitality;
     private String teamSheet;
     private String contact;
     private String captainArmband;
-    private Integer overallScoreHome;
-    private Integer overallScoreAway;
+    private Short overallScoreHome;
+    private Short overallScoreAway;
     private String overallScoreComment;
 
     public String getLeague() {
@@ -84,11 +84,11 @@ public class Form {
         this.date = date;
     }
 
-    public Integer getChangingFacilityScore() {
+    public Short getChangingFacilityScore() {
         return changingFacilityScore;
     }
 
-    public void setChangingFacilityScore(Integer changingFacilityScore) {
+    public void setChangingFacilityScore(Short changingFacilityScore) {
         this.changingFacilityScore = changingFacilityScore;
     }
 
@@ -140,19 +140,19 @@ public class Form {
         this.shirt = shirt;
     }
 
-    public Integer getSpectatorHome() {
+    public Short getSpectatorHome() {
         return spectatorHome;
     }
 
-    public void setSpectatorHome(Integer spectatorHome) {
+    public void setSpectatorHome(Short spectatorHome) {
         this.spectatorHome = spectatorHome;
     }
 
-    public Integer getSpectatorAway() {
+    public Short getSpectatorAway() {
         return spectatorAway;
     }
 
-    public void setSpectatorAway(Integer spectatorAway) {
+    public void setSpectatorAway(Short spectatorAway) {
         this.spectatorAway = spectatorAway;
     }
 
@@ -164,19 +164,19 @@ public class Form {
         this.spectatorComment = spectatorComment;
     }
 
-    public Integer getAssistantHome() {
+    public Short getAssistantHome() {
         return assistantHome;
     }
 
-    public void setAssistantHome(Integer assistantHome) {
+    public void setAssistantHome(Short assistantHome) {
         this.assistantHome = assistantHome;
     }
 
-    public Integer getAssistantAway() {
+    public Short getAssistantAway() {
         return assistantAway;
     }
 
-    public void setAssistantAway(Integer assistantAway) {
+    public void setAssistantAway(Short assistantAway) {
         this.assistantAway = assistantAway;
     }
 
@@ -188,19 +188,19 @@ public class Form {
         this.assistantComment = assistantComment;
     }
 
-    public Integer getCaptainLiaisonHome() {
+    public Short getCaptainLiaisonHome() {
         return captainLiaisonHome;
     }
 
-    public void setCaptainLiaisonHome(Integer captainLiaisonHome) {
+    public void setCaptainLiaisonHome(Short captainLiaisonHome) {
         this.captainLiaisonHome = captainLiaisonHome;
     }
 
-    public Integer getCaptainLiaisonAway() {
+    public Short getCaptainLiaisonAway() {
         return captainLiaisonAway;
     }
 
-    public void setCaptainLiaisonAway(Integer captainLiaisonAway) {
+    public void setCaptainLiaisonAway(Short captainLiaisonAway) {
         this.captainLiaisonAway = captainLiaisonAway;
     }
 
@@ -212,11 +212,11 @@ public class Form {
         this.captainLiaisonComment = captainLiaisonComment;
     }
 
-    public Integer getHospitality() {
+    public Short getHospitality() {
         return hospitality;
     }
 
-    public void setHospitality(Integer hospitality) {
+    public void setHospitality(Short hospitality) {
         this.hospitality = hospitality;
     }
 
@@ -244,19 +244,19 @@ public class Form {
         this.captainArmband = captainArmband;
     }
 
-    public Integer getOverallScoreHome() {
+    public Short getOverallScoreHome() {
         return overallScoreHome;
     }
 
-    public void setOverallScoreHome(Integer overallScoreHome) {
+    public void setOverallScoreHome(Short overallScoreHome) {
         this.overallScoreHome = overallScoreHome;
     }
 
-    public Integer getOverallScoreAway() {
+    public Short getOverallScoreAway() {
         return overallScoreAway;
     }
 
-    public void setOverallScoreAway(Integer overallScoreAway) {
+    public void setOverallScoreAway(Short overallScoreAway) {
         this.overallScoreAway = overallScoreAway;
     }
 

@@ -154,6 +154,10 @@
                 <td th:text="${form.overallScoreComment}"></td>
             </tr>
         </table>
+
+        <form action="/submit" th:action="@{/submit}" th:object="${form}" method="post">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
     </div>
 </center>
 </body>

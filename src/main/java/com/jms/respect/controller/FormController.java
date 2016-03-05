@@ -40,6 +40,15 @@ public class FormController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    public ModelAndView submitForm(Form form) {
+        ModelAndView modelAndView = new ModelAndView("sucess");
+
+        modelAndView.addObject("form", form);
+
+        return modelAndView;
+    }
+
     @RequestMapping("/all-reports")
     @ResponseBody
     public Iterable<Report> getAllReports() {
