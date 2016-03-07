@@ -36,22 +36,23 @@ public class AccountService {
             throw new InvalidParameterException("Email address already in use.");
         }
 
-        Referee referee = getRefereeFromAccountCreationDto(accountCreationDto);
-        Referee refereeInDb = refereeRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(referee.getFirstName(), referee.getLastName());
+        Referee refereeEntryAssociatedWithUser = getRefereeFromAccountCreationDto(accountCreationDto);
+        Referee refereeInDb = refereeRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(refereeEntryAssociatedWithUser.getFirstName(), refereeEntryAssociatedWithUser.getLastName());
 
         // If the referee is not in the db yet, save them to the db
         if(refereeInDb == null) {
-            referee = refereeRepository.save(referee);
+            refereeEntryAssociatedWithUser = refereeRepository.save(refereeEntryAssociatedWithUser);
         } else {
             // If they are in the db, make sure their level is correct in the db
-            referee = refereeInDb;
-            if(refereeInDb.getLevel() != referee.getLevel()) {
-                refereeInDb.setLevel(referee.getLevel());
-                refereeRepository.save(refereeInDb);
+            if(refereeInDb.getLevel() != refereeEntryAssociatedWithUser.getLevel()) {
+                refereeInDb.setLevel(refereeEntryAssociatedWithUser.getLevel());
+                refereeInDb = refereeRepository.save(refereeInDb);
             }
+
+            refereeEntryAssociatedWithUser = refereeInDb;
         }
 
-        User user = getUserFromAccountCreationDtoAndReferee(accountCreationDto, referee);
+        User user = getUserFromAccountCreationDtoAndReferee(accountCreationDto, refereeEntryAssociatedWithUser);
         user = userRepository.save(user);
 
         return user;
