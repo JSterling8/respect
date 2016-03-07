@@ -48,7 +48,7 @@ public class FormController {
     public ModelAndView submitForm(Form form) {
         formService.submitForm(form);
 
-        ModelAndView modelAndView = new ModelAndView("sucess");
+        ModelAndView modelAndView = new ModelAndView("redirect:sucess");
         modelAndView.addObject("form", form);
 
         return modelAndView;
