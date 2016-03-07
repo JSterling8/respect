@@ -3,13 +3,18 @@ package com.jms.respect.controller;
 import com.jms.respect.config.security.AdminAuthority;
 import com.jms.respect.config.security.RespectUserDetails;
 import com.jms.respect.dao.Report;
-import com.jms.respect.dto.Form;
+import com.jms.respect.dao.User;
+import com.jms.respect.dto.CompletedForm;
+import com.jms.respect.dto.IncompleteForm;
 import com.jms.respect.repository.ReportRepository;
 import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -28,28 +33,31 @@ public class FormController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public ModelAndView getForm() {
+    public ModelAndView getForm(IncompleteForm incompleteForm) {
         ModelAndView modelAndView = new ModelAndView("respect-form");
-        modelAndView.addObject(new Form());
+        RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = respectUserDetails.getUser();
+        incompleteForm.setReferee(user.getRefereeId().getFirstName() + " " + user.getRefereeId().getLastName());
+        modelAndView.addObject("form", incompleteForm);
         modelAndView.addObject("admin", isAdmin());
         return modelAndView;
     }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
-    public ModelAndView confirmForm(Form form) {
+    public ModelAndView confirmForm(CompletedForm completedForm) {
         ModelAndView modelAndView = new ModelAndView("confirm");
 
-        modelAndView.addObject("form", form);
+        modelAndView.addObject("form", completedForm);
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public ModelAndView submitForm(Form form) {
-        formService.submitForm(form);
+    public ModelAndView submitForm(CompletedForm completedForm) {
+        formService.submitForm(completedForm);
 
         ModelAndView modelAndView = new ModelAndView("redirect:success");
-        modelAndView.addObject("form", form);
+        modelAndView.addObject("form", completedForm);
 
         return modelAndView;
     }

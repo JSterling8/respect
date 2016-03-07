@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse navHeaderCollapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="dashboard" class="navbar-brand">Dashboard</a></li>
-                    <li><a href="form" class="navbar-brand">Form</a></li>
+                    <li><a href="completedForm" class="navbar-brand">Form</a></li>
                     <li th:if="${isAdmin}"><a href="admin" class="navbar-brand">Admin</a></li>
                     <li><a href='logout' class="navbar-brand">Logout</a></li>
                 </ul>
@@ -111,9 +111,7 @@
                         <td><b>Referee:*</b></td>
                         <td>
                             <select name="referee" id="referee" class="form-control" required="required">
-                                <option value="" disabled="true" selected="true">--- Select a Referee ---</option>
-                                <option value="Jonathan Sterling">Jonathan Sterling</option>
-                                <option value="Jon Doe">Jon Doe</option>
+                                <option th:value="${form.referee}" th:text="${form.referee}" selected="selected"/>
                             </select>
                         </td>
                     </tr>

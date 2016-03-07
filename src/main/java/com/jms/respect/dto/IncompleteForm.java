@@ -1,16 +1,18 @@
 package com.jms.respect.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
- * Created by anon on 25/02/2016.
+ * Created by anon on 07/03/2016.
  */
-public class Form {
-    private String league;
-    private String competition;
+public class IncompleteForm {
+    private List<String> leagues;
+    private List<String> competitions;
+    private List<String> referees;
     private String referee;
-    private String homeTeam;
-    private String awayTeam;
+    private List<String> homeTeams;
+    private List<String> awayTeams;
     private Date date;
     private Short changingFacilityScore;
     private String changingFacilityComment;
@@ -36,20 +38,28 @@ public class Form {
     private Short overallScoreAway;
     private String overallScoreComment;
 
-    public String getLeague() {
-        return league;
+    public List<String> getLeagues() {
+        return leagues;
     }
 
-    public void setLeague(String league) {
-        this.league = league;
+    public void setLeagues(List<String> leagues) {
+        this.leagues = leagues;
     }
 
-    public String getCompetition() {
-        return competition;
+    public List<String> getCompetitions() {
+        return competitions;
     }
 
-    public void setCompetition(String competition) {
-        this.competition = competition;
+    public void setCompetitions(List<String> competitions) {
+        this.competitions = competitions;
+    }
+
+    public List<String> getReferees() {
+        return referees;
+    }
+
+    public void setReferees(List<String> referees) {
+        this.referees = referees;
     }
 
     public String getReferee() {
@@ -60,20 +70,20 @@ public class Form {
         this.referee = referee;
     }
 
-    public String getHomeTeam() {
-        return homeTeam;
+    public List<String> getHomeTeams() {
+        return homeTeams;
     }
 
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setHomeTeams(List<String> homeTeams) {
+        this.homeTeams = homeTeams;
     }
 
-    public String getAwayTeam() {
-        return awayTeam;
+    public List<String> getAwayTeams() {
+        return awayTeams;
     }
 
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
+    public void setAwayTeams(List<String> awayTeams) {
+        this.awayTeams = awayTeams;
     }
 
     public Date getDate() {

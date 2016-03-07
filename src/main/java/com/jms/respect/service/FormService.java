@@ -1,7 +1,7 @@
 package com.jms.respect.service;
 
 import com.jms.respect.dao.*;
-import com.jms.respect.dto.Form;
+import com.jms.respect.dto.CompletedForm;
 import com.jms.respect.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,19 +67,19 @@ public class FormService {
     }
 
     @Transactional(rollbackOn = {Exception.class})
-    public void submitForm(Form form) {
-        Competition competition = competitionRepository.findByName(form.getCompetition());
+    public void submitForm(CompletedForm completedForm) {
+        Competition competition = competitionRepository.findByName(completedForm.getCompetition());
 
-        String refereeName = form.getReferee();
+        String refereeName = completedForm.getReferee();
         String refereeFirstName = refereeName.substring(0, refereeName.indexOf(' '));
         String refereeLastName = refereeName.substring(refereeName.indexOf(' '), refereeName.length());
         Referee referee = refereeRepository
                 .findByFirstNameIgnoreCaseAndLastNameIgnoreCase(refereeFirstName, refereeLastName);
 
-        Team homeTeam = teamRepository.findByName(form.getHomeTeam());
-        Team awayTeam = teamRepository.findByName(form.getAwayTeam());
+        Team homeTeam = teamRepository.findByName(completedForm.getHomeTeam());
+        Team awayTeam = teamRepository.findByName(completedForm.getAwayTeam());
 
-        Date date = form.getDate();
+        Date date = completedForm.getDate();
 
         Report report = new Report();
         report.setCompetition(competition);
@@ -89,70 +89,70 @@ public class FormService {
         report = reportRepository.save(report);
 
         TeamSheet teamSheet = new TeamSheet();
-        teamSheet.setRecieved(form.getTeamSheet());
+        teamSheet.setRecieved(completedForm.getTeamSheet());
         teamSheet.setReportId(report);
         teamSheetRepository.save(teamSheet);
 
         Spectator spectator = new Spectator();
-        spectator.setHomeScore(form.getSpectatorHome());
-        spectator.setAwayScore(form.getSpectatorAway());
-        spectator.setComment(form.getSpectatorComment());
+        spectator.setHomeScore(completedForm.getSpectatorHome());
+        spectator.setAwayScore(completedForm.getSpectatorAway());
+        spectator.setComment(completedForm.getSpectatorComment());
         spectator.setReportId(report);
         spectatorRepository.save(spectator);
 
         Shirt shirt = new Shirt();
-        shirt.setDidWear(form.getShirt());
+        shirt.setDidWear(completedForm.getShirt());
         shirt.setReportId(report);
         shirtRepository.save(shirt);
 
         OverallScore overallScore = new OverallScore();
-        overallScore.setHomeScore(form.getOverallScoreHome());
-        overallScore.setAwayScore(form.getOverallScoreAway());
-        overallScore.setComment(form.getOverallScoreComment());
+        overallScore.setHomeScore(completedForm.getOverallScoreHome());
+        overallScore.setAwayScore(completedForm.getOverallScoreAway());
+        overallScore.setComment(completedForm.getOverallScoreComment());
         overallScore.setReportId(report);
         overallScoreRepository.save(overallScore);
 
         KickOff kickOff = new KickOff();
-        if(form.getKickOffLate().equalsIgnoreCase("Yes")) {
+        if(completedForm.getKickOffLate().equalsIgnoreCase("Yes")) {
             kickOff.setLate(true);
         } else {
             kickOff.setLate(false);
         }
-        kickOff.setFault(form.getKickOffFault());
-        kickOff.setHowLate(form.getKickOffHowLate());
+        kickOff.setFault(completedForm.getKickOffFault());
+        kickOff.setHowLate(completedForm.getKickOffHowLate());
         kickOff.setReportId(report);
         kickOffRepository.save(kickOff);
 
         HomeHospitality homeHospitality = new HomeHospitality();
-        homeHospitality.setScore(form.getHospitality());
+        homeHospitality.setScore(completedForm.getHospitality());
         homeHospitality.setReportId(report);
         homeHospitalityRepository.save(homeHospitality);
 
         Contact contact = new Contact();
-        contact.setYesNoClub(form.getContact());
+        contact.setYesNoClub(completedForm.getContact());
         contact.setReportId(report);
         contactRepository.save(contact);
 
         ChangingFacility changingFacility = new ChangingFacility();
-        changingFacility.setScore(form.getChangingFacilityScore());
-        changingFacility.setComment(form.getChangingFacilityComment());
+        changingFacility.setScore(completedForm.getChangingFacilityScore());
+        changingFacility.setComment(completedForm.getChangingFacilityComment());
         changingFacility.setReportId(report);
         changingFacilityRepository.save(changingFacility);
 
         CaptainLiaison captainLiaison = new CaptainLiaison();
-        captainLiaison.setHomeScore(form.getCaptainLiaisonHome());
-        captainLiaison.setAwayScore(form.getCaptainLiaisonAway());
-        captainLiaison.setComment(form.getCaptainLiaisonComment());
+        captainLiaison.setHomeScore(completedForm.getCaptainLiaisonHome());
+        captainLiaison.setAwayScore(completedForm.getCaptainLiaisonAway());
+        captainLiaison.setComment(completedForm.getCaptainLiaisonComment());
         captainLiaison.setReportId(report);
         captainLiaisonRepository.save(captainLiaison);
 
         CaptainArmband captainArmband = new CaptainArmband();
-        captainArmband.setHomeAwayBothNeither(form.getCaptainArmband());
+        captainArmband.setHomeAwayBothNeither(completedForm.getCaptainArmband());
         captainArmband.setReportId(report);
         captainArmbandRepository.save(captainArmband);
 
         Ball ball = new Ball();
-        if(form.getBall().equalsIgnoreCase("Yes")) {
+        if(completedForm.getBall().equalsIgnoreCase("Yes")) {
             ball.setProvided(true);
         } else {
             ball.setProvided(false);
@@ -161,9 +161,9 @@ public class FormService {
         ballRepository.save(ball);
 
         Assistant assistant = new Assistant();
-        assistant.setHomeScore(form.getAssistantHome());
-        assistant.setAwayScore(form.getAssistantAway());
-        assistant.setComment(form.getAssistantComment());
+        assistant.setHomeScore(completedForm.getAssistantHome());
+        assistant.setAwayScore(completedForm.getAssistantAway());
+        assistant.setComment(completedForm.getAssistantComment());
         assistant.setReportId(report);
         assistantRepository.save(assistant);
     }
