@@ -43,7 +43,7 @@ public class FormController {
 
         return modelAndView;
     }
-
+    
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public ModelAndView submitForm(Form form) {
         formService.submitForm(form);

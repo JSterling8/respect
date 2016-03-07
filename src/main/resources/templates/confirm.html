@@ -153,40 +153,44 @@
                 <td>Additional Comments</td>
                 <td th:text="${form.overallScoreComment}"></td>
             </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <form action="/submit" th:action="@{/submit}" method="post">
+                        <input type="hidden" name="league" th:value="${form.league}" />
+                        <input type="hidden" name="competition" th:value="${form.competition}" />
+                        <input type="hidden" name="referee" th:value="${form.referee}" />
+                        <input type="hidden" name="homeTeam" th:value="${form.homeTeam}" />
+                        <input type="hidden" name="awayTeam" th:value="${form.awayTeam}" />
+                        <input type="hidden" name="date" th:value="${form.date}" />
+                        <input type="hidden" name="changingFacilityScore" th:value="${form.changingFacilityScore}" />
+                        <input type="hidden" name="changingFacilityComment" th:value="${form.changingFacilityComment}" />
+                        <input type="hidden" name="kickOffLate" th:value="${form.kickOffLate}" />
+                        <input type="hidden" name="kickOffHowLate" th:value="${form.kickOffHowLate}" />
+                        <input type="hidden" name="kickOffFault" th:value="${form.kickOffFault}" />
+                        <input type="hidden" name="ball" th:value="${form.ball}" />
+                        <input type="hidden" name="shirt" th:value="${form.shirt}" />
+                        <input type="hidden" name="spectatorHome" th:value="${form.spectatorHome}" />
+                        <input type="hidden" name="spectatorAway" th:value="${form.spectatorAway}" />
+                        <input type="hidden" name="spectatorComment" th:value="${form.spectatorComment}" />
+                        <input type="hidden" name="assistantHome" th:value="${form.assistantHome}" />
+                        <input type="hidden" name="assistantAway" th:value="${form.assistantAway}" />
+                        <input type="hidden" name="assistantComment" th:value="${form.assistantComment}" />
+                        <input type="hidden" name="captainLiaisonHome" th:value="${form.captainLiaisonHome}" />
+                        <input type="hidden" name="captainLiaisonAway" th:value="${form.captainLiaisonAway}" />
+                        <input type="hidden" name="captainLiaisonComment" th:value="${form.captainLiaisonComment}" />
+                        <input type="hidden" name="hospitality" th:value="${form.hospitality}" />
+                        <input type="hidden" name="teamSheet" th:value="${form.teamSheet}" />
+                        <input type="hidden" name="contact" th:value="${form.contact}" />
+                        <input type="hidden" name="captainArmband" th:value="${form.captainArmband}" />
+                        <input type="hidden" name="overallScoreHome" th:value="${form.overallScoreHome}" />
+                        <input type="hidden" name="overallScoreAway" th:value="${form.overallScoreAway}" />
+                        <input type="hidden" name="overallScoreComment" th:value="${form.overallScoreComment}" />
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </td>
+            </tr>
         </table>
-
-        <form action="/submit" th:action="@{/submit}" method="post">
-                <input type="hidden" name="league" th:value="${form.league}" />
-                <input type="hidden" name="competition" th:value="${form.competition}" />
-                <input type="hidden" name="referee" th:value="${form.referee}" />
-                <input type="hidden" name="homeTeam" th:value="${form.homeTeam}" />
-                <input type="hidden" name="awayTeam" th:value="${form.awayTeam}" />
-                <input type="hidden" name="date" th:value="${form.date}" />
-                <input type="hidden" name="changingFacilityScore" th:value="${form.changingFacilityScore}" />
-                <input type="hidden" name="changingFacilityComment" th:value="${form.changingFacilityComment}" />
-                <input type="hidden" name="kickOffLate" th:value="${form.kickOffLate}" />
-                <input type="hidden" name="kickOffHowLate" th:value="${form.kickOffHowLate}" />
-                <input type="hidden" name="kickOffFault" th:value="${form.kickOffFault}" />
-                <input type="hidden" name="ball" th:value="${form.ball}" />
-                <input type="hidden" name="shirt" th:value="${form.shirt}" />
-                <input type="hidden" name="spectatorHome" th:value="${form.spectatorHome}" />
-                <input type="hidden" name="spectatorAway" th:value="${form.spectatorAway}" />
-                <input type="hidden" name="spectatorComment" th:value="${form.spectatorComment}" />
-                <input type="hidden" name="assistantHome" th:value="${form.assistantHome}" />
-                <input type="hidden" name="assistantAway" th:value="${form.assistantAway}" />
-                <input type="hidden" name="assistantComment" th:value="${form.assistantComment}" />
-                <input type="hidden" name="captainLiaisonHome" th:value="${form.captainLiaisonHome}" />
-                <input type="hidden" name="captainLiaisonAway" th:value="${form.captainLiaisonAway}" />
-                <input type="hidden" name="captainLiaisonComment" th:value="${form.captainLiaisonComment}" />
-                <input type="hidden" name="hospitality" th:value="${form.hospitality}" />
-                <input type="hidden" name="teamSheet" th:value="${form.teamSheet}" />
-                <input type="hidden" name="contact" th:value="${form.contact}" />
-                <input type="hidden" name="captainArmband" th:value="${form.captainArmband}" />
-                <input type="hidden" name="overallScoreHome" th:value="${form.overallScoreHome}" />
-                <input type="hidden" name="overallScoreAway" th:value="${form.overallScoreAway}" />
-                <input type="hidden" name="overallScoreComment" th:value="${form.overallScoreComment}" />
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
     </div>
 </center>
 </body>

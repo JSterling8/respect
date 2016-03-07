@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5beta1
 -- Dumped by pg_dump version 9.5beta1
 
--- Started on 2016-03-02 18:22:35
+-- Started on 2016-03-07 14:39:58
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,7 +16,7 @@ SET client_min_messages = warning;
 
 DROP DATABASE respect;
 --
--- TOC entry 2395 (class 1262 OID 26858)
+-- TOC entry 2396 (class 1262 OID 26858)
 -- Name: respect; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -46,7 +46,7 @@ CREATE SCHEMA public;
 ALTER SCHEMA public OWNER TO postgres;
 
 --
--- TOC entry 2396 (class 0 OID 0)
+-- TOC entry 2397 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
 --
@@ -63,7 +63,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2398 (class 0 OID 0)
+-- TOC entry 2399 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -109,7 +109,7 @@ CREATE SEQUENCE assistant_id_seq
 ALTER TABLE assistant_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2399 (class 0 OID 0)
+-- TOC entry 2400 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: assistant_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -133,7 +133,7 @@ CREATE SEQUENCE assistant_report_id_seq
 ALTER TABLE assistant_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2400 (class 0 OID 0)
+-- TOC entry 2401 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: assistant_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -171,7 +171,7 @@ CREATE SEQUENCE ball_id_seq
 ALTER TABLE ball_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2401 (class 0 OID 0)
+-- TOC entry 2402 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: ball_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -195,7 +195,7 @@ CREATE SEQUENCE ball_report_id_seq
 ALTER TABLE ball_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2402 (class 0 OID 0)
+-- TOC entry 2403 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: ball_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -233,7 +233,7 @@ CREATE SEQUENCE captain_armband_id_seq
 ALTER TABLE captain_armband_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2403 (class 0 OID 0)
+-- TOC entry 2404 (class 0 OID 0)
 -- Dependencies: 187
 -- Name: captain_armband_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -257,7 +257,7 @@ CREATE SEQUENCE captain_armband_report_id_seq
 ALTER TABLE captain_armband_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2404 (class 0 OID 0)
+-- TOC entry 2405 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: captain_armband_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -297,7 +297,7 @@ CREATE SEQUENCE captain_liaison_id_seq
 ALTER TABLE captain_liaison_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2405 (class 0 OID 0)
+-- TOC entry 2406 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: captain_liaison_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -321,7 +321,7 @@ CREATE SEQUENCE captain_liaison_report_id_seq
 ALTER TABLE captain_liaison_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2406 (class 0 OID 0)
+-- TOC entry 2407 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: captain_liaison_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -345,30 +345,6 @@ CREATE TABLE changing_facility (
 ALTER TABLE changing_facility OWNER TO postgres;
 
 --
--- TOC entry 193 (class 1259 OID 26899)
--- Name: changing_facilitiy_score_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE changing_facilitiy_score_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE changing_facilitiy_score_id_seq OWNER TO postgres;
-
---
--- TOC entry 2407 (class 0 OID 0)
--- Dependencies: 193
--- Name: changing_facilitiy_score_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE changing_facilitiy_score_id_seq OWNED BY changing_facility.id;
-
-
---
 -- TOC entry 194 (class 1259 OID 26901)
 -- Name: changing_facilitiy_score_report_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -390,6 +366,30 @@ ALTER TABLE changing_facilitiy_score_report_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE changing_facilitiy_score_report_id_seq OWNED BY changing_facility.report_id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 26899)
+-- Name: changing_facility_score_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE changing_facility_score_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE changing_facility_score_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2409 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: changing_facility_score_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE changing_facility_score_id_seq OWNED BY changing_facility.id;
 
 
 --
@@ -422,7 +422,7 @@ CREATE SEQUENCE competition_id_seq
 ALTER TABLE competition_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2409 (class 0 OID 0)
+-- TOC entry 2410 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: competition_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -446,7 +446,7 @@ CREATE SEQUENCE competition_league_seq
 ALTER TABLE competition_league_seq OWNER TO postgres;
 
 --
--- TOC entry 2410 (class 0 OID 0)
+-- TOC entry 2411 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: competition_league_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -484,7 +484,7 @@ CREATE SEQUENCE contact_id_seq
 ALTER TABLE contact_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2411 (class 0 OID 0)
+-- TOC entry 2412 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -508,7 +508,7 @@ CREATE SEQUENCE contact_report_id_seq
 ALTER TABLE contact_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2412 (class 0 OID 0)
+-- TOC entry 2413 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: contact_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -546,7 +546,7 @@ CREATE SEQUENCE home_hospitality_id_seq
 ALTER TABLE home_hospitality_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2413 (class 0 OID 0)
+-- TOC entry 2414 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: home_hospitality_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -570,7 +570,7 @@ CREATE SEQUENCE home_hospitality_report_id_seq
 ALTER TABLE home_hospitality_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2414 (class 0 OID 0)
+-- TOC entry 2415 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: home_hospitality_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -610,7 +610,7 @@ CREATE SEQUENCE late_kick_off_id_seq
 ALTER TABLE late_kick_off_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2415 (class 0 OID 0)
+-- TOC entry 2416 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: late_kick_off_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -634,7 +634,7 @@ CREATE SEQUENCE late_kick_off_report_id_seq
 ALTER TABLE late_kick_off_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2416 (class 0 OID 0)
+-- TOC entry 2417 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: late_kick_off_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -671,7 +671,7 @@ CREATE SEQUENCE league_id_seq
 ALTER TABLE league_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2417 (class 0 OID 0)
+-- TOC entry 2418 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: league_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -688,7 +688,8 @@ CREATE TABLE overall_score (
     id integer NOT NULL,
     report_id integer NOT NULL,
     home_score smallint NOT NULL,
-    away_score smallint NOT NULL
+    away_score smallint NOT NULL,
+    comment character varying(4095)
 );
 
 
@@ -710,7 +711,7 @@ CREATE SEQUENCE overall_score_id_seq
 ALTER TABLE overall_score_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2418 (class 0 OID 0)
+-- TOC entry 2419 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: overall_score_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -734,7 +735,7 @@ CREATE SEQUENCE overall_score_report_id_seq
 ALTER TABLE overall_score_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2419 (class 0 OID 0)
+-- TOC entry 2420 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: overall_score_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -773,7 +774,7 @@ CREATE SEQUENCE referee_id_seq
 ALTER TABLE referee_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2420 (class 0 OID 0)
+-- TOC entry 2421 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: referee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -814,7 +815,7 @@ CREATE SEQUENCE report_away_team_id_seq
 ALTER TABLE report_away_team_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2421 (class 0 OID 0)
+-- TOC entry 2422 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: report_away_team_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -838,7 +839,7 @@ CREATE SEQUENCE report_competition_seq
 ALTER TABLE report_competition_seq OWNER TO postgres;
 
 --
--- TOC entry 2422 (class 0 OID 0)
+-- TOC entry 2423 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: report_competition_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -862,7 +863,7 @@ CREATE SEQUENCE report_home_team_id_seq
 ALTER TABLE report_home_team_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2423 (class 0 OID 0)
+-- TOC entry 2424 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: report_home_team_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -886,7 +887,7 @@ CREATE SEQUENCE report_id_seq
 ALTER TABLE report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2424 (class 0 OID 0)
+-- TOC entry 2425 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -910,7 +911,7 @@ CREATE SEQUENCE report_referee_seq
 ALTER TABLE report_referee_seq OWNER TO postgres;
 
 --
--- TOC entry 2425 (class 0 OID 0)
+-- TOC entry 2426 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: report_referee_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -948,7 +949,7 @@ CREATE SEQUENCE shirt_id_seq
 ALTER TABLE shirt_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2426 (class 0 OID 0)
+-- TOC entry 2427 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: shirt_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -972,7 +973,7 @@ CREATE SEQUENCE shirt_report_id_seq
 ALTER TABLE shirt_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2427 (class 0 OID 0)
+-- TOC entry 2428 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: shirt_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1012,7 +1013,7 @@ CREATE SEQUENCE spectator_id_seq
 ALTER TABLE spectator_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2428 (class 0 OID 0)
+-- TOC entry 2429 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: spectator_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1036,7 +1037,7 @@ CREATE SEQUENCE spectator_report_id_seq
 ALTER TABLE spectator_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2429 (class 0 OID 0)
+-- TOC entry 2430 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: spectator_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1074,7 +1075,7 @@ CREATE SEQUENCE team_id_seq
 ALTER TABLE team_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2430 (class 0 OID 0)
+-- TOC entry 2431 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: team_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1098,7 +1099,7 @@ CREATE SEQUENCE team_league_seq
 ALTER TABLE team_league_seq OWNER TO postgres;
 
 --
--- TOC entry 2431 (class 0 OID 0)
+-- TOC entry 2432 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: team_league_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1136,7 +1137,7 @@ CREATE SEQUENCE team_sheet_id_seq
 ALTER TABLE team_sheet_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2432 (class 0 OID 0)
+-- TOC entry 2433 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: team_sheet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1160,7 +1161,7 @@ CREATE SEQUENCE team_sheet_report_id_seq
 ALTER TABLE team_sheet_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2433 (class 0 OID 0)
+-- TOC entry 2434 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: team_sheet_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1200,7 +1201,7 @@ CREATE SEQUENCE user_id_seq
 ALTER TABLE user_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2434 (class 0 OID 0)
+-- TOC entry 2435 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1224,7 +1225,7 @@ CREATE SEQUENCE user_referee_id_seq
 ALTER TABLE user_referee_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2435 (class 0 OID 0)
+-- TOC entry 2436 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: user_referee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1233,7 +1234,7 @@ ALTER SEQUENCE user_referee_id_seq OWNED BY use.referee_id;
 
 
 --
--- TOC entry 2128 (class 2604 OID 27008)
+-- TOC entry 2129 (class 2604 OID 27008)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1241,7 +1242,7 @@ ALTER TABLE ONLY assistant ALTER COLUMN id SET DEFAULT nextval('assistant_id_seq
 
 
 --
--- TOC entry 2129 (class 2604 OID 27009)
+-- TOC entry 2130 (class 2604 OID 27009)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1249,7 +1250,7 @@ ALTER TABLE ONLY assistant ALTER COLUMN report_id SET DEFAULT nextval('assistant
 
 
 --
--- TOC entry 2130 (class 2604 OID 27010)
+-- TOC entry 2131 (class 2604 OID 27010)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1257,7 +1258,7 @@ ALTER TABLE ONLY ball ALTER COLUMN id SET DEFAULT nextval('ball_id_seq'::regclas
 
 
 --
--- TOC entry 2131 (class 2604 OID 27011)
+-- TOC entry 2132 (class 2604 OID 27011)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1265,7 +1266,7 @@ ALTER TABLE ONLY ball ALTER COLUMN report_id SET DEFAULT nextval('ball_report_id
 
 
 --
--- TOC entry 2132 (class 2604 OID 27012)
+-- TOC entry 2133 (class 2604 OID 27012)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1273,7 +1274,7 @@ ALTER TABLE ONLY captain_armband ALTER COLUMN id SET DEFAULT nextval('captain_ar
 
 
 --
--- TOC entry 2133 (class 2604 OID 27013)
+-- TOC entry 2134 (class 2604 OID 27013)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1281,7 +1282,7 @@ ALTER TABLE ONLY captain_armband ALTER COLUMN report_id SET DEFAULT nextval('cap
 
 
 --
--- TOC entry 2134 (class 2604 OID 27014)
+-- TOC entry 2135 (class 2604 OID 27014)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1289,7 +1290,7 @@ ALTER TABLE ONLY captain_liaison ALTER COLUMN id SET DEFAULT nextval('captain_li
 
 
 --
--- TOC entry 2135 (class 2604 OID 27015)
+-- TOC entry 2136 (class 2604 OID 27015)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1297,15 +1298,15 @@ ALTER TABLE ONLY captain_liaison ALTER COLUMN report_id SET DEFAULT nextval('cap
 
 
 --
--- TOC entry 2136 (class 2604 OID 27016)
+-- TOC entry 2137 (class 2604 OID 27016)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY changing_facility ALTER COLUMN id SET DEFAULT nextval('changing_facilitiy_score_id_seq'::regclass);
+ALTER TABLE ONLY changing_facility ALTER COLUMN id SET DEFAULT nextval('changing_facility_score_id_seq'::regclass);
 
 
 --
--- TOC entry 2137 (class 2604 OID 27017)
+-- TOC entry 2138 (class 2604 OID 27017)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1313,7 +1314,7 @@ ALTER TABLE ONLY changing_facility ALTER COLUMN report_id SET DEFAULT nextval('c
 
 
 --
--- TOC entry 2138 (class 2604 OID 27018)
+-- TOC entry 2139 (class 2604 OID 27018)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1321,7 +1322,7 @@ ALTER TABLE ONLY competition ALTER COLUMN id SET DEFAULT nextval('competition_id
 
 
 --
--- TOC entry 2139 (class 2604 OID 27019)
+-- TOC entry 2140 (class 2604 OID 27019)
 -- Name: league; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1329,7 +1330,7 @@ ALTER TABLE ONLY competition ALTER COLUMN league SET DEFAULT nextval('competitio
 
 
 --
--- TOC entry 2140 (class 2604 OID 27020)
+-- TOC entry 2141 (class 2604 OID 27020)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1337,7 +1338,7 @@ ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::r
 
 
 --
--- TOC entry 2141 (class 2604 OID 27021)
+-- TOC entry 2142 (class 2604 OID 27021)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1345,7 +1346,7 @@ ALTER TABLE ONLY contact ALTER COLUMN report_id SET DEFAULT nextval('contact_rep
 
 
 --
--- TOC entry 2142 (class 2604 OID 27022)
+-- TOC entry 2143 (class 2604 OID 27022)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1353,7 +1354,7 @@ ALTER TABLE ONLY home_hospitality ALTER COLUMN id SET DEFAULT nextval('home_hosp
 
 
 --
--- TOC entry 2143 (class 2604 OID 27023)
+-- TOC entry 2144 (class 2604 OID 27023)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1361,7 +1362,7 @@ ALTER TABLE ONLY home_hospitality ALTER COLUMN report_id SET DEFAULT nextval('ho
 
 
 --
--- TOC entry 2144 (class 2604 OID 27024)
+-- TOC entry 2145 (class 2604 OID 27024)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1369,7 +1370,7 @@ ALTER TABLE ONLY kick_off ALTER COLUMN id SET DEFAULT nextval('late_kick_off_id_
 
 
 --
--- TOC entry 2145 (class 2604 OID 27025)
+-- TOC entry 2146 (class 2604 OID 27025)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1377,7 +1378,7 @@ ALTER TABLE ONLY kick_off ALTER COLUMN report_id SET DEFAULT nextval('late_kick_
 
 
 --
--- TOC entry 2146 (class 2604 OID 27026)
+-- TOC entry 2147 (class 2604 OID 27026)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1385,7 +1386,7 @@ ALTER TABLE ONLY league ALTER COLUMN id SET DEFAULT nextval('league_id_seq'::reg
 
 
 --
--- TOC entry 2147 (class 2604 OID 27027)
+-- TOC entry 2148 (class 2604 OID 27027)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1393,7 +1394,7 @@ ALTER TABLE ONLY overall_score ALTER COLUMN id SET DEFAULT nextval('overall_scor
 
 
 --
--- TOC entry 2148 (class 2604 OID 27028)
+-- TOC entry 2149 (class 2604 OID 27028)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1401,7 +1402,7 @@ ALTER TABLE ONLY overall_score ALTER COLUMN report_id SET DEFAULT nextval('overa
 
 
 --
--- TOC entry 2149 (class 2604 OID 27029)
+-- TOC entry 2150 (class 2604 OID 27029)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1409,7 +1410,7 @@ ALTER TABLE ONLY referee ALTER COLUMN id SET DEFAULT nextval('referee_id_seq'::r
 
 
 --
--- TOC entry 2150 (class 2604 OID 27030)
+-- TOC entry 2151 (class 2604 OID 27030)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1417,7 +1418,7 @@ ALTER TABLE ONLY report ALTER COLUMN id SET DEFAULT nextval('report_id_seq'::reg
 
 
 --
--- TOC entry 2151 (class 2604 OID 27031)
+-- TOC entry 2152 (class 2604 OID 27031)
 -- Name: competition; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1425,7 +1426,7 @@ ALTER TABLE ONLY report ALTER COLUMN competition SET DEFAULT nextval('report_com
 
 
 --
--- TOC entry 2152 (class 2604 OID 27032)
+-- TOC entry 2153 (class 2604 OID 27032)
 -- Name: referee_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1433,7 +1434,7 @@ ALTER TABLE ONLY report ALTER COLUMN referee_id SET DEFAULT nextval('report_refe
 
 
 --
--- TOC entry 2153 (class 2604 OID 27033)
+-- TOC entry 2154 (class 2604 OID 27033)
 -- Name: home_team_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1441,7 +1442,7 @@ ALTER TABLE ONLY report ALTER COLUMN home_team_id SET DEFAULT nextval('report_ho
 
 
 --
--- TOC entry 2154 (class 2604 OID 27034)
+-- TOC entry 2155 (class 2604 OID 27034)
 -- Name: away_team_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1449,7 +1450,7 @@ ALTER TABLE ONLY report ALTER COLUMN away_team_id SET DEFAULT nextval('report_aw
 
 
 --
--- TOC entry 2155 (class 2604 OID 27035)
+-- TOC entry 2156 (class 2604 OID 27035)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1457,7 +1458,7 @@ ALTER TABLE ONLY shirt ALTER COLUMN id SET DEFAULT nextval('shirt_id_seq'::regcl
 
 
 --
--- TOC entry 2156 (class 2604 OID 27036)
+-- TOC entry 2157 (class 2604 OID 27036)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1465,7 +1466,7 @@ ALTER TABLE ONLY shirt ALTER COLUMN report_id SET DEFAULT nextval('shirt_report_
 
 
 --
--- TOC entry 2157 (class 2604 OID 27037)
+-- TOC entry 2158 (class 2604 OID 27037)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1473,7 +1474,7 @@ ALTER TABLE ONLY spectator ALTER COLUMN id SET DEFAULT nextval('spectator_id_seq
 
 
 --
--- TOC entry 2158 (class 2604 OID 27038)
+-- TOC entry 2159 (class 2604 OID 27038)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1481,7 +1482,7 @@ ALTER TABLE ONLY spectator ALTER COLUMN report_id SET DEFAULT nextval('spectator
 
 
 --
--- TOC entry 2159 (class 2604 OID 27039)
+-- TOC entry 2160 (class 2604 OID 27039)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1489,7 +1490,7 @@ ALTER TABLE ONLY team ALTER COLUMN id SET DEFAULT nextval('team_id_seq'::regclas
 
 
 --
--- TOC entry 2160 (class 2604 OID 27040)
+-- TOC entry 2161 (class 2604 OID 27040)
 -- Name: league; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1497,7 +1498,7 @@ ALTER TABLE ONLY team ALTER COLUMN league SET DEFAULT nextval('team_league_seq':
 
 
 --
--- TOC entry 2161 (class 2604 OID 27041)
+-- TOC entry 2162 (class 2604 OID 27041)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1505,7 +1506,7 @@ ALTER TABLE ONLY team_sheet ALTER COLUMN id SET DEFAULT nextval('team_sheet_id_s
 
 
 --
--- TOC entry 2162 (class 2604 OID 27042)
+-- TOC entry 2163 (class 2604 OID 27042)
 -- Name: report_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1513,7 +1514,7 @@ ALTER TABLE ONLY team_sheet ALTER COLUMN report_id SET DEFAULT nextval('team_she
 
 
 --
--- TOC entry 2163 (class 2604 OID 27043)
+-- TOC entry 2164 (class 2604 OID 27043)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1521,7 +1522,7 @@ ALTER TABLE ONLY use ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass
 
 
 --
--- TOC entry 2164 (class 2604 OID 27044)
+-- TOC entry 2165 (class 2604 OID 27044)
 -- Name: referee_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1529,7 +1530,7 @@ ALTER TABLE ONLY use ALTER COLUMN referee_id SET DEFAULT nextval('user_referee_i
 
 
 --
--- TOC entry 2336 (class 0 OID 26859)
+-- TOC entry 2337 (class 0 OID 26859)
 -- Dependencies: 180
 -- Data for Name: assistant; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1539,7 +1540,7 @@ COPY assistant (id, home_score, away_score, comment, report_id) FROM stdin;
 
 
 --
--- TOC entry 2436 (class 0 OID 0)
+-- TOC entry 2437 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: assistant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1548,7 +1549,7 @@ SELECT pg_catalog.setval('assistant_id_seq', 1, false);
 
 
 --
--- TOC entry 2437 (class 0 OID 0)
+-- TOC entry 2438 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: assistant_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1557,7 +1558,7 @@ SELECT pg_catalog.setval('assistant_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2339 (class 0 OID 26869)
+-- TOC entry 2340 (class 0 OID 26869)
 -- Dependencies: 183
 -- Data for Name: ball; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1567,7 +1568,7 @@ COPY ball (id, provided, report_id) FROM stdin;
 
 
 --
--- TOC entry 2438 (class 0 OID 0)
+-- TOC entry 2439 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: ball_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1576,7 +1577,7 @@ SELECT pg_catalog.setval('ball_id_seq', 1, false);
 
 
 --
--- TOC entry 2439 (class 0 OID 0)
+-- TOC entry 2440 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: ball_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1585,7 +1586,7 @@ SELECT pg_catalog.setval('ball_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2342 (class 0 OID 26876)
+-- TOC entry 2343 (class 0 OID 26876)
 -- Dependencies: 186
 -- Data for Name: captain_armband; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1595,7 +1596,7 @@ COPY captain_armband (id, report_id, home_away_both_neither) FROM stdin;
 
 
 --
--- TOC entry 2440 (class 0 OID 0)
+-- TOC entry 2441 (class 0 OID 0)
 -- Dependencies: 187
 -- Name: captain_armband_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1604,7 +1605,7 @@ SELECT pg_catalog.setval('captain_armband_id_seq', 1, false);
 
 
 --
--- TOC entry 2441 (class 0 OID 0)
+-- TOC entry 2442 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: captain_armband_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1613,7 +1614,7 @@ SELECT pg_catalog.setval('captain_armband_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2345 (class 0 OID 26883)
+-- TOC entry 2346 (class 0 OID 26883)
 -- Dependencies: 189
 -- Data for Name: captain_liaison; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1623,7 +1624,7 @@ COPY captain_liaison (id, home_score, away_score, comment, report_id) FROM stdin
 
 
 --
--- TOC entry 2442 (class 0 OID 0)
+-- TOC entry 2443 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: captain_liaison_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1632,21 +1633,12 @@ SELECT pg_catalog.setval('captain_liaison_id_seq', 1, false);
 
 
 --
--- TOC entry 2443 (class 0 OID 0)
+-- TOC entry 2444 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: captain_liaison_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('captain_liaison_report_id_seq', 1, false);
-
-
---
--- TOC entry 2444 (class 0 OID 0)
--- Dependencies: 193
--- Name: changing_facilitiy_score_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('changing_facilitiy_score_id_seq', 1, false);
 
 
 --
@@ -1659,7 +1651,7 @@ SELECT pg_catalog.setval('changing_facilitiy_score_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2348 (class 0 OID 26893)
+-- TOC entry 2349 (class 0 OID 26893)
 -- Dependencies: 192
 -- Data for Name: changing_facility; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1669,18 +1661,26 @@ COPY changing_facility (id, report_id, score, comment) FROM stdin;
 
 
 --
--- TOC entry 2351 (class 0 OID 26903)
+-- TOC entry 2446 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: changing_facility_score_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('changing_facility_score_id_seq', 1, false);
+
+
+--
+-- TOC entry 2352 (class 0 OID 26903)
 -- Dependencies: 195
 -- Data for Name: competition; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY competition (id, name, league) FROM stdin;
-1	Competition 1	1
 \.
 
 
 --
--- TOC entry 2446 (class 0 OID 0)
+-- TOC entry 2447 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: competition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1689,7 +1689,7 @@ SELECT pg_catalog.setval('competition_id_seq', 1, true);
 
 
 --
--- TOC entry 2447 (class 0 OID 0)
+-- TOC entry 2448 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: competition_league_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1698,7 +1698,7 @@ SELECT pg_catalog.setval('competition_league_seq', 1, false);
 
 
 --
--- TOC entry 2354 (class 0 OID 26910)
+-- TOC entry 2355 (class 0 OID 26910)
 -- Dependencies: 198
 -- Data for Name: contact; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1708,16 +1708,16 @@ COPY contact (id, yes_no_club, report_id) FROM stdin;
 
 
 --
--- TOC entry 2448 (class 0 OID 0)
+-- TOC entry 2449 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 1, false);
+SELECT pg_catalog.setval('contact_id_seq', 1, true);
 
 
 --
--- TOC entry 2449 (class 0 OID 0)
+-- TOC entry 2450 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: contact_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1726,7 +1726,7 @@ SELECT pg_catalog.setval('contact_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2357 (class 0 OID 26917)
+-- TOC entry 2358 (class 0 OID 26917)
 -- Dependencies: 201
 -- Data for Name: home_hospitality; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1736,16 +1736,16 @@ COPY home_hospitality (id, score, report_id) FROM stdin;
 
 
 --
--- TOC entry 2450 (class 0 OID 0)
+-- TOC entry 2451 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: home_hospitality_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('home_hospitality_id_seq', 1, false);
+SELECT pg_catalog.setval('home_hospitality_id_seq', 1, true);
 
 
 --
--- TOC entry 2451 (class 0 OID 0)
+-- TOC entry 2452 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: home_hospitality_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1754,7 +1754,7 @@ SELECT pg_catalog.setval('home_hospitality_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2360 (class 0 OID 26924)
+-- TOC entry 2361 (class 0 OID 26924)
 -- Dependencies: 204
 -- Data for Name: kick_off; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1764,16 +1764,16 @@ COPY kick_off (id, report_id, late, how_late, fault) FROM stdin;
 
 
 --
--- TOC entry 2452 (class 0 OID 0)
+-- TOC entry 2453 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: late_kick_off_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('late_kick_off_id_seq', 1, false);
+SELECT pg_catalog.setval('late_kick_off_id_seq', 1, true);
 
 
 --
--- TOC entry 2453 (class 0 OID 0)
+-- TOC entry 2454 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: late_kick_off_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1782,18 +1782,17 @@ SELECT pg_catalog.setval('late_kick_off_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2363 (class 0 OID 26934)
+-- TOC entry 2364 (class 0 OID 26934)
 -- Dependencies: 207
 -- Data for Name: league; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY league (id, name) FROM stdin;
-1	League 1
 \.
 
 
 --
--- TOC entry 2454 (class 0 OID 0)
+-- TOC entry 2455 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: league_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1802,26 +1801,26 @@ SELECT pg_catalog.setval('league_id_seq', 1, true);
 
 
 --
--- TOC entry 2365 (class 0 OID 26939)
+-- TOC entry 2366 (class 0 OID 26939)
 -- Dependencies: 209
 -- Data for Name: overall_score; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY overall_score (id, report_id, home_score, away_score) FROM stdin;
+COPY overall_score (id, report_id, home_score, away_score, comment) FROM stdin;
 \.
 
 
 --
--- TOC entry 2455 (class 0 OID 0)
+-- TOC entry 2456 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: overall_score_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('overall_score_id_seq', 1, false);
+SELECT pg_catalog.setval('overall_score_id_seq', 1, true);
 
 
 --
--- TOC entry 2456 (class 0 OID 0)
+-- TOC entry 2457 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: overall_score_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1830,38 +1829,37 @@ SELECT pg_catalog.setval('overall_score_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2368 (class 0 OID 26946)
+-- TOC entry 2369 (class 0 OID 26946)
 -- Dependencies: 212
 -- Data for Name: referee; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY referee (id, first_name, last_name, level) FROM stdin;
-1	Jonathan	Sterling	6
-\.
-
-
---
--- TOC entry 2457 (class 0 OID 0)
--- Dependencies: 213
--- Name: referee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('referee_id_seq', 1, true);
-
-
---
--- TOC entry 2370 (class 0 OID 26954)
--- Dependencies: 214
--- Data for Name: report; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY report (id, date, competition, referee_id, home_team_id, away_team_id) FROM stdin;
-1	2016-02-26	1	1	2	3
+19	Jonathan	Sterling	6
 \.
 
 
 --
 -- TOC entry 2458 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: referee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('referee_id_seq', 19, true);
+
+
+--
+-- TOC entry 2371 (class 0 OID 26954)
+-- Dependencies: 214
+-- Data for Name: report; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY report (id, date, competition, referee_id, home_team_id, away_team_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2459 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: report_away_team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1870,7 +1868,7 @@ SELECT pg_catalog.setval('report_away_team_id_seq', 1, false);
 
 
 --
--- TOC entry 2459 (class 0 OID 0)
+-- TOC entry 2460 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: report_competition_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1879,7 +1877,7 @@ SELECT pg_catalog.setval('report_competition_seq', 1, false);
 
 
 --
--- TOC entry 2460 (class 0 OID 0)
+-- TOC entry 2461 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: report_home_team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1888,16 +1886,16 @@ SELECT pg_catalog.setval('report_home_team_id_seq', 1, false);
 
 
 --
--- TOC entry 2461 (class 0 OID 0)
+-- TOC entry 2462 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('report_id_seq', 1, true);
+SELECT pg_catalog.setval('report_id_seq', 2, true);
 
 
 --
--- TOC entry 2462 (class 0 OID 0)
+-- TOC entry 2463 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: report_referee_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1906,7 +1904,7 @@ SELECT pg_catalog.setval('report_referee_seq', 1, false);
 
 
 --
--- TOC entry 2376 (class 0 OID 26967)
+-- TOC entry 2377 (class 0 OID 26967)
 -- Dependencies: 220
 -- Data for Name: shirt; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1916,16 +1914,16 @@ COPY shirt (id, report_id, did_wear) FROM stdin;
 
 
 --
--- TOC entry 2463 (class 0 OID 0)
+-- TOC entry 2464 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: shirt_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('shirt_id_seq', 1, false);
+SELECT pg_catalog.setval('shirt_id_seq', 1, true);
 
 
 --
--- TOC entry 2464 (class 0 OID 0)
+-- TOC entry 2465 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: shirt_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1934,7 +1932,7 @@ SELECT pg_catalog.setval('shirt_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2379 (class 0 OID 26974)
+-- TOC entry 2380 (class 0 OID 26974)
 -- Dependencies: 223
 -- Data for Name: spectator; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1944,16 +1942,16 @@ COPY spectator (id, home_score, away_score, report_id, comment) FROM stdin;
 
 
 --
--- TOC entry 2465 (class 0 OID 0)
+-- TOC entry 2466 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: spectator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('spectator_id_seq', 1, false);
+SELECT pg_catalog.setval('spectator_id_seq', 1, true);
 
 
 --
--- TOC entry 2466 (class 0 OID 0)
+-- TOC entry 2467 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: spectator_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1962,20 +1960,17 @@ SELECT pg_catalog.setval('spectator_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2382 (class 0 OID 26984)
+-- TOC entry 2383 (class 0 OID 26984)
 -- Dependencies: 226
 -- Data for Name: team; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY team (id, name, league) FROM stdin;
-1	Team 1111	1
-2	Team 1111	1
-3	Team 2222	1
 \.
 
 
 --
--- TOC entry 2467 (class 0 OID 0)
+-- TOC entry 2468 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1984,7 +1979,7 @@ SELECT pg_catalog.setval('team_id_seq', 3, true);
 
 
 --
--- TOC entry 2468 (class 0 OID 0)
+-- TOC entry 2469 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: team_league_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1993,7 +1988,7 @@ SELECT pg_catalog.setval('team_league_seq', 1, false);
 
 
 --
--- TOC entry 2385 (class 0 OID 26991)
+-- TOC entry 2386 (class 0 OID 26991)
 -- Dependencies: 229
 -- Data for Name: team_sheet; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2003,16 +1998,16 @@ COPY team_sheet (id, recieved, report_id) FROM stdin;
 
 
 --
--- TOC entry 2469 (class 0 OID 0)
+-- TOC entry 2470 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: team_sheet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('team_sheet_id_seq', 1, false);
+SELECT pg_catalog.setval('team_sheet_id_seq', 1, true);
 
 
 --
--- TOC entry 2470 (class 0 OID 0)
+-- TOC entry 2471 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: team_sheet_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -2021,27 +2016,27 @@ SELECT pg_catalog.setval('team_sheet_report_id_seq', 1, false);
 
 
 --
--- TOC entry 2388 (class 0 OID 26998)
+-- TOC entry 2389 (class 0 OID 26998)
 -- Dependencies: 232
 -- Data for Name: use; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY use (id, referee_id, email, password, type) FROM stdin;
-1	1	JSterling8@gmail.com	$2a$10$rSxrJ8cgbQ3TtcCXw.HxGeoZD8Y17Cb11fEJNNef82yCJhJWwtyLm	ADMIN
+19	19	a@a.com	$2a$10$C4wBInV/NeghZDf.IuUj6u.EAh3Lk199L6GAqNOUALIhBTRKOEYX.	DEFAULT
 \.
 
 
 --
--- TOC entry 2471 (class 0 OID 0)
+-- TOC entry 2472 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_id_seq', 1, true);
+SELECT pg_catalog.setval('user_id_seq', 19, true);
 
 
 --
--- TOC entry 2472 (class 0 OID 0)
+-- TOC entry 2473 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: user_referee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -2050,7 +2045,7 @@ SELECT pg_catalog.setval('user_referee_id_seq', 1, false);
 
 
 --
--- TOC entry 2170 (class 2606 OID 27046)
+-- TOC entry 2171 (class 2606 OID 27046)
 -- Name: armband_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2059,7 +2054,7 @@ ALTER TABLE ONLY captain_armband
 
 
 --
--- TOC entry 2166 (class 2606 OID 27048)
+-- TOC entry 2167 (class 2606 OID 27048)
 -- Name: assistant_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2068,7 +2063,7 @@ ALTER TABLE ONLY assistant
 
 
 --
--- TOC entry 2168 (class 2606 OID 27050)
+-- TOC entry 2169 (class 2606 OID 27050)
 -- Name: ball_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2077,7 +2072,7 @@ ALTER TABLE ONLY ball
 
 
 --
--- TOC entry 2172 (class 2606 OID 27052)
+-- TOC entry 2173 (class 2606 OID 27052)
 -- Name: captain_liaison_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2086,7 +2081,7 @@ ALTER TABLE ONLY captain_liaison
 
 
 --
--- TOC entry 2176 (class 2606 OID 27054)
+-- TOC entry 2177 (class 2606 OID 27054)
 -- Name: comp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2095,7 +2090,7 @@ ALTER TABLE ONLY competition
 
 
 --
--- TOC entry 2178 (class 2606 OID 27056)
+-- TOC entry 2179 (class 2606 OID 27056)
 -- Name: contact_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2104,7 +2099,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- TOC entry 2200 (class 2606 OID 27058)
+-- TOC entry 2201 (class 2606 OID 27058)
 -- Name: email_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2113,7 +2108,7 @@ ALTER TABLE ONLY use
 
 
 --
--- TOC entry 2174 (class 2606 OID 27060)
+-- TOC entry 2175 (class 2606 OID 27060)
 -- Name: facility_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2122,7 +2117,7 @@ ALTER TABLE ONLY changing_facility
 
 
 --
--- TOC entry 2180 (class 2606 OID 27062)
+-- TOC entry 2181 (class 2606 OID 27062)
 -- Name: hospitality_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2131,7 +2126,7 @@ ALTER TABLE ONLY home_hospitality
 
 
 --
--- TOC entry 2182 (class 2606 OID 27064)
+-- TOC entry 2183 (class 2606 OID 27064)
 -- Name: kick_off_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2140,7 +2135,7 @@ ALTER TABLE ONLY kick_off
 
 
 --
--- TOC entry 2184 (class 2606 OID 27066)
+-- TOC entry 2185 (class 2606 OID 27066)
 -- Name: league_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2149,7 +2144,7 @@ ALTER TABLE ONLY league
 
 
 --
--- TOC entry 2186 (class 2606 OID 27068)
+-- TOC entry 2187 (class 2606 OID 27068)
 -- Name: overall_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2158,7 +2153,7 @@ ALTER TABLE ONLY overall_score
 
 
 --
--- TOC entry 2188 (class 2606 OID 27070)
+-- TOC entry 2189 (class 2606 OID 27070)
 -- Name: ref_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2167,7 +2162,7 @@ ALTER TABLE ONLY referee
 
 
 --
--- TOC entry 2190 (class 2606 OID 27072)
+-- TOC entry 2191 (class 2606 OID 27072)
 -- Name: report_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2176,7 +2171,7 @@ ALTER TABLE ONLY report
 
 
 --
--- TOC entry 2192 (class 2606 OID 27074)
+-- TOC entry 2193 (class 2606 OID 27074)
 -- Name: shirt_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2185,7 +2180,7 @@ ALTER TABLE ONLY shirt
 
 
 --
--- TOC entry 2194 (class 2606 OID 27076)
+-- TOC entry 2195 (class 2606 OID 27076)
 -- Name: spectator_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2194,7 +2189,7 @@ ALTER TABLE ONLY spectator
 
 
 --
--- TOC entry 2196 (class 2606 OID 27078)
+-- TOC entry 2197 (class 2606 OID 27078)
 -- Name: team_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2203,7 +2198,7 @@ ALTER TABLE ONLY team
 
 
 --
--- TOC entry 2198 (class 2606 OID 27080)
+-- TOC entry 2199 (class 2606 OID 27080)
 -- Name: team_sheet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2212,7 +2207,7 @@ ALTER TABLE ONLY team_sheet
 
 
 --
--- TOC entry 2202 (class 2606 OID 27082)
+-- TOC entry 2203 (class 2606 OID 27082)
 -- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2221,7 +2216,7 @@ ALTER TABLE ONLY use
 
 
 --
--- TOC entry 2213 (class 2606 OID 27083)
+-- TOC entry 2214 (class 2606 OID 27083)
 -- Name: away_team_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2230,7 +2225,7 @@ ALTER TABLE ONLY report
 
 
 --
--- TOC entry 2215 (class 2606 OID 27093)
+-- TOC entry 2216 (class 2606 OID 27093)
 -- Name: competition_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2239,7 +2234,7 @@ ALTER TABLE ONLY report
 
 
 --
--- TOC entry 2214 (class 2606 OID 27088)
+-- TOC entry 2215 (class 2606 OID 27088)
 -- Name: home_team_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2248,7 +2243,7 @@ ALTER TABLE ONLY report
 
 
 --
--- TOC entry 2219 (class 2606 OID 27098)
+-- TOC entry 2220 (class 2606 OID 27098)
 -- Name: league_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2257,7 +2252,7 @@ ALTER TABLE ONLY team
 
 
 --
--- TOC entry 2208 (class 2606 OID 27103)
+-- TOC entry 2209 (class 2606 OID 27103)
 -- Name: league_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2266,7 +2261,7 @@ ALTER TABLE ONLY competition
 
 
 --
--- TOC entry 2216 (class 2606 OID 27108)
+-- TOC entry 2217 (class 2606 OID 27108)
 -- Name: referee_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2275,7 +2270,7 @@ ALTER TABLE ONLY report
 
 
 --
--- TOC entry 2221 (class 2606 OID 27113)
+-- TOC entry 2222 (class 2606 OID 27113)
 -- Name: referee_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2284,7 +2279,7 @@ ALTER TABLE ONLY use
 
 
 --
--- TOC entry 2207 (class 2606 OID 27118)
+-- TOC entry 2208 (class 2606 OID 27118)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2293,7 +2288,7 @@ ALTER TABLE ONLY changing_facility
 
 
 --
--- TOC entry 2211 (class 2606 OID 27123)
+-- TOC entry 2212 (class 2606 OID 27123)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2302,7 +2297,7 @@ ALTER TABLE ONLY kick_off
 
 
 --
--- TOC entry 2218 (class 2606 OID 27128)
+-- TOC entry 2219 (class 2606 OID 27128)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2311,7 +2306,7 @@ ALTER TABLE ONLY spectator
 
 
 --
--- TOC entry 2204 (class 2606 OID 27133)
+-- TOC entry 2205 (class 2606 OID 27133)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2320,7 +2315,7 @@ ALTER TABLE ONLY ball
 
 
 --
--- TOC entry 2217 (class 2606 OID 27138)
+-- TOC entry 2218 (class 2606 OID 27138)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2329,7 +2324,7 @@ ALTER TABLE ONLY shirt
 
 
 --
--- TOC entry 2203 (class 2606 OID 27143)
+-- TOC entry 2204 (class 2606 OID 27143)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2338,7 +2333,7 @@ ALTER TABLE ONLY assistant
 
 
 --
--- TOC entry 2210 (class 2606 OID 27148)
+-- TOC entry 2211 (class 2606 OID 27148)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2347,7 +2342,7 @@ ALTER TABLE ONLY home_hospitality
 
 
 --
--- TOC entry 2220 (class 2606 OID 27153)
+-- TOC entry 2221 (class 2606 OID 27153)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2356,7 +2351,7 @@ ALTER TABLE ONLY team_sheet
 
 
 --
--- TOC entry 2209 (class 2606 OID 27158)
+-- TOC entry 2210 (class 2606 OID 27158)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2365,7 +2360,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- TOC entry 2206 (class 2606 OID 27163)
+-- TOC entry 2207 (class 2606 OID 27163)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2374,7 +2369,7 @@ ALTER TABLE ONLY captain_liaison
 
 
 --
--- TOC entry 2205 (class 2606 OID 27168)
+-- TOC entry 2206 (class 2606 OID 27168)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2383,7 +2378,7 @@ ALTER TABLE ONLY captain_armband
 
 
 --
--- TOC entry 2212 (class 2606 OID 27173)
+-- TOC entry 2213 (class 2606 OID 27173)
 -- Name: report_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2392,7 +2387,7 @@ ALTER TABLE ONLY overall_score
 
 
 --
--- TOC entry 2397 (class 0 OID 0)
+-- TOC entry 2398 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -2403,7 +2398,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-03-02 18:22:35
+-- Completed on 2016-03-07 14:40:00
 
 --
 -- PostgreSQL database dump complete
