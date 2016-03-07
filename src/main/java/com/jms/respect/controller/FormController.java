@@ -43,12 +43,12 @@ public class FormController {
 
         return modelAndView;
     }
-    
+
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public ModelAndView submitForm(Form form) {
         formService.submitForm(form);
 
-        ModelAndView modelAndView = new ModelAndView("redirect:sucess");
+        ModelAndView modelAndView = new ModelAndView("redirect:success");
         modelAndView.addObject("form", form);
 
         return modelAndView;
