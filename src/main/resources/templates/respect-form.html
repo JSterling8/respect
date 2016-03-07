@@ -90,10 +90,7 @@
                         <td>
                             <select name="league" id="league" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a League ---</option>
-                                <option value="Huddersfield &amp; District Association Football League">Huddersfield &amp; District Association Football League</option>
-                                <option value="Huddersfield &amp; District Works And Combination League">Huddersfield &amp; District Works And Combination League</option>
-                                <option value="Kirklees Sunday League">Kirklees Sunday League</option>
-                                <option value="Huddersfield FA">Huddersfield FA</option>
+                                <option th:each="league : ${form.leagues}" th:value="${league}" th:text="${league}" />
                             </select>
                         </td>
                     </tr>
@@ -102,8 +99,7 @@
                         <td>
                             <select name="competition" id="competition" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select a Competition ---</option>
-                                <option value="Division 1">Division 1</option>
-                                <option value="Division 2">Division 2</option>
+                                <option th:each="competition : ${form.competitions}" th:value="${competition}" th:text="${competition}" />
                             </select>
                         </td>
                     </tr>
@@ -112,6 +108,7 @@
                         <td>
                             <select name="referee" id="referee" class="form-control" required="required">
                                 <option th:value="${form.referee}" th:text="${form.referee}" selected="selected"/>
+                                <option th:each="referee : ${form.referees}" th:value="${referee}" th:text="${referee}" />
                             </select>
                         </td>
                     </tr>
@@ -126,8 +123,7 @@
                         <td>
                             <select name="homeTeam" id="team_home" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select Home Team ---</option>
-                                <option value="Team 1 Test">Team 1 test</option>
-                                <option value="Team 2 Test">Team 2 test</option>
+                                <option th:each="homeTeam : ${form.homeTeams}" th:value="${homeTeam}" th:text="${homeTeam}" />
                             </select>
                         </td>
                     </tr>
@@ -136,8 +132,7 @@
                         <td>
                             <select name="awayTeam" id="team_away" class="form-control" required="required">
                                 <option value="" disabled="true" selected="true">--- Select Away Team ---</option>
-                                <option value="Team 1 Test">Team 1 test</option>
-                                <option value="Team 2 Test">Team 2 test</option>
+                                <option th:each="awayTeam : ${form.awayTeams}" th:value="${awayTeam}" th:text="${awayTeam}" />
                             </select>
                         </td>
                     </tr>

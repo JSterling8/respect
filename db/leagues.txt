@@ -1,0 +1,6 @@
+INSERT INTO public.league(
+            name)
+    VALUES ('Huddersfield & District Association Football League'), 
+    ('Huddersfield & District Works & Combination League'), 
+    ('Kirklees Sunday League'), 
+    ('Cup Competition');

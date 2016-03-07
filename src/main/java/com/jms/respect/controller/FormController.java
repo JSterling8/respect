@@ -35,12 +35,26 @@ public class FormController {
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public ModelAndView getForm(IncompleteForm incompleteForm) {
         ModelAndView modelAndView = new ModelAndView("respect-form");
-        RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = respectUserDetails.getUser();
-        incompleteForm.setReferee(user.getRefereeId().getFirstName() + " " + user.getRefereeId().getLastName());
+
+        incompleteForm = prepareForm(incompleteForm);
+
         modelAndView.addObject("form", incompleteForm);
         modelAndView.addObject("admin", isAdmin());
         return modelAndView;
+    }
+
+    private IncompleteForm prepareForm(IncompleteForm incompleteForm) {
+        RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = respectUserDetails.getUser();
+
+        incompleteForm.setReferee(user.getRefereeId().getFirstName() + " " + user.getRefereeId().getLastName());
+        incompleteForm.setLeagues(formService.getLeagues());
+        incompleteForm.setCompetitions(formService.getCompetitions());
+        incompleteForm.setReferees(formService.getReferees());
+        incompleteForm.setHomeTeams(formService.getAllTeams());
+        incompleteForm.setAwayTeams(formService.getAllTeams());
+
+        return  incompleteForm;
     }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)

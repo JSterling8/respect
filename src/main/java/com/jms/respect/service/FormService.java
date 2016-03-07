@@ -1,5 +1,6 @@
 package com.jms.respect.service;
 
+import com.google.common.collect.Lists;
 import com.jms.respect.dao.*;
 import com.jms.respect.dto.CompletedForm;
 import com.jms.respect.repository.*;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by anon on 05/03/2016.
@@ -30,6 +33,9 @@ public class FormService {
     private final ShirtRepository shirtRepository;
     private final SpectatorRepository spectatorRepository;
     private final TeamSheetRepository teamSheetRepository;
+    private final LeagueRepository leagueRepository;
+    private List<String> referees;
+    private List<String> allTeams;
 
     @Autowired
     public FormService(CompetitionRepository competitionRepository,
@@ -47,7 +53,8 @@ public class FormService {
                        OverallScoreRepository overallScoreRepository,
                        ShirtRepository shirtRepository,
                        SpectatorRepository spectatorRepository,
-                       TeamSheetRepository teamSheetRepository) {
+                       TeamSheetRepository teamSheetRepository,
+                       LeagueRepository leagueRepository) {
         this.competitionRepository = competitionRepository;
         this.refereeRepository = refereeRepository;
         this.teamRepository = teamRepository;
@@ -64,6 +71,7 @@ public class FormService {
         this.shirtRepository = shirtRepository;
         this.spectatorRepository = spectatorRepository;
         this.teamSheetRepository = teamSheetRepository;
+        this.leagueRepository = leagueRepository;
     }
 
     @Transactional(rollbackOn = {Exception.class})
@@ -166,5 +174,29 @@ public class FormService {
         assistant.setComment(completedForm.getAssistantComment());
         assistant.setReportId(report);
         assistantRepository.save(assistant);
+    }
+
+    public List<String> getLeagues() {
+        List<League> leagues = Lists.newArrayList(leagueRepository.findAll());
+
+        return  leagues.stream().map(League::getName).collect(Collectors.toList());
+    }
+
+    public List<String> getCompetitions() {
+        List<Competition> competitions = Lists.newArrayList(competitionRepository.findAll());
+
+        return  competitions.stream().map(Competition::getName).collect(Collectors.toList());
+    }
+
+    public List<String> getReferees() {
+        List<Referee> referees = Lists.newArrayList(refereeRepository.findAll());
+
+        return  referees.stream().map(Referee::getName).collect(Collectors.toList());
+    }
+
+    public List<String> getAllTeams() {
+        List<Team> teams = Lists.newArrayList(teamRepository.findAll());
+
+        return  teams.stream().map(Team::getName).collect(Collectors.toList());
     }
 }

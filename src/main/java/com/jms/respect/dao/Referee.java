@@ -19,6 +19,10 @@ public class Referee {
     @Column(name = "level", columnDefinition = "int2")
     private Short level;
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
     public Integer getId() {
         return id;
     }
