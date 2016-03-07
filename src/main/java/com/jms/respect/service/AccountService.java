@@ -37,7 +37,19 @@ public class AccountService {
         }
 
         Referee referee = getRefereeFromAccountCreationDto(accountCreationDto);
-        referee = refereeRepository.save(referee);
+        Referee refereeInDb = refereeRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(referee.getFirstName(), referee.getLastName());
+
+        // If the referee is not in the db yet, save them to the db
+        if(refereeInDb == null) {
+            referee = refereeRepository.save(referee);
+        } else {
+            // If they are in the db, make sure their level is correct in the db
+            referee = refereeInDb;
+            if(refereeInDb.getLevel() != referee.getLevel()) {
+                refereeInDb.setLevel(referee.getLevel());
+                refereeRepository.save(refereeInDb);
+            }
+        }
 
         User user = getUserFromAccountCreationDtoAndReferee(accountCreationDto, referee);
         user = userRepository.save(user);
