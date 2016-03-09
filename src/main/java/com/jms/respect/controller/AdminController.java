@@ -47,6 +47,28 @@ public class AdminController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/respect/admin/user/approve/{id}", method = RequestMethod.GET)
+    public ModelAndView approve(@PathVariable("id") Integer userId) {
+        accountService.approve(userId);
+
+        ModelAndView modelAndView = new ModelAndView("admin-user");
+        User user = accountService.getUserById(userId);
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/respect/admin/user/disapprove/{id}", method = RequestMethod.GET)
+    public ModelAndView disapprove(@PathVariable("id") Integer userId) {
+        accountService.disapprove(userId);
+
+        ModelAndView modelAndView = new ModelAndView("admin-user");
+        User user = accountService.getUserById(userId);
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
     public boolean isAdmin() {
         RespectUserDetails userDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         for(GrantedAuthority authority : userDetails.getAuthorities()) {

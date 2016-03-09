@@ -6,14 +6,18 @@
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
           rel="stylesheet" media="screen" />
-    <link href="../static/css/general.css"
-          th:href="@{css/general.css}" rel="stylesheet" media="screen"/>
+    <link href="/static/css/general.css"
+          th:href="@{/css/general.css}" rel="stylesheet" media="screen"/>
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
 </head>
 <body background="/img/paper_2.png">
-    <div th:each="user : ${users}">
-        <a th:href="'/respect/admin/user/' + ${user.id}" th:text="${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}"></a>
+<center>
+    <div class="table-body">
+        <div th:each="user : ${users}">
+            <a th:href="'/respect/admin/user/' + ${user.id}" th:text="${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}"></a>
+        </div>
     </div>
+</center>
 </body>
 </html>

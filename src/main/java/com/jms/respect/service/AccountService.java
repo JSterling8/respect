@@ -130,6 +130,24 @@ public class AccountService {
         return userRepository.findById(id);
     }
 
+    public void approve(Integer userId) {
+        User user = userRepository.findById(userId);
+
+        if(user != null) {
+            user.setApproved(true);
+            userRepository.save(user);
+        }
+    }
+
+    public void disapprove(Integer userId) {
+        User user = userRepository.findById(userId);
+
+        if(user != null) {
+            user.setApproved(false);
+            userRepository.save(user);
+        }
+    }
+
     private class UserComparator implements Comparator<User>{
         @Override
         public int compare(User o1, User o2) {

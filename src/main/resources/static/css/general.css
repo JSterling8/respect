@@ -1,3 +1,20 @@
 .float-center {
     float: none;
 }
+
+textarea {
+    resize: vertical;
+}
+
+label.radio {
+    padding-left: 7%;
+}
+
+.table-body {
+    margin-right: 30%;
+    margin-left: 30%;
+}
+
+.red {
+    color: red;
+}
