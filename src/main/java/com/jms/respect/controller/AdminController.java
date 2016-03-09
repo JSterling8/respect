@@ -4,6 +4,7 @@ import com.jms.respect.config.security.RespectUserDetails;
 import com.jms.respect.dao.User;
 import com.jms.respect.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.List;
 /**
  * Created by anon on 09/03/2016.
  */
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller
 public class AdminController {
     private final AccountService accountService;
@@ -28,10 +30,6 @@ public class AdminController {
 
     @RequestMapping(value = "/respect/admin/users", method = RequestMethod.GET)
     public ModelAndView getAdminPage() {
-        if(!isAdmin()) {
-            return new ModelAndView("forbidden");
-        }
-
         ModelAndView modelAndView = new ModelAndView("admin-users");
         List<User> users = accountService.getAllUsers();
         modelAndView.addObject("users", users);
@@ -41,10 +39,6 @@ public class AdminController {
 
     @RequestMapping(value = "/respect/admin/user/{id}", method = RequestMethod.GET)
     public ModelAndView getUserPage(@PathVariable("id") Integer userId) {
-        if(!isAdmin()) {
-            return new ModelAndView("forbidden");
-        }
-
         ModelAndView modelAndView = new ModelAndView("admin-user");
         User user = accountService.getUserById(userId);
 
