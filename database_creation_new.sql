@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5beta1
 -- Dumped by pg_dump version 9.5beta1
 
--- Started on 2016-03-07 14:39:58
+-- Started on 2016-03-09 14:03:34
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -13,6 +13,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 DROP DATABASE respect;
 --
@@ -20,7 +21,7 @@ DROP DATABASE respect;
 -- Name: respect; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8';
+CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United Kingdom.1252' LC_CTYPE = 'English_United Kingdom.1252';
 
 
 ALTER DATABASE respect OWNER TO postgres;
@@ -33,6 +34,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- TOC entry 6 (class 2615 OID 2200)
@@ -1178,7 +1180,12 @@ CREATE TABLE use (
     referee_id integer NOT NULL,
     email character varying(255) NOT NULL,
     password character varying(32767) NOT NULL,
-    type character varying(255) NOT NULL
+    type character varying(255) NOT NULL,
+    created date NOT NULL,
+    approved boolean NOT NULL,
+    remind boolean NOT NULL,
+    validated boolean NOT NULL,
+    validation_code character varying(1027)
 );
 
 
@@ -1675,6 +1682,16 @@ SELECT pg_catalog.setval('changing_facility_score_id_seq', 1, false);
 --
 
 COPY competition (id, name, league) FROM stdin;
+2	Division One	4
+3	Division 1	3
+4	Division One	2
+5	Division Two	2
+6	Division Three	2
+7	Division Four	2
+8	Reserve Division One	2
+9	Reserve Division Two	2
+10	Reserve Division Three	2
+11	Reserve Division Four	2
 \.
 
 
@@ -1684,7 +1701,7 @@ COPY competition (id, name, league) FROM stdin;
 -- Name: competition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('competition_id_seq', 1, true);
+SELECT pg_catalog.setval('competition_id_seq', 11, true);
 
 
 --
@@ -1787,6 +1804,10 @@ SELECT pg_catalog.setval('late_kick_off_report_id_seq', 1, false);
 --
 
 COPY league (id, name) FROM stdin;
+2	Huddersfield & District Association Football League
+3	Huddersfield & District Works & Combination League
+4	Kirklees Sunday League
+5	Cup Competition
 \.
 
 
@@ -1796,7 +1817,7 @@ COPY league (id, name) FROM stdin;
 -- Name: league_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('league_id_seq', 1, true);
+SELECT pg_catalog.setval('league_id_seq', 5, true);
 
 
 --
@@ -1834,7 +1855,92 @@ SELECT pg_catalog.setval('overall_score_report_id_seq', 1, false);
 --
 
 COPY referee (id, first_name, last_name, level) FROM stdin;
-19	Jonathan	Sterling	6
+20	David	Armitage	7
+21	Eddie	Aspin	7
+22	Matt	Barber	7
+23	Nigel	Bennett	7
+24	Alan	Berry	7
+25	Neil	Blackburn	7
+26	Nigel	Booth	7
+27	Stephen	Bottom	7
+28	Rob	Byrne	7
+29	Dwayne	Chappell	7
+30	Michael	Coles	7
+31	John	Connolly	7
+32	Stephen	Crawshaw	7
+33	Ronnie	Cushing	7
+34	Ian	Daffern	7
+35	Peter	Darby	7
+36	Peter	Davies	7
+37	Tom	Dickens	7
+38	Jack	Dowse	7
+39	Gordon	Durward	7
+40	Joel	Ezro	7
+41	Adam	Farmer	7
+42	Christian	Firth	7
+43	Charles	Fosbrook	7
+44	Off	Game	7
+45	Ian	Garrett	7
+46	John	Gray	7
+47	Alan	Green	7
+48	Tony	Green	7
+49	Michael	Hallam	7
+50	Charlie	Harrison	7
+51	Chris	Hinchcliffe	7
+52	Mark	Hinchcliffe	7
+53	John	Hislop	7
+54	Thomas	Holmes	7
+55	Graham	Hughes	7
+56	Alan	Kelly	7
+57	Tahir	Khan	7
+58	Jason	Knowles	7
+59	Carl	Leadbeater	7
+60	Chris	Lockwood	7
+61	Steve	Longmore	7
+62	Tom	Mallon	7
+63	Jonathan	Martin	7
+64	Josh	Martin	7
+65	Dennis	McCarthy	7
+66	Andrew	Noble	7
+67	Ian	Parker	7
+68	Kyle	Pearson	7
+69	Neil	Pickles	7
+70	Gary	Porter	7
+71	Piotr	Ptak	7
+72	Alex	Rak	7
+73	Haneef	Rashid	7
+74	Albert	Rennison	7
+75	Coalen	Rennison	7
+76	Chris	Rhodes	7
+77	Martin	Rhodes	7
+78	Mike	Roberts	7
+79	Michael	Robertson	7
+80	Stephen	Rushworth	7
+81	Craig	Salmons	7
+82	Gordon	Schofield	7
+83	Bob	Skeldon	7
+84	Barry	South	7
+85	Johnathon	Spencer	7
+87	Michael	Stoddart	7
+88	David	Szuminski	7
+89	Gareth	Thomas	7
+90	Arnie	Thorpe	7
+91	Nathan	Tosum	7
+92	Ossie	Tosum	7
+93	Arron	Townend	7
+94	Peter	Tupman	7
+95	Daniel	Waddington	7
+96	Michael	Walsh	7
+97	Darren	Weaver	7
+98	Bill	Westwood	7
+99	Brian	Whitaker	7
+100	Geoff	Wilding	7
+101	Arran	Williams	7
+102	John	Wozniak	7
+103	Howard	Young	7
+104	Paul	Vasilenko	7
+105	Paul	Wilkinson	7
+86	Jonathan	Sterling	6
 \.
 
 
@@ -1844,7 +1950,7 @@ COPY referee (id, first_name, last_name, level) FROM stdin;
 -- Name: referee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('referee_id_seq', 19, true);
+SELECT pg_catalog.setval('referee_id_seq', 105, true);
 
 
 --
@@ -2020,8 +2126,8 @@ SELECT pg_catalog.setval('team_sheet_report_id_seq', 1, false);
 -- Data for Name: use; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY use (id, referee_id, email, password, type) FROM stdin;
-19	19	a@a.com	$2a$10$C4wBInV/NeghZDf.IuUj6u.EAh3Lk199L6GAqNOUALIhBTRKOEYX.	DEFAULT
+COPY use (id, referee_id, email, password, type, created, approved, remind, validated, validation_code) FROM stdin;
+21	86	JSterling8@gmail.com	$2a$10$3orLmHaArovBqCoCNov1X.XIKXrofIZAXSm1IDKxFIcUvi1lOS63C	DEFAULT	2016-03-09	t	t	t	\N
 \.
 
 
@@ -2031,7 +2137,7 @@ COPY use (id, referee_id, email, password, type) FROM stdin;
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_id_seq', 19, true);
+SELECT pg_catalog.setval('user_id_seq', 21, true);
 
 
 --
@@ -2397,7 +2503,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-03-07 14:40:00
+-- Completed on 2016-03-09 14:03:34
 
 --
 -- PostgreSQL database dump complete
