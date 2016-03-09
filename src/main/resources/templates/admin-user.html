@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin - User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+</head>
+<body background="/img/paper_2.png">
+    <div>
+        <span th:text="'Name: ' + ${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}" />
+    </div>
+    <div>
+        <span th:text="'Email: ' + ${user.email}" />
+    </div>
+    <div>
+        <span th:text="'Validated: ' + ${user.validated}" />
+    </div>
+    <div th:if="${user.validated} == false">
+        <span th:text="'Validation Code: ' + ${user.validationCode}" />
+    </div>
+    <div>
+        <span th:text="'Level: ' + ${user.refereeId.level}" />
+    </div>
+    <div>
+        <span th:text="'Account Type: ' + ${user.type}" />
+    </div>
+    <div>
+        <span th:text="'Created: ' + ${user.created}" />
+    </div>
+    <div>
+        <span th:text="'Approved: ' + ${user.approved}" />
+    </div>
+    <div>
+        <span th:text="'Remind: ' + ${user.remind}" />
+    </div>
+</body>
+</html>

@@ -1,6 +1,5 @@
 package com.jms.respect.controller;
 
-import com.jms.respect.config.security.AdminAuthority;
 import com.jms.respect.config.security.RespectUserDetails;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dao.User;
@@ -9,6 +8,7 @@ import com.jms.respect.dto.IncompleteForm;
 import com.jms.respect.repository.ReportRepository;
 import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,10 +96,12 @@ public class FormController {
 
     public boolean isAdmin() {
         RespectUserDetails userDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (userDetails.getAuthorities().contains(new AdminAuthority())) {
-            return true;
-        } else {
-            return false;
+        for(GrantedAuthority authority : userDetails.getAuthorities()) {
+            if(authority.getAuthority().equalsIgnoreCase("ROLE_ADMIN")) {
+                return true;
+            }
         }
+
+        return false;
     }
 }

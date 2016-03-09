@@ -11,7 +11,7 @@
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
 </head>
-<body background="img/paper_2.png">
+<body background="/img/paper_2.png">
     <div class="col-sm-4 container float-center">
         <div th:if="${param.error}">Invalid username and password.</div>
         <form class="form-signin horizontal" th:action="@{/login}" method="POST">

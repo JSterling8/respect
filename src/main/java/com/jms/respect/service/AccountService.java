@@ -1,5 +1,6 @@
 package com.jms.respect.service;
 
+import com.google.common.collect.Lists;
 import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.User;
 import com.jms.respect.dto.AccountCreationDto;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.security.InvalidParameterException;
 import java.sql.Date;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -24,9 +28,12 @@ public class AccountService {
     private static final boolean DEFAULT_VALIDATED_STATUS = false;
     private static final boolean DEFAULT_REMIND_STATUS = true;
 
+    private final UserComparator userComparator = new UserComparator();
     private final UserRepository userRepository;
     private final RefereeRepository refereeRepository;
     private final PasswordEncoder passwordEncoder;
+    private List<User> allUsers;
+    private User userById;
 
     @Autowired
     public AccountService(UserRepository userRepository, RefereeRepository refereeRepository, PasswordEncoder passwordEncoder) {
@@ -110,5 +117,23 @@ public class AccountService {
 
     public String getValidationCode() {
         return UUID.randomUUID().toString();
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = Lists.newArrayList(userRepository.findAll());
+        Collections.sort(users, userComparator);
+
+        return  users;
+    }
+
+    public User getUserById(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    private class UserComparator implements Comparator<User>{
+        @Override
+        public int compare(User o1, User o2) {
+            return o1.getRefereeId().getLastName().compareTo(o2.getRefereeId().getLastName());
+        }
     }
 }
