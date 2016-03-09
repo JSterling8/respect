@@ -13,7 +13,10 @@
 </head>
 <body background="/img/paper_2.png">
     <center>
-        <div class="table-body">
+        <div class="padded-table-body">
+            <div>
+                <h3>Info:</h3>
+            </div>
             <div>
                 <span th:text="'Name: ' + ${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}" />
             </div>
@@ -37,11 +40,27 @@
             </div>
             <div>
                 <span th:text="'Approved: ' + ${user.approved}" />
-                <a th:if="${user.approved} == false" th:href="'/respect/admin/user/approve/' + ${user.id}"> -  Approve</a>
-                <a th:if="${user.approved} == true" th:href="'/respect/admin/user/disapprove/' + ${user.id}"> -  Disapprove</a>
             </div>
             <div>
                 <span th:text="'Remind: ' + ${user.remind}" />
+            </div>
+        </div>
+
+        <div class="padded-table-body">
+            <div>
+                <h3>Actions</h3>
+            </div>
+            <div>
+                <a th:if="${user.approved} == false" th:href="'/respect/admin/user/approve/' + ${user.id}">Approve</a>
+                <a th:if="${user.approved} == true" th:href="'/respect/admin/user/disapprove/' + ${user.id}">Disapprove</a>
+            </div>
+            <div>
+                <a th:if="${user.validated} == false" th:href="'/respect/admin/user/validate/' + ${user.id}">Validate Email</a>
+                <a th:if="${user.validated} == true" th:href="'/respect/admin/user/invalidate/' + ${user.id}">Invalidate Email</a>
+            </div>
+            <div class="spacing" />
+            <div>
+                <a th:href="'/respect/admin/user/delete/' + ${user.id}" class="red">Delete Account</a>
             </div>
         </div>
     </center>

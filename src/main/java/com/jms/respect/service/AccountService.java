@@ -148,6 +148,36 @@ public class AccountService {
         }
     }
 
+    public void delete(Integer userId) {
+        User user = userRepository.findById(userId);
+
+        if(user != null) {
+            userRepository.delete(user);
+        }
+    }
+
+    public void validate(Integer userId) {
+        User user = userRepository.findById(userId);
+
+        if (user != null) {
+            user.setValidated(true);
+            user.setValidationCode(null);
+
+            userRepository.save(user);
+        }
+    }
+
+    public void invalidate(Integer userId) {
+        User user = userRepository.findById(userId);
+
+        if (user != null) {
+            user.setValidated(false);
+            user.setValidationCode(getValidationCode());
+
+            userRepository.save(user);
+        }
+    }
+
     private class UserComparator implements Comparator<User>{
         @Override
         public int compare(User o1, User o2) {

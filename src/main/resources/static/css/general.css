@@ -15,6 +15,16 @@ label.radio {
     margin-left: 30%;
 }
 
+.padded-table-body {
+    margin-right: 30%;
+    margin-left: 30%;
+    margin-top: 10px;
+}
+
+.spacing {
+    margin-top: 10px;
+}
+
 .red {
     color: red;
 }
