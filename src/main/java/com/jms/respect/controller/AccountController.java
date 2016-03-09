@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,15 +30,15 @@ import java.security.InvalidParameterException;
  * Created by anon on 25/02/2016.
  */
 @Controller
-public class LoginController {
+public class AccountController {
     private final AccountService accountService;
     private final AuthenticationManager authenticationManager;
     private final RespectUserDetailsService userDetailsService;
 
     @Autowired
-    public LoginController(AccountService accountService,
-                           AuthenticationManager authenticationManager,
-                           RespectUserDetailsService userDetailsService) {
+    public AccountController(AccountService accountService,
+                             AuthenticationManager authenticationManager,
+                             RespectUserDetailsService userDetailsService) {
         this.accountService = accountService;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
@@ -113,6 +114,17 @@ public class LoginController {
         } else {
             return new ModelAndView("/form");
         }
+    }
+
+    @RequestMapping(value = "/validate/{validationCode}", method = RequestMethod.GET)
+    public ModelAndView validate(@PathVariable("validationCode") String validationCode) {
+        try {
+            accountService.validate(validationCode);
+        } catch (InvalidParameterException e) {
+            return new ModelAndView("validation-error");
+        }
+
+        return new ModelAndView("validated");
     }
 
     private boolean isLoggedIn() {

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.security.InvalidParameterException;
+import java.sql.Date;
+import java.util.UUID;
 
 /**
  * Created by anon on 25/02/2016.
@@ -18,6 +20,9 @@ import java.security.InvalidParameterException;
 @Service
 public class AccountService {
     private static final String DEFAULT_USER_TYPE = "DEFAULT";
+    private static final boolean DEFAULT_APPROVED_STATUS = true;
+    private static final boolean DEFAULT_VALIDATED_STATUS = false;
+    private static final boolean DEFAULT_REMIND_STATUS = true;
 
     private final UserRepository userRepository;
     private final RefereeRepository refereeRepository;
@@ -58,6 +63,20 @@ public class AccountService {
         return user;
     }
 
+    @Transactional(rollbackOn = Exception.class)
+    public Boolean validate(String validationCode) {
+        User user = userRepository.findByValidationCodeIgnoreCase(validationCode);
+
+        if(user == null) {
+            throw new InvalidParameterException("Invalid validation code.  No user found with that code.");
+        } else {
+            user.setValidationCode(null);
+            user.setValidated(true);
+            userRepository.save(user);
+            return true;
+        }
+    }
+
     private User getUserFromAccountCreationDtoAndReferee(AccountCreationDto accountCreationDto, Referee referee) {
         User user = new User();
         user.setRefereeId(referee);
@@ -65,6 +84,11 @@ public class AccountService {
         String encryptedPassword = passwordEncoder.encode(accountCreationDto.getPassword());
         user.setPassword(encryptedPassword);
         user.setType(DEFAULT_USER_TYPE);
+        user.setApproved(DEFAULT_APPROVED_STATUS);
+        user.setCreated(new Date(System.currentTimeMillis()));
+        user.setValidated(DEFAULT_VALIDATED_STATUS);
+        user.setRemind(DEFAULT_REMIND_STATUS);
+        user.setValidationCode(getValidationCode());
         return user;
     }
 
@@ -82,5 +106,9 @@ public class AccountService {
         } else {
             return false;
         }
+    }
+
+    public String getValidationCode() {
+        return UUID.randomUUID().toString();
     }
 }
