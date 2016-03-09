@@ -16,6 +16,7 @@
     <div class="table-body">
         <div th:each="user : ${users}">
             <a th:href="'/respect/admin/user/' + ${user.id}" th:text="${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}"></a>
+            <span th:if="${user.approved} == false"> - Account not yet approved!</span>
         </div>
     </div>
 </center>

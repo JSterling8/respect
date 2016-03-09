@@ -48,13 +48,6 @@ public class AdminAccountController {
 
     @RequestMapping(value = "/respect/admin/user/approve/{id}", method = RequestMethod.GET)
     public ModelAndView approve(@PathVariable("id") Integer userId) {
-        RespectUserDetails currentUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = currentUserDetails.getUser();
-
-        if(currentUser.getId() == userId) {
-            return new ModelAndView("forbidden");
-        }
-
         accountService.approve(userId);
 
         ModelAndView modelAndView = new ModelAndView("admin-user");
@@ -99,6 +92,13 @@ public class AdminAccountController {
 
     @RequestMapping(value = "/respect/admin/user/delete/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable("id") Integer userId) {
+        RespectUserDetails currentUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = currentUserDetails.getUser();
+
+        if(currentUser.getId() == userId) {
+            return new ModelAndView("forbidden");
+        }
+        
         accountService.delete(userId);
 
         return getUsersPage();
