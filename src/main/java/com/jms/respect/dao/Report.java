@@ -67,11 +67,17 @@ public class Report {
     @JoinColumn(name = "away_team_id", referencedColumnName = "id", nullable = false)
     private Team awayTeamId;
 
-    @Column(name = "date", columnDefinition = "date")
+    @Column(name = "match_date", columnDefinition = "date")
     @NotNull
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
-    private Date date;
+    private Date matchDate;
+
+    @Column(name = "submitted", columnDefinition = "date")
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "M-")
+    private Date submitted;
 
     public Integer getId() {
         return id;
@@ -209,11 +215,11 @@ public class Report {
         this.awayTeamId = awayTeamId;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getMatchDate() {
+        return matchDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMatchDate(Date matchDate) {
+        this.matchDate = matchDate;
     }
 }
