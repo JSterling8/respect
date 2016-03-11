@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin - User Reports</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="/static/css/general.css"
+          th:href="@{/css/general.css}" rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+</head>
+<body background="/img/paper_2.png">
+    <div class="large-table">
+        <div>
+            <h3 th:text="${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName} +'\'s Reports (Sorted By Match Date)'" />
+        </div>
+        <table class = "table table-bordered table-condensed">
+            <thead>
+                <th>ID</th>
+                <th>Submission Date</th>
+                <th>League</th>
+                <th>Competition</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Match Date</th>
+                <th>Changing Facility Score</th>
+                <th>Changing Facility Comment</th>
+                <th>Late Kickoff</th>
+                <th>How Late</th>
+                <th>Fault</th>
+                <th>2 Balls Provided</th>
+                <th>Numbered Shirts</th>
+                <th>Home Spectators</th>
+                <th>Away Spectators</th>
+                <th>Spectators Comment</th>
+                <th>Home Assistant</th>
+                <th>Away Assistant</th>
+                <th>Assistant Comment</th>
+                <th>Home Captain Liaison</th>
+                <th>Away Captain Liaison</th>
+                <th>Captain Liaison Comment</th>
+                <th>Home Hospitality</th>
+                <th>Team Sheets Received On Time</th>
+                <th>Contacted Club</th>
+                <th>Captain Armbands</th>
+                <th>Home Overall</th>
+                <th>Away Overall</th>
+                <th>Additional Comments</th>
+            </thead>
+            <tr th:each="report : ${reports}">
+            <td th:text="${report.id}"/>
+            <td th:text="${report.submitted}"/>
+            <td th:text="${report.competition.league.name}"/>
+            <td th:text="${report.competition.name}"/>
+            <td th:text="${report.homeTeamId.name}"/>
+            <td th:text="${report.awayTeamId.name}"/>
+            <td th:text="${report.matchDate}"/>
+            <td th:each="changingFacility : ${report.changingFacilities}" th:text="${changingFacility.score}"/>
+            <td th:each="changingFacility : ${report.changingFacilities}" th:text="${changingFacility.comment}"/>
+            <td th:each="kickOff : ${report.kickOffs}" th:text="${kickOff.late}"/>
+            <td th:each="kickOff : ${report.kickOffs}" th:text="${kickOff.howLate}"/>
+            <td th:each="kickOff : ${report.kickOffs}" th:text="${kickOff.fault}"/>
+            <td th:each="ball : ${report.balls}" th:text="${ball.provided}"/>
+            <td th:each="shirt : ${report.shirts}" th:text="${shirt.didWear}"/>
+            <td th:each="spectator : ${report.spectators}" th:text="${spectator.homeScore}"/>
+            <td th:each="spectator : ${report.spectators}" th:text="${spectator.awayScore}"/>
+            <td th:each="spectator : ${report.spectators}" th:text="${spectator.comment}"/>
+            <td th:each="assistant : ${report.assistants}" th:text="${assistant.homeScore}"/>
+            <td th:each="assistant : ${report.assistants}" th:text="${assistant.awayScore}"/>
+            <td th:each="assistant : ${report.assistants}" th:text="${assistant.comment}"/>
+            <td th:each="captainLiaison : ${report.captainLiaisons}" th:text="${captainLiaison.homeScore}"/>
+            <td th:each="captainLiaison : ${report.captainLiaisons}" th:text="${captainLiaison.awayScore}"/>
+            <td th:each="captainLiaison : ${report.captainLiaisons}" th:text="${captainLiaison.comment}"/>
+            <td th:each="homeHospitality : ${report.homeHospitalities}" th:text="${homeHospitality.score}"/>
+            <td th:each="teamSheet : ${report.teamSheets}" th:text="${teamSheet.received}"/>
+            <td th:each="contact : ${report.contacts}" th:text="${contact.yesNoClub}"/>
+            <td th:each="captainArmband : ${report.captainArmbands}" th:text="${captainArmband.homeAwayBothNeither}"/>
+            <td th:each="overallScore : ${report.overallScores}" th:text="${overallScore.homeScore}"/>
+            <td th:each="overallScore : ${report.overallScores}" th:text="${overallScore.awayScore}"/>
+            <td th:each="overallScore : ${report.overallScores}" th:text="${overallScore.comment}"/>
+        </tr>
+        </table>
+    </div>
+</body>
+</html>

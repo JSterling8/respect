@@ -51,6 +51,9 @@
                 <h3>Actions</h3>
             </div>
             <div>
+                <a th:href="'/respect/admin/reports/user/' + ${user.id}">View All Reports From User</a>
+            </div>
+            <div>
                 <a th:if="${user.approved} == false" th:href="'/respect/admin/user/approve/' + ${user.id}">Approve</a>
                 <a th:if="${user.approved} == true" th:href="'/respect/admin/user/disapprove/' + ${user.id}">Disapprove</a>
             </div>

@@ -34,8 +34,6 @@ public class FormService {
     private final SpectatorRepository spectatorRepository;
     private final TeamSheetRepository teamSheetRepository;
     private final LeagueRepository leagueRepository;
-    private List<String> referees;
-    private List<String> allTeams;
 
     @Autowired
     public FormService(CompetitionRepository competitionRepository,
@@ -198,5 +196,9 @@ public class FormService {
         List<Team> teams = Lists.newArrayList(teamRepository.findAll());
 
         return  teams.stream().map(Team::getName).collect(Collectors.toList());
+    }
+
+    public List<Report> getAllReportsByReferee(Referee referee) {
+        return reportRepository.findByRefereeId(referee);
     }
 }

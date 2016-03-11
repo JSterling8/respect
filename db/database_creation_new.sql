@@ -13,7 +13,6 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 DROP DATABASE respect;
 --
@@ -21,7 +20,7 @@ DROP DATABASE respect;
 -- Name: respect; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United Kingdom.1252' LC_CTYPE = 'English_United Kingdom.1252';
+CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8';
 
 
 ALTER DATABASE respect OWNER TO postgres;
