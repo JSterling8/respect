@@ -98,7 +98,7 @@ public class AdminAccountController {
         if(currentUser.getId() == userId) {
             return new ModelAndView("forbidden");
         }
-        
+
         accountService.delete(userId);
 
         return getUsersPage();
