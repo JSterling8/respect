@@ -27,13 +27,12 @@ public class AccountService {
     private static final boolean DEFAULT_APPROVED_STATUS = true;
     private static final boolean DEFAULT_VALIDATED_STATUS = false;
     private static final boolean DEFAULT_REMIND_STATUS = true;
+    private static final String ADMIN_ACCOUNT_TYPE = "ADMIN";
 
     private final UserComparator userComparator = new UserComparator();
     private final UserRepository userRepository;
     private final RefereeRepository refereeRepository;
     private final PasswordEncoder passwordEncoder;
-    private List<User> allUsers;
-    private User userById;
 
     @Autowired
     public AccountService(UserRepository userRepository, RefereeRepository refereeRepository, PasswordEncoder passwordEncoder) {
@@ -173,6 +172,16 @@ public class AccountService {
         if (user != null) {
             user.setValidated(false);
             user.setValidationCode(getValidationCode());
+
+            userRepository.save(user);
+        }
+    }
+
+    public void makeAdmin(Integer userId) {
+        User user = userRepository.findById(userId);
+
+        if (user != null) {
+            user.setType(ADMIN_ACCOUNT_TYPE);
 
             userRepository.save(user);
         }

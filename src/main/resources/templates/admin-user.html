@@ -58,6 +58,9 @@
                 <a th:if="${user.validated} == false" th:href="'/respect/admin/user/validate/' + ${user.id}">Validate Email</a>
                 <a th:if="${user.validated} == true" th:href="'/respect/admin/user/invalidate/' + ${user.id}">Invalidate Email</a>
             </div>
+            <div>
+                <a th:if="${user.type} == 'DEFAULT'" th:href="'/respect/admin/user/make-admin/' + ${user.id}">Make Admin</a>
+            </div>
             <div class="spacing" />
             <div>
                 <a th:href="'/respect/admin/user/delete/' + ${user.id}" class="red">Delete Account</a>

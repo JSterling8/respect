@@ -90,6 +90,17 @@ public class AdminAccountController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/respect/admin/user/make-admin/{userId}", method = RequestMethod.GET)
+    public ModelAndView makeAdmin(@PathVariable("userId") Integer userId) {
+        accountService.makeAdmin(userId);
+
+        ModelAndView modelAndView = new ModelAndView("admin-user");
+        User user = accountService.getUserById(userId);
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/respect/admin/user/delete/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable("id") Integer userId) {
         RespectUserDetails currentUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

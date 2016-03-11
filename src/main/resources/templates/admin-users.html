@@ -18,6 +18,7 @@
             <h3>Users (Sorted By Last Name)</h3>
         </div>
         <div th:each="user : ${users}">
+            <span th:if="${user.type} == 'ADMIN'">ADMIN - </span>
             <a th:href="'/respect/admin/user/' + ${user.id}" th:text="${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}"></a>
             <span th:if="${user.approved} == false"> - Account not yet approved!</span>
         </div>
