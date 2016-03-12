@@ -29,9 +29,9 @@
 
             <div class="collapse navbar-collapse navHeaderCollapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/dashboard" class="navbar-brand">Dashboard</a></li>
                     <li><a href="/form" class="navbar-brand">Form</a></li>
-                    <li th:if="${isAdmin}"><a href="admin" class="navbar-brand">Admin</a></li>
+                    <li><a href="/stats" class="navbar-brand">Stats</a></li>
+                    <li th:if="${admin}"><a href="/respect/admin/dashboard" class="navbar-brand">Admin</a></li>
                     <li><a href='/logout' class="navbar-brand">Logout</a></li>
                 </ul>
             </div>

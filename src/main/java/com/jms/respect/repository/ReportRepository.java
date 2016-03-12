@@ -1,5 +1,6 @@
 package com.jms.respect.repository;
 
+import com.jms.respect.dao.Competition;
 import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dao.Team;
@@ -19,4 +20,6 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
                                                                  Date matchDateCheck,
                                                                  Team homeTeam,
                                                                  Team awayTeam);
+
+    List<Report> findByCompetition(Competition competition);
 }
