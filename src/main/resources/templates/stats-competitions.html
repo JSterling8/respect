@@ -20,6 +20,9 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                   <td><a th:href="'/stats/league/' + ${league.key.id}">ALL TEAMS IN LEAGUE</a></td>
+                </tr>
                 <tr th:each="competition : ${league.value}">
                     <td>
                         <a th:href="'/stats/competition/' + ${competition.id}" th:text="${competition.name}"/>

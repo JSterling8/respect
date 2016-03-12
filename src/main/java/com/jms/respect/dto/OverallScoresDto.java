@@ -1,16 +1,21 @@
 package com.jms.respect.dto;
 
+import com.jms.respect.dao.Team;
+
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Created by anon on 12/03/2016.
  */
 public class OverallScoresDto {
-    private Map<String, Double> teamAverages;
+    private String competitionAndOrLeagueName;
+    private Map<Team, Double> teamAverages;
+    private Map<String, Integer> teamReportNums;
     private double competitionAverage;
 
-    public OverallScoresDto(Map<String, Double> teamAverages, double competitionAverage) {
+    public OverallScoresDto(String competitionAndOrLeagueName, Map<Team, Double> teamAverages, Map<String, Integer> teamReportNums, double competitionAverage) {
+        this.competitionAndOrLeagueName = competitionAndOrLeagueName;
+        this.teamReportNums = teamReportNums;
         this.teamAverages = teamAverages;
         this.competitionAverage = competitionAverage;
     }
@@ -18,11 +23,23 @@ public class OverallScoresDto {
     public OverallScoresDto() {
     }
 
-    public Map<String, Double> getTeamAverages() {
+    public Integer teamReportNums(String name) {
+        return teamReportNums.get(name);
+    }
+
+    public String getCompetitionAndOrLeagueName() {
+        return competitionAndOrLeagueName;
+    }
+
+    public void setCompetitionAndOrLeagueName(String competitionAndOrLeagueName) {
+        this.competitionAndOrLeagueName = competitionAndOrLeagueName;
+    }
+
+    public Map<Team, Double> getTeamAverages() {
         return teamAverages;
     }
 
-    public void setTeamAverages(TreeMap<String, Double> teamAverages) {
+    public void setTeamAverages(Map<Team, Double> teamAverages) {
         this.teamAverages = teamAverages;
     }
 
@@ -32,5 +49,13 @@ public class OverallScoresDto {
 
     public void setCompetitionAverage(double competitionAverage) {
         this.competitionAverage = competitionAverage;
+    }
+
+    public Map<String, Integer> getTeamReportNums() {
+        return teamReportNums;
+    }
+
+    public void setTeamReportNums(Map<String, Integer> teamReportNums) {
+        this.teamReportNums = teamReportNums;
     }
 }

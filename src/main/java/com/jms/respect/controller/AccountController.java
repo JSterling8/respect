@@ -45,11 +45,11 @@ public class AccountController {
     }
 
     @RequestMapping(value = {"/", "/login", "/index"}, method = RequestMethod.GET)
-    public String getLoginPage() {
+    public ModelAndView getLoginPage() {
         if(isLoggedIn()) {
-            return "respect-form";
+            return new ModelAndView("redirect:/form");
         } else {
-            return "login";
+            return new ModelAndView("login");
         }
     }
 
@@ -71,7 +71,7 @@ public class AccountController {
 
             return modelAndView;
         } else {
-            return new ModelAndView("respect-form");
+            return new ModelAndView("redirect:/form");
         }
     }
 
@@ -112,7 +112,7 @@ public class AccountController {
             modelAndView.addObject(accountCreationDto);
             return modelAndView;
         } else {
-            return new ModelAndView("respect-form");
+            return new ModelAndView("redirect:/form");
         }
     }
 

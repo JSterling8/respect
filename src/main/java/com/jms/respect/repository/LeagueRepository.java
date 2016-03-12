@@ -8,4 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface LeagueRepository extends CrudRepository<League, Long> {
     League findByName(String league);
+    League findById(Integer id);
 }

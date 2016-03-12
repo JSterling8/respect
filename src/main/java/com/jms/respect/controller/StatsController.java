@@ -42,8 +42,14 @@ public class StatsController {
     public ModelAndView getStatsForCompetitionId(@PathVariable("id") Integer id) {
         OverallScoresDto overallScoresDto = statsService.getOverallScoresForCompetitionId(id);
         ModelAndView modelAndView = new ModelAndView("overall-stats");
-        Competition competition = competitionService.getCompetitionById(id);
-        modelAndView.addObject("competition", competition);
+        modelAndView.addObject("overallScores", overallScoresDto);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/stats/league/{id}", method = RequestMethod.GET)
+    public ModelAndView getStatsForLeagueId(@PathVariable("id") Integer id) {
+        OverallScoresDto overallScoresDto = statsService.getOverallScoresForLeagueId(id);
+        ModelAndView modelAndView = new ModelAndView("overall-stats");
         modelAndView.addObject("overallScores", overallScoresDto);
         return modelAndView;
     }
