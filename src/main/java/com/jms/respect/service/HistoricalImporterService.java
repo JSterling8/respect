@@ -111,11 +111,11 @@ public class HistoricalImporterService {
 
                     cell = row.getCell(HOME_TEAM_COL_NUM);
                     String homeTeam = cell.getStringCellValue();
-                    completedForm.setHomeTeam(homeTeam);
+                    completedForm.setHomeTeam(homeTeam.trim());
 
                     cell = row.getCell(AWAY_TEAM_COL_NUM);
                     String awayTeam = cell.getStringCellValue();
-                    completedForm.setAwayTeam(awayTeam);
+                    completedForm.setAwayTeam(awayTeam.trim());
 
                     cell = row.getCell(MATCH_DATE_COL_NUM);
                     Date matchDate = new Date(cell.getDateCellValue().getTime());
