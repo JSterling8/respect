@@ -43,6 +43,13 @@ public class FormController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/form/delete-all", method = RequestMethod.GET)
+    public ModelAndView deleteAll() {
+        formService.deleteAllReportsTeamsAndCompetitions();
+
+        return new ModelAndView("success");
+    }
+
     private IncompleteForm prepareForm(IncompleteForm incompleteForm) {
         RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = respectUserDetails.getUser();
@@ -51,6 +58,7 @@ public class FormController {
         incompleteForm.setLeagues(formService.getLeagues());
         incompleteForm.setCompetitions(formService.getCompetitions());
         incompleteForm.setReferees(formService.getReferees());
+        // TODO Prefix KSL teams with KSL, and WL with WL
         incompleteForm.setHomeTeams(formService.getAllTeams());
         incompleteForm.setAwayTeams(formService.getAllTeams());
 

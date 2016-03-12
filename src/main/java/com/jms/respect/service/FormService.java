@@ -4,10 +4,13 @@ import com.google.common.collect.Lists;
 import com.jms.respect.dao.*;
 import com.jms.respect.dto.CompletedForm;
 import com.jms.respect.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.security.InvalidParameterException;
 import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +20,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class FormService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FormService.class);
+
     private final CompetitionRepository competitionRepository;
     private final RefereeRepository refereeRepository;
     private final TeamRepository teamRepository;
@@ -75,16 +80,54 @@ public class FormService {
     @Transactional(rollbackOn = {Exception.class})
     public void submitForm(CompletedForm completedForm) {
         League league = leagueRepository.findByName(completedForm.getLeague());
-        Competition competition = competitionRepository.findByNameAndLeague(completedForm.getCompetition(), league);
+        if(league == null) {
+            throw new InvalidParameterException("League not found: " + completedForm.getLeague());
+        }
 
-        String refereeName = completedForm.getReferee();
-        String refereeFirstName = refereeName.substring(0, refereeName.indexOf(' '));
-        String refereeLastName = refereeName.substring(refereeName.indexOf(' '), refereeName.length());
+        Competition competition = competitionRepository.findByNameAndLeague(completedForm.getCompetition(), league);
+        if (competition == null) {
+            competition = new Competition();
+            competition.setLeague(league);
+            competition.setName(completedForm.getCompetition());
+            competition = competitionRepository.save(competition);
+
+            LOGGER.warn("Unable to find competition.  Added to db: " + competition.getName());
+        }
+
+        String refereeName = completedForm.getReferee().trim();
+        String refereeFirstName = refereeName.substring(0, refereeName.indexOf(' ')).trim();
+        String refereeLastName = refereeName.substring(refereeName.indexOf(' '), refereeName.length()).trim();
         Referee referee = refereeRepository
                 .findByFirstNameIgnoreCaseAndLastNameIgnoreCase(refereeFirstName, refereeLastName);
+        if(referee == null) {
+            referee = new Referee();
+            referee.setFirstName(refereeFirstName);
+            referee.setLastName(refereeLastName);
+            referee.setLevel((short) 7);
+            referee = refereeRepository.save(referee);
+
+            LOGGER.warn("Unable to find referee.  Added to db: " + refereeName);
+        }
 
         Team homeTeam = teamRepository.findByName(completedForm.getHomeTeam());
+        if(homeTeam == null) {
+            homeTeam = new Team();
+            homeTeam.setLeague(league);
+            homeTeam.setName(completedForm.getHomeTeam());
+            homeTeam = teamRepository.save(homeTeam);
+
+            LOGGER.warn("Unable to find team.  Added to db: " + homeTeam.getName());
+        }
+
         Team awayTeam = teamRepository.findByName(completedForm.getAwayTeam());
+        if(awayTeam == null) {
+            awayTeam = new Team();
+            awayTeam.setLeague(league);
+            awayTeam.setName(completedForm.getAwayTeam());
+            awayTeam = teamRepository.save(awayTeam);
+
+            LOGGER.warn("Unable to find team.  Added to db: " + awayTeam.getName());
+        }
 
         Date matchDate = completedForm.getMatchDate();
 
@@ -179,6 +222,24 @@ public class FormService {
         assistant.setComment(completedForm.getAssistantComment());
         assistant.setReportId(report);
         assistantRepository.save(assistant);
+    }
+
+    public void deleteAllReportsTeamsAndCompetitions() {
+        assistantRepository.deleteAll();
+        ballRepository.deleteAll();
+        captainArmbandRepository.deleteAll();
+        captainLiaisonRepository.deleteAll();
+        changingFacilityRepository.deleteAll();
+        contactRepository.deleteAll();
+        homeHospitalityRepository.deleteAll();
+        kickOffRepository.deleteAll();
+        overallScoreRepository.deleteAll();
+        shirtRepository.deleteAll();
+        spectatorRepository.deleteAll();
+        teamSheetRepository.deleteAll();
+        reportRepository.deleteAll();
+        competitionRepository.deleteAll();
+        teamRepository.deleteAll();
     }
 
     public List<String> getLeagues() {

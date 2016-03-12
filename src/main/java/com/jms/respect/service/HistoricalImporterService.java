@@ -231,6 +231,8 @@ public class HistoricalImporterService {
                         overallComment = cell.getStringCellValue();
                     }
                     completedForm.setOverallScoreComment(overallComment);
+
+                    formService.submitForm(completedForm);
                 }
             }
         } catch(Exception ioe) {
