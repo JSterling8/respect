@@ -39,7 +39,7 @@ public class StatsService {
         Map<Team, Double> teamAverages = getTeamAverageScoreMap(leagueReports, teamsInCompetition);
         Map<String, Integer> teamReportNums = getTeamReportNums(leagueReports, new ArrayList(teamAverages.keySet()));
 
-        double averageScoreForAllTeams = calculateAverageScoreAllTeams(leagueReports);
+        double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
         String competitionAndOrLeagueName = competition.getLeague().getName() + " - " + competition.getName();
 
@@ -60,7 +60,7 @@ public class StatsService {
         Map<Team, Double> teamAverages = getTeamAverageScoreMap(leagueReports, teamsInCompetition);
         Map<String, Integer> teamReportNums = getTeamReportNums(leagueReports, new ArrayList(teamAverages.keySet()));
 
-        double averageScoreForAllTeams = calculateAverageScoreAllTeams(leagueReports);
+        double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
         String competitionAndOrLeagueName = league.getName();
 
@@ -121,21 +121,19 @@ public class StatsService {
         return average;
     }
 
-    private double calculateAverageScoreAllTeams(List<Report> reports) {
+    private double calculateAverageScoreAllTeams(Map<Team, Double> averages) {
         double total = 0d;
 
-        for(Report report : reports) {
-            Set<OverallScore> overallScores = report.getOverallScores();
-            for(OverallScore overallScore : overallScores) {
-                total += overallScore.getHomeScore();
-                total += overallScore.getAwayScore();
-            }
+        for(Map.Entry<Team, Double> entry : averages.entrySet()) {
+            total += entry.getValue();
         }
 
+        if(total == 0d || averages.size() == 0) {
+            return 0d;
+        }
         DecimalFormat formatter = new DecimalFormat("#.00");
-        Double average = Double.parseDouble(formatter.format(total / ((double) reports.size() * 2d)));
+        Double average = Double.parseDouble(formatter.format(total / (double) averages.size()));
 
-        // Report size multiplied by 2 because each report has two scores - home and away
         return average;
     }
 

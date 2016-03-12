@@ -48,7 +48,7 @@ public class AdminReportController {
         modelAndView.addObject("reports", reports);
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
-        
+
         return modelAndView;
     }
 
