@@ -71,7 +71,7 @@ public class AccountController {
 
             return modelAndView;
         } else {
-            return new ModelAndView("/form");
+            return new ModelAndView("respect-form");
         }
     }
 
@@ -108,11 +108,11 @@ public class AccountController {
                 }
             }
 
-            ModelAndView modelAndView = new ModelAndView("/register");
+            ModelAndView modelAndView = new ModelAndView("register");
             modelAndView.addObject(accountCreationDto);
             return modelAndView;
         } else {
-            return new ModelAndView("/form");
+            return new ModelAndView("respect-form");
         }
     }
 

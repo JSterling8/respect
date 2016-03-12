@@ -222,4 +222,12 @@ public class Report {
     public void setMatchDate(Date matchDate) {
         this.matchDate = matchDate;
     }
+
+    public Date getSubmitted() {
+        return submitted;
+    }
+
+    public void setSubmitted(Date submitted) {
+        this.submitted = submitted;
+    }
 }

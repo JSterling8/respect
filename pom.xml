@@ -65,13 +65,21 @@
             <version>1.9.2</version>
         </dependency>
 
+        <!--For Excel file reading-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+
+        <!--For converting Iterables to ArrayLists-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
 
-        <!--Apache-->
+        <!--For custom validator (making sure two fields are equal)-->
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>

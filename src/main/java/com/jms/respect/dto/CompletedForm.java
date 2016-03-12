@@ -11,7 +11,7 @@ public class CompletedForm {
     private String referee;
     private String homeTeam;
     private String awayTeam;
-    private Date date;
+    private Date matchDate;
     private Short changingFacilityScore;
     private String changingFacilityComment;
     private String kickOffLate;
@@ -35,6 +35,7 @@ public class CompletedForm {
     private Short overallScoreHome;
     private Short overallScoreAway;
     private String overallScoreComment;
+    private Date dateFormSubmitted;
 
     public String getLeague() {
         return league;
@@ -76,12 +77,12 @@ public class CompletedForm {
         this.awayTeam = awayTeam;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getMatchDate() {
+        return matchDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMatchDate(Date matchDate) {
+        this.matchDate = matchDate;
     }
 
     public Short getChangingFacilityScore() {
@@ -266,5 +267,13 @@ public class CompletedForm {
 
     public void setOverallScoreComment(String overallScoreComment) {
         this.overallScoreComment = overallScoreComment;
+    }
+
+    public Date getDateFormSubmitted() {
+        return dateFormSubmitted;
+    }
+
+    public void setDateFormSubmitted(Date dateFormSubmitted) {
+        this.dateFormSubmitted = dateFormSubmitted;
     }
 }

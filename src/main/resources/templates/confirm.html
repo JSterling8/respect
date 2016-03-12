@@ -59,7 +59,7 @@
             </tr>
             <tr>
                 <td>Date</td>
-                <td th:text="${form.date}"></td>
+                <td th:text="${form.matchDate}"></td>
             </tr>
             <tr>
                 <td>Facilities Score</td>
@@ -162,7 +162,7 @@
                         <input type="hidden" name="referee" th:value="${form.referee}" />
                         <input type="hidden" name="homeTeam" th:value="${form.homeTeam}" />
                         <input type="hidden" name="awayTeam" th:value="${form.awayTeam}" />
-                        <input type="hidden" name="date" th:value="${form.date}" />
+                        <input type="hidden" name="matchDate" th:value="${form.matchDate}" />
                         <input type="hidden" name="changingFacilityScore" th:value="${form.changingFacilityScore}" />
                         <input type="hidden" name="changingFacilityComment" th:value="${form.changingFacilityComment}" />
                         <input type="hidden" name="kickOffLate" th:value="${form.kickOffLate}" />

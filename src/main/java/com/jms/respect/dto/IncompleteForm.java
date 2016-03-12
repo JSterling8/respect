@@ -13,7 +13,7 @@ public class IncompleteForm {
     private String referee;
     private List<String> homeTeams;
     private List<String> awayTeams;
-    private Date date;
+    private Date matchDate;
     private Short changingFacilityScore;
     private String changingFacilityComment;
     private String kickOffLate;
@@ -86,12 +86,12 @@ public class IncompleteForm {
         this.awayTeams = awayTeams;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getMatchDate() {
+        return matchDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMatchDate(Date matchDate) {
+        this.matchDate = matchDate;
     }
 
     public Short getChangingFacilityScore() {

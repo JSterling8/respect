@@ -74,7 +74,8 @@ public class FormService {
 
     @Transactional(rollbackOn = {Exception.class})
     public void submitForm(CompletedForm completedForm) {
-        Competition competition = competitionRepository.findByName(completedForm.getCompetition());
+        League league = leagueRepository.findByName(completedForm.getLeague());
+        Competition competition = competitionRepository.findByNameAndLeague(completedForm.getCompetition(), league);
 
         String refereeName = completedForm.getReferee();
         String refereeFirstName = refereeName.substring(0, refereeName.indexOf(' '));
@@ -85,13 +86,19 @@ public class FormService {
         Team homeTeam = teamRepository.findByName(completedForm.getHomeTeam());
         Team awayTeam = teamRepository.findByName(completedForm.getAwayTeam());
 
-        Date date = completedForm.getDate();
+        Date matchDate = completedForm.getMatchDate();
+
+        if(completedForm.getDateFormSubmitted() == null) {
+            completedForm.setDateFormSubmitted(new Date(System.currentTimeMillis()));
+        }
 
         Report report = new Report();
         report.setCompetition(competition);
         report.setRefereeId(referee);
         report.setHomeTeamId(homeTeam);
         report.setAwayTeamId(awayTeam);
+        report.setMatchDate(matchDate);
+        report.setSubmitted(completedForm.getDateFormSubmitted());
         report = reportRepository.save(report);
 
         TeamSheet teamSheet = new TeamSheet();
