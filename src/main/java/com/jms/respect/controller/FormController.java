@@ -43,28 +43,6 @@ public class FormController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/form/delete-all", method = RequestMethod.GET)
-    public ModelAndView deleteAll() {
-        formService.deleteAllReportsTeamsAndCompetitions();
-
-        return new ModelAndView("success");
-    }
-
-    private IncompleteForm prepareForm(IncompleteForm incompleteForm) {
-        RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = respectUserDetails.getUser();
-
-        incompleteForm.setReferee(user.getRefereeId().getFirstName() + " " + user.getRefereeId().getLastName());
-        incompleteForm.setLeagues(formService.getLeagues());
-        incompleteForm.setCompetitions(formService.getCompetitions());
-        incompleteForm.setReferees(formService.getReferees());
-        // TODO Prefix KSL teams with KSL, and WL with WL
-        incompleteForm.setHomeTeams(formService.getAllTeams());
-        incompleteForm.setAwayTeams(formService.getAllTeams());
-
-        return  incompleteForm;
-    }
-
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public ModelAndView confirmForm(CompletedForm completedForm) {
         ModelAndView modelAndView = new ModelAndView("confirm");
@@ -111,5 +89,20 @@ public class FormController {
         }
 
         return false;
+    }
+
+    private IncompleteForm prepareForm(IncompleteForm incompleteForm) {
+        RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = respectUserDetails.getUser();
+
+        incompleteForm.setReferee(user.getRefereeId().getFirstName() + " " + user.getRefereeId().getLastName());
+        incompleteForm.setLeagues(formService.getLeagues());
+        incompleteForm.setCompetitions(formService.getCompetitions());
+        incompleteForm.setReferees(formService.getReferees());
+        // TODO Prefix KSL teams with KSL, and WL with WL
+        incompleteForm.setHomeTeams(formService.getAllTeams());
+        incompleteForm.setAwayTeams(formService.getAllTeams());
+
+        return  incompleteForm;
     }
 }

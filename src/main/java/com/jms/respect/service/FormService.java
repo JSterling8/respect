@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.jms.respect.dao.*;
 import com.jms.respect.dto.CompletedForm;
 import com.jms.respect.repository.*;
+import org.hibernate.DuplicateMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,22 @@ public class FormService {
 
     @Transactional(rollbackOn = {Exception.class})
     public void submitForm(CompletedForm completedForm) {
+        Date dateSubmittedCheck = completedForm.getDateFormSubmitted();
+        Date matchDateCheck = completedForm.getMatchDate();
+        Team homeTeamCheck = teamRepository.findByName(completedForm.getHomeTeam());
+        Team awayTeamCheck = teamRepository.findByName(completedForm.getAwayTeam());
+        Report reportCheck = null;
+        if(homeTeamCheck != null && awayTeamCheck != null) {
+            reportCheck = reportRepository.findBySubmittedAndMatchDateAndHomeTeamIdAndAwayTeamId(
+                    dateSubmittedCheck,
+                    matchDateCheck,
+                    homeTeamCheck,
+                    awayTeamCheck);
+        }
+        if(reportCheck != null) {
+            throw new DuplicateMappingException(DuplicateMappingException.Type.ENTITY, "Attempted to add same report twice.  Terminating report submission.");
+        }
+
         League league = leagueRepository.findByName(completedForm.getLeague());
         if(league == null) {
             throw new InvalidParameterException("League not found: " + completedForm.getLeague());

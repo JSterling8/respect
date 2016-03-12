@@ -6,6 +6,9 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hibernate.DuplicateMappingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,7 @@ import java.sql.Date;
  */
 @Service
 public class HistoricalImporterService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HistoricalImporterService.class);
     private static final int FIRST_DATA_ROW_NUM = 1;
     private static final int LAST_DATA_ROW_NUM = 566;
     private static final int SUBMISSION_TIMESTAMP_COL_NUM = 1;
@@ -232,7 +236,12 @@ public class HistoricalImporterService {
                     }
                     completedForm.setOverallScoreComment(overallComment);
 
-                    formService.submitForm(completedForm);
+                    try {
+                        formService.submitForm(completedForm);
+                    } catch (DuplicateMappingException e) {
+                        LOGGER.error("Import attempted multiple times.");
+                        return;
+                    }
                 }
             }
         } catch(Exception ioe) {

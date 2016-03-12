@@ -46,4 +46,11 @@ public class AdminReportController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "/respect/admin/reports/delete-all", method = RequestMethod.GET)
+    public ModelAndView deleteAll() {
+        formService.deleteAllReportsTeamsAndCompetitions();
+
+        return new ModelAndView("success");
+    }
 }
