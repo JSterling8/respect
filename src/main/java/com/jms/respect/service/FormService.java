@@ -280,7 +280,12 @@ public class FormService {
     public List<String> getAllTeams() {
         List<Team> teams = Lists.newArrayList(teamRepository.findAll());
 
-        return  teams.stream().map(Team::getName).collect(Collectors.toList());
+        teams = teams
+                .stream()
+                .sorted((t1, t2) -> t1.getName().compareTo(t2.getName()))
+                .collect(Collectors.toList());
+
+        return teams.stream().map(Team::getName).collect(Collectors.toList());
     }
 
     public List<Report> getAllReportsByReferee(Referee referee) {

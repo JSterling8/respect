@@ -90,7 +90,6 @@ public class FormController {
         incompleteForm.setLeagues(formService.getLeagues());
         incompleteForm.setCompetitions(formService.getCompetitions());
         incompleteForm.setReferees(formService.getReferees());
-        // TODO Prefix KSL teams with KSL, and WL with WL
         incompleteForm.setHomeTeams(formService.getAllTeams());
         incompleteForm.setAwayTeams(formService.getAllTeams());
 
