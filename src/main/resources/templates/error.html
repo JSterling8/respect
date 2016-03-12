@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Error</title>
+    <title>Admin - Dashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="/css/general.css"
+          th:href="@{/css/general.css}" rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+    <div class = "navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/form" class="navbar-brand">Form</a></li>
+                    <li><a href="/stats" class="navbar-brand">Stats</a></li>
+                    <li><a href='/logout' class="navbar-brand">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </head>
-<body>
-    <h1>Error: Invalid Attribute/ID/URL</h1>
+<body background="/img/paper_2.png">
+    <div class="padded-table-body">
+        <div>
+            <h1>Whoops!  Looks like something went wrong!</h1>
+        </div>
+        <div class="spacer" />
+        <div>
+            If you require assistance or have discovered a bug,
+            please contact the site's admin, Jonathan Sterling, at
+            <b>JSterling8 -[-at-]- gmail -[-dot-]- com</b>.  Please let him
+            know what you were doing when the issue occurred so he can
+            attempt to reproduce the problem.
+        </div>
+
+    </div>
 </body>
 </html>
