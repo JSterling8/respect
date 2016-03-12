@@ -1,37 +1,36 @@
 package com.jms.respect.dto;
 
-import com.jms.respect.dao.OverallScore;
-
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by anon on 12/03/2016.
  */
 public class OverallScoresDto {
-    private List<OverallScore> overallScores;
-    private double averageScore;
+    private Map<String, Double> teamAverages;
+    private double competitionAverage;
 
-    public OverallScoresDto(List<OverallScore> overallScores, double averageScore) {
-        this.overallScores = overallScores;
-        this.averageScore = averageScore;
+    public OverallScoresDto(Map<String, Double> teamAverages, double competitionAverage) {
+        this.teamAverages = teamAverages;
+        this.competitionAverage = competitionAverage;
     }
 
     public OverallScoresDto() {
     }
 
-    public List<OverallScore> getOverallScores() {
-        return overallScores;
+    public Map<String, Double> getTeamAverages() {
+        return teamAverages;
     }
 
-    public void setOverallScores(List<OverallScore> overallScores) {
-        this.overallScores = overallScores;
+    public void setTeamAverages(TreeMap<String, Double> teamAverages) {
+        this.teamAverages = teamAverages;
     }
 
-    public double getAverageScore() {
-        return averageScore;
+    public double getCompetitionAverage() {
+        return competitionAverage;
     }
 
-    public void setAverageScore(double averageScore) {
-        this.averageScore = averageScore;
+    public void setCompetitionAverage(double competitionAverage) {
+        this.competitionAverage = competitionAverage;
     }
 }

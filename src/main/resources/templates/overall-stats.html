@@ -12,6 +12,23 @@
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
 </head>
 <body background="/img/paper_2.png">
-
+    <div class="padded-table-body">
+        <h1 th:text="${competition.league.name} + ' - ' + ${competition.name}"></h1>
+        <h3>Average score for competition/division: <span th:text="${overallScores.competitionAverage}" /></h3>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Average Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="teamAverage : ${overallScores.teamAverages}">
+                    <td th:text="${teamAverage.key}" />
+                    <td th:text="${teamAverage.value}" />
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

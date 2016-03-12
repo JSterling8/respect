@@ -43,6 +43,10 @@ public class CompetitionService {
         return competitionsByLeague;
     }
 
+    public Competition getCompetitionById(Integer id) {
+        return competitionRepository.findById(id);
+    }
+
     private class LeagueComparator implements Comparator<League> {
         @Override
         public int compare(League o1, League o2) {
