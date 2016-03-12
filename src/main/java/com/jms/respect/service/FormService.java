@@ -112,7 +112,7 @@ public class FormService {
         Team homeTeam = teamRepository.findByName(completedForm.getHomeTeam());
         if(homeTeam == null) {
             homeTeam = new Team();
-            homeTeam.setLeague(league);
+            homeTeam.setCompetition(competition);
             homeTeam.setName(completedForm.getHomeTeam());
             homeTeam = teamRepository.save(homeTeam);
 
@@ -122,7 +122,7 @@ public class FormService {
         Team awayTeam = teamRepository.findByName(completedForm.getAwayTeam());
         if(awayTeam == null) {
             awayTeam = new Team();
-            awayTeam.setLeague(league);
+            awayTeam.setCompetition(competition);
             awayTeam.setName(completedForm.getAwayTeam());
             awayTeam = teamRepository.save(awayTeam);
 

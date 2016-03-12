@@ -11,8 +11,8 @@ public class Team {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "league", referencedColumnName = "id", nullable = false)
-    private League league;
+    @JoinColumn(name = "competition", referencedColumnName = "id", nullable = false)
+    private Competition competition;
 
     @Column(name = "name", columnDefinition = "varchar", length = 255)
     private String name;
@@ -25,12 +25,12 @@ public class Team {
         this.id = id;
     }
 
-    public League getLeague() {
-        return league;
+    public Competition getCompetition() {
+        return competition;
     }
 
-    public void setLeague(League league) {
-        this.league = league;
+    public void setCompetition(Competition competition) {
+        this.competition = competition;
     }
 
     public String getName() {
