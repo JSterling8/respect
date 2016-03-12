@@ -21,10 +21,13 @@ import java.util.List;
 @Controller
 public class AdminAccountController {
     private final AccountService accountService;
+    private final ControllerHelper controllerHelper;
 
     @Autowired
-    public AdminAccountController(AccountService accountService) {
+    public AdminAccountController(AccountService accountService,
+                                  ControllerHelper controllerHelper) {
         this.accountService = accountService;
+        this.controllerHelper = controllerHelper;
     }
 
     @RequestMapping(value = "/respect/admin/users", method = RequestMethod.GET)
@@ -32,6 +35,7 @@ public class AdminAccountController {
         ModelAndView modelAndView = new ModelAndView("admin-users");
         List<User> users = accountService.getAllUsers();
         modelAndView.addObject("users", users);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }
@@ -42,6 +46,7 @@ public class AdminAccountController {
         User user = accountService.getUserById(userId);
 
         modelAndView.addObject("user", user);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }
@@ -53,6 +58,7 @@ public class AdminAccountController {
         ModelAndView modelAndView = new ModelAndView("admin-user");
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }
@@ -64,6 +70,7 @@ public class AdminAccountController {
         ModelAndView modelAndView = new ModelAndView("admin-user");
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }
@@ -75,6 +82,7 @@ public class AdminAccountController {
         ModelAndView modelAndView = new ModelAndView("admin-user");
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }
@@ -86,6 +94,7 @@ public class AdminAccountController {
         ModelAndView modelAndView = new ModelAndView("admin-user");
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }
@@ -97,6 +106,7 @@ public class AdminAccountController {
         ModelAndView modelAndView = new ModelAndView("admin-user");
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }

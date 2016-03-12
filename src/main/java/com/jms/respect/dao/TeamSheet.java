@@ -15,9 +15,9 @@ public class TeamSheet {
     @JoinColumn(name = "report_id", referencedColumnName = "id", nullable = false)
     private Report reportId;
 
-    @Column(name = "recieved", columnDefinition = "varchar", length = 255)
+    @Column(name = "received", columnDefinition = "varchar", length = 255)
     @NotNull
-    private String recieved;
+    private String received;
 
     public Integer getId() {
         return id;
@@ -35,11 +35,11 @@ public class TeamSheet {
         this.reportId = reportId;
     }
 
-    public String getRecieved() {
-        return recieved;
+    public String getReceived() {
+        return received;
     }
 
-    public void setRecieved(String recieved) {
-        this.recieved = recieved;
+    public void setReceived(String received) {
+        this.received = received;
     }
 }

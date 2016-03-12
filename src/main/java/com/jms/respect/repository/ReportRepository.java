@@ -20,6 +20,7 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
                                                                  Date matchDateCheck,
                                                                  Team homeTeam,
                                                                  Team awayTeam);
-
     List<Report> findByCompetition(Competition competition);
+    List<Report> findByHomeTeamId(Team team);
+    List<Report> findByAwayTeamId(Team team);
 }

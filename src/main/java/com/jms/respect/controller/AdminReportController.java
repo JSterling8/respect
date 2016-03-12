@@ -23,11 +23,15 @@ import java.util.List;
 public class AdminReportController {
     private final FormService formService;
     private final AccountService accountService;
+    private final ControllerHelper controllerHelper;
 
     @Autowired
-    public AdminReportController(FormService formService, AccountService accountService) {
+    public AdminReportController(FormService formService,
+                                 AccountService accountService,
+                                 ControllerHelper controllerHelper) {
         this.formService = formService;
         this.accountService = accountService;
+        this.controllerHelper = controllerHelper;
     }
 
     @RequestMapping(value = "/respect/admin/reports/user/{id}", method = RequestMethod.GET)
@@ -43,7 +47,8 @@ public class AdminReportController {
         List<Report> reports = formService.getAllReportsByReferee(referee);
         modelAndView.addObject("reports", reports);
         modelAndView.addObject("user", user);
-
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
+        
         return modelAndView;
     }
 

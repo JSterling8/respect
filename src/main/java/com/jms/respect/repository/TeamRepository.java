@@ -12,4 +12,5 @@ import java.util.List;
 public interface TeamRepository extends CrudRepository<Team, Long> {
     Team findByName(String name);
     List<Team> findByCompetition(Competition competition);
+    Team findById(Integer id);
 }

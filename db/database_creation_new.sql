@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5beta1
 -- Dumped by pg_dump version 9.5beta1
 
--- Started on 2016-03-12 16:35:30
+-- Started on 2016-03-12 20:39:23
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -13,6 +13,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 DROP DATABASE respect;
 --
@@ -20,7 +21,7 @@ DROP DATABASE respect;
 -- Name: respect; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8';
+CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United Kingdom.1252' LC_CTYPE = 'English_United Kingdom.1252';
 
 
 ALTER DATABASE respect OWNER TO postgres;
@@ -1091,7 +1092,7 @@ ALTER SEQUENCE team_id_seq OWNED BY team.id;
 
 CREATE TABLE team_sheet (
     id integer NOT NULL,
-    recieved character varying(255) NOT NULL,
+    received character varying(255) NOT NULL,
     report_id integer NOT NULL
 );
 
@@ -8995,7 +8996,7 @@ SELECT pg_catalog.setval('team_id_seq', 394, true);
 -- Data for Name: team_sheet; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY team_sheet (id, recieved, report_id) FROM stdin;
+COPY team_sheet (id, received, report_id) FROM stdin;
 1142	Both	1143
 1143	Both	1144
 1144	Both	1145
@@ -9591,7 +9592,6 @@ SELECT pg_catalog.setval('team_sheet_report_id_seq', 1, false);
 
 COPY use (id, referee_id, email, password, type, created, approved, remind, validated, validation_code) FROM stdin;
 23	106	a@a.com	$2a$10$EKD.X3iuYjnEZaOJ957bx.ZEDD58NqZ6DRryxHwCxK9/TuD.OtLcy	ADMIN	2016-03-11	t	t	t	\N
-21	86	JSterling8@gmail.com	$2a$10$3orLmHaArovBqCoCNov1X.XIKXrofIZAXSm1IDKxFIcUvi1lOS63C	ADMIN	2016-03-09	t	t	t	\N
 24	107	b@b.com	$2a$10$0CbS/X0OZSvW8ocHWnT7s.kEbQdeYIGuphI7wg4B4HGwf.bp6N6Yq	DEFAULT	2016-03-11	t	t	f	db8579d9-912c-4da1-9699-c18328a29c54
 25	108	c@c.com	$2a$10$MiTwunGmo.6a668Cb6myoe3joXSmWTC24kWE.Cv485BGfrRVjQ6aG	DEFAULT	2016-03-11	f	t	f	33628a37-2e05-4e59-b839-2ac42220de4f
 \.
@@ -9969,7 +9969,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-03-12 16:35:31
+-- Completed on 2016-03-12 20:39:23
 
 --
 -- PostgreSQL database dump complete

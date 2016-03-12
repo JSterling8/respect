@@ -162,7 +162,7 @@ public class FormService {
         report = reportRepository.save(report);
 
         TeamSheet teamSheet = new TeamSheet();
-        teamSheet.setRecieved(completedForm.getTeamSheet());
+        teamSheet.setReceived(completedForm.getTeamSheet());
         teamSheet.setReportId(report);
         teamSheetRepository.save(teamSheet);
 

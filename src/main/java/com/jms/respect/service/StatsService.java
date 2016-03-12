@@ -98,7 +98,7 @@ public class StatsService {
         return teamAverages;
     }
 
-    private double calculateAverageScoreForTeam(List<Report> reports, String teamName) {
+    public double calculateAverageScoreForTeam(List<Report> reports, String teamName) {
         double totalScore = 0d;
         double size = reports.size();
 
@@ -137,5 +137,15 @@ public class StatsService {
 
         // Report size multiplied by 2 because each report has two scores - home and away
         return average;
+    }
+
+    public List<Report> getReportsForTeam(Team team) {
+        List<Report> reports = reportRepository.findByHomeTeamId(team);
+        reports.addAll(reportRepository.findByAwayTeamId(team));
+
+        return reports
+                .stream()
+                .sorted((r1, r2) -> r1.getMatchDate().compareTo(r2.getMatchDate()))
+                .collect(Collectors.toList());
     }
 }

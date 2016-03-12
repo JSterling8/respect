@@ -1,5 +1,6 @@
 package com.jms.respect.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller
 public class AdminDashboardController {
+    private final ControllerHelper controllerHelper;
+
+    @Autowired
+    public AdminDashboardController(ControllerHelper controllerHelper) {
+        this.controllerHelper = controllerHelper;
+    }
+
     @RequestMapping(value = "/respect/admin/dashboard", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
-        return new ModelAndView("admin-dashboard");
+        ModelAndView modelAndView = new ModelAndView("admin-dashboard");
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
+        return modelAndView;
     }
 }
