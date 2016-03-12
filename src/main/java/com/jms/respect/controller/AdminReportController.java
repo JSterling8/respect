@@ -34,6 +34,10 @@ public class AdminReportController {
     public ModelAndView getReportsForUser(@PathVariable("id") Integer userId) {
         ModelAndView modelAndView = new ModelAndView("admin-reports");
         User user = accountService.getUserById(userId);
+        if(user == null) {
+            return new ModelAndView("error");
+        }
+
         Referee referee = user.getRefereeId();
 
         List<Report> reports = formService.getAllReportsByReferee(referee);
