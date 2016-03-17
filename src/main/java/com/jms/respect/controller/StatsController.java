@@ -40,11 +40,8 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats", method = RequestMethod.GET)
-    public ModelAndView getStatsDashboard() {
-        ModelAndView modelAndView = new ModelAndView("stats-dashboard");
-        modelAndView.addObject("admin", controllerHelper.isAdmin());
-
-        return modelAndView;
+    public ModelAndView getMainStatsPage() {
+        return getCompetitions();
     }
 
     @RequestMapping(value = "/stats/competitions", method = RequestMethod.GET)
