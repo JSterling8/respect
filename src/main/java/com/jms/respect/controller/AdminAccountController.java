@@ -34,7 +34,7 @@ public class AdminAccountController {
     public ModelAndView getUsersPage() {
         ModelAndView modelAndView = new ModelAndView("admin-users");
         List<User> users = accountService.getAllUsers();
-        modelAndView.addObject("users", users);
+        modelAndView.addObject("users", users); 
         modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
