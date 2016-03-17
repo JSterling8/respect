@@ -2,7 +2,7 @@ package com.jms.respect.service;
 
 import com.google.common.collect.Lists;
 import com.jms.respect.dao.*;
-import com.jms.respect.dto.OverallScoresDto;
+import com.jms.respect.dto.StatsTableDataDto;
 import com.jms.respect.repository.CompetitionRepository;
 import com.jms.respect.repository.LeagueRepository;
 import com.jms.respect.repository.ReportRepository;
@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class StatsService {
+    private static final String ALL_LEAGUES = "All Leagues";
+
     private final ReportRepository reportRepository;
     private final CompetitionRepository competitionRepository;
     private final TeamRepository teamRepository;
@@ -32,7 +34,7 @@ public class StatsService {
         this.leagueRepository = leagueRepository;
     }
 
-    public OverallScoresDto getOverallScoresForCompetitionId(Integer competitionId){
+    public StatsTableDataDto getStatsForCompetitionId(Integer competitionId){
         Competition competition = competitionRepository.findById(competitionId);
         List<Report> competitionReports = reportRepository.findByCompetition(competition);
         List<Team> teamsInCompetition = teamRepository.findByCompetition(competition);
@@ -48,10 +50,10 @@ public class StatsService {
 
         String competitionAndOrLeagueName = competition.getLeague().getName() + " - " + competition.getName();
 
-        return new OverallScoresDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
+        return new StatsTableDataDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
     }
 
-    public OverallScoresDto getOverallScoresForLeagueId(Integer id) {
+    public StatsTableDataDto getStatsForLeagueId(Integer id) {
         League league = leagueRepository.findById(id);
         List<Competition> competitions = competitionRepository.findByLeague(league);
         List<Report> leagueReports = new ArrayList<>();
@@ -73,7 +75,21 @@ public class StatsService {
 
         String competitionAndOrLeagueName = league.getName();
 
-        return new OverallScoresDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
+        return new StatsTableDataDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
+    }
+
+    public StatsTableDataDto getStatsForAllLeagues() {
+        List<Report> reports = Lists.newArrayList(reportRepository.findAll());
+        List<Team> teamsInCompetition = Lists.newArrayList(teamRepository.findAll());
+
+        Map<Team, Double> teamAverages = getTeamAverageScoreMap(reports, teamsInCompetition);
+        Map<String, Integer> teamReportNums = getTeamReportNums(reports, new ArrayList(teamAverages.keySet()));
+
+        double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
+
+        String competitionAndOrLeagueName = ALL_LEAGUES;
+
+        return new StatsTableDataDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
     }
 
     private Map<String, Integer> getTeamReportNums(List<Report> leagueReports, List<Team> teamsInCompetition) {

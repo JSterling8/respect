@@ -30,17 +30,27 @@
     </div>
 </head>
 <body background="/img/paper_2.png">
+    <div class="padded-table-body">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <h3><a href="/stats/all">All Competitions</a></h3>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
     <div class="padded-table-body" th:each="league :${leagueMap}">
         <table>
             <thead>
                 <tr>
-                    <th th:text="${league.key.name}" />
+                    <th>
+                        <h3><a th:text="${league.key.name}" th:href="'/stats/league/' + ${league.key.id}" /></h3>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                   <td><a th:href="'/stats/league/' + ${league.key.id}">ALL TEAMS IN LEAGUE</a></td>
-                </tr>
                 <tr th:each="competition : ${league.value}">
                     <td>
                         <a th:href="'/stats/competition/' + ${competition.id}" th:text="${competition.name}"/>

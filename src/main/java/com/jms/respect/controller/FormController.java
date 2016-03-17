@@ -64,6 +64,11 @@ public class FormController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "success", method = RequestMethod.GET)
+    public ModelAndView getSuccessPage() {
+        return new ModelAndView("success");
+    }
+
     @RequestMapping("/all-reports")
     @ResponseBody
     public Iterable<Report> getAllReports() {

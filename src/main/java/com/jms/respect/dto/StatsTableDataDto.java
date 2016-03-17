@@ -7,20 +7,20 @@ import java.util.Map;
 /**
  * Created by anon on 12/03/2016.
  */
-public class OverallScoresDto {
+public class StatsTableDataDto {
     private String competitionAndOrLeagueName;
     private Map<Team, Double> teamAverages;
     private Map<String, Integer> teamReportNums;
     private double competitionAverage;
 
-    public OverallScoresDto(String competitionAndOrLeagueName, Map<Team, Double> teamAverages, Map<String, Integer> teamReportNums, double competitionAverage) {
+    public StatsTableDataDto(String competitionAndOrLeagueName, Map<Team, Double> teamAverages, Map<String, Integer> teamReportNums, double competitionAverage) {
         this.competitionAndOrLeagueName = competitionAndOrLeagueName;
         this.teamReportNums = teamReportNums;
         this.teamAverages = teamAverages;
         this.competitionAverage = competitionAverage;
     }
 
-    public OverallScoresDto() {
+    public StatsTableDataDto() {
     }
 
     public Integer teamReportNums(String name) {

@@ -31,8 +31,8 @@
 </head>
 <body background="/img/paper_2.png">
     <div class="padded-table-body">
-        <h1 th:text="${overallScores.competitionAndOrLeagueName}"></h1>
-        <h3>Average score for competition/division: <span th:text="${overallScores.competitionAverage}" /></h3>
+        <h1 th:text="${tableData.competitionAndOrLeagueName}"></h1>
+        <h3>Average score for competition/division: <span th:text="${tableData.competitionAverage}" /></h3>
         <table class="table table-bordered table-condensed">
             <thead>
                 <tr>
@@ -42,10 +42,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="teamAverage,index : ${overallScores.teamAverages}">
+                <tr th:each="teamAverage : ${tableData.teamAverages}">
                     <td> <a th:text="${teamAverage.key.name}" th:href="'/stats/team/' + ${teamAverage.key.id}"/> </td>
                     <td th:text="${teamAverage.value}" />
-                    <td th:text="${overallScores.teamReportNums('__${teamAverage.key.name}__')}" />
+                    <td th:text="${tableData.teamReportNums('__${teamAverage.key.name}__')}" />
                 </tr>
             </tbody>
         </table>

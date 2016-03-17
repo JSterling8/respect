@@ -4,7 +4,7 @@ import com.jms.respect.dao.Competition;
 import com.jms.respect.dao.League;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dao.Team;
-import com.jms.respect.dto.OverallScoresDto;
+import com.jms.respect.dto.StatsTableDataDto;
 import com.jms.respect.service.CompetitionService;
 import com.jms.respect.service.StatsService;
 import com.jms.respect.service.TeamService;
@@ -55,19 +55,28 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats/competition/{id}", method = RequestMethod.GET)
-    public ModelAndView getOverallStatsForCompetitionId(@PathVariable("id") Integer id) {
-        OverallScoresDto overallScoresDto = statsService.getOverallScoresForCompetitionId(id);
-        ModelAndView modelAndView = new ModelAndView("overall-stats");
-        modelAndView.addObject("overallScores", overallScoresDto);
+    public ModelAndView getStatsForCompetitionId(@PathVariable("id") Integer id) {
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForCompetitionId(id);
+        ModelAndView modelAndView = new ModelAndView("stats-table");
+        modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
         return modelAndView;
     }
 
     @RequestMapping(value = "/stats/league/{id}", method = RequestMethod.GET)
-    public ModelAndView getOverallStatsForLeagueId(@PathVariable("id") Integer id) {
-        OverallScoresDto overallScoresDto = statsService.getOverallScoresForLeagueId(id);
-        ModelAndView modelAndView = new ModelAndView("overall-stats");
-        modelAndView.addObject("overallScores", overallScoresDto);
+    public ModelAndView getStatsForLeagueId(@PathVariable("id") Integer id) {
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForLeagueId(id);
+        ModelAndView modelAndView = new ModelAndView("stats-table");
+        modelAndView.addObject("tableData", statsTableDataDto);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/stats/all", method = RequestMethod.GET)
+    public ModelAndView getStatsForAllLeagues() {
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForAllLeagues();
+        ModelAndView modelAndView = new ModelAndView("stats-table");
+        modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
         return modelAndView;
     }
