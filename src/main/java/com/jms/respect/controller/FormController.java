@@ -50,6 +50,7 @@ public class FormController {
         ModelAndView modelAndView = new ModelAndView("confirm");
 
         modelAndView.addObject("form", completedForm);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
     }
@@ -58,15 +59,15 @@ public class FormController {
     public ModelAndView submitForm(CompletedForm completedForm) {
         formService.submitForm(completedForm);
 
-        ModelAndView modelAndView = new ModelAndView("redirect:success");
-        modelAndView.addObject("form", completedForm);
-
-        return modelAndView;
+        return new ModelAndView("redirect:success");
     }
 
     @RequestMapping(value = "success", method = RequestMethod.GET)
     public ModelAndView getSuccessPage() {
-        return new ModelAndView("success");
+        ModelAndView modelAndView = new ModelAndView("success");
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
+
+        return modelAndView;
     }
 
     @RequestMapping("/all-reports")
