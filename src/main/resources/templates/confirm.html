@@ -8,24 +8,7 @@
           rel="stylesheet" media="screen" />
     <link href="../static/css/general.css"
           th:href="@{css/respect-form.css}" rel="stylesheet" media="screen"/>
-    <div class = "navbar navbar-inverse navbar-static-top">
-        <div class="container">
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <div class="collapse navbar-collapse navHeaderCollapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/form" class="navbar-brand">Form</a></li>
-                    <li><a href="/stats" class="navbar-brand">Stats</a></li>
-                    <li th:if="${admin}"><a href="/respect/admin/dashboard" class="navbar-brand">Admin</a></li>
-                    <li><a href='/logout' class="navbar-brand">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div th:replace="fragments/navigation-header :: nav-header" />
 </head>
 <body background="img/paper_2.png">
 <center>
