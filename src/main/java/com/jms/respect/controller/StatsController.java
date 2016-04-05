@@ -27,6 +27,7 @@ import java.util.TreeMap;
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller
 public class StatsController {
+    private static final long DEFAULT_START_DATE = 1433548800l;
     private final StatsService statsService;
     private final CompetitionService competitionService;
     private final TeamService teamService;
@@ -71,7 +72,7 @@ public class StatsController {
                                                             required = false)
                                                      Date endDate){
         if(startDate == null) {
-            startDate = new Date(0l);
+            startDate = new Date(DEFAULT_START_DATE);
         }
         if(endDate == null) {
             endDate = new Date(System.currentTimeMillis());
@@ -99,7 +100,7 @@ public class StatsController {
                                                     required = false)
                                                 Date endDate) {
         if(startDate == null) {
-            startDate = new Date(0l);
+            startDate = new Date(DEFAULT_START_DATE);
         }
         if(endDate == null) {
             endDate = new Date(System.currentTimeMillis());
@@ -126,7 +127,7 @@ public class StatsController {
                                                       required = false)
                                               Date endDate) {
         if(startDate == null) {
-            startDate = new Date(0l);
+            startDate = new Date(DEFAULT_START_DATE);
         }
         if(endDate == null) {
             endDate = new Date(System.currentTimeMillis());
