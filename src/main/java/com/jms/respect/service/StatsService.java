@@ -44,7 +44,7 @@ public class StatsService {
         }
 
         Map<Team, Double> teamAverages = getTeamAverageScoreMap(statName, competitionReports, teamsInCompetition);
-        Map<String, Integer> teamReportNums = getTeamReportNums(competitionReports, new ArrayList(teamAverages.keySet()));
+        Map<String, Integer> teamReportNums = getTeamReportNums(statName, competitionReports, new ArrayList(teamAverages.keySet()));
 
         double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
@@ -73,7 +73,7 @@ public class StatsService {
         }
 
         Map<Team, Double> teamAverages = getTeamAverageScoreMap(statName, leagueReports, teamsInCompetition);
-        Map<String, Integer> teamReportNums = getTeamReportNums(leagueReports, new ArrayList(teamAverages.keySet()));
+        Map<String, Integer> teamReportNums = getTeamReportNums(statName, leagueReports, new ArrayList(teamAverages.keySet()));
 
         double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
@@ -91,7 +91,7 @@ public class StatsService {
         List<Team> teamsInCompetition = Lists.newArrayList(teamRepository.findAll());
 
         Map<Team, Double> teamAverages = getTeamAverageScoreMap(statName, reports, teamsInCompetition);
-        Map<String, Integer> teamReportNums = getTeamReportNums(reports, new ArrayList(teamAverages.keySet()));
+        Map<String, Integer> teamReportNums = getTeamReportNums(statName, reports, new ArrayList(teamAverages.keySet()));
 
         double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
@@ -104,7 +104,7 @@ public class StatsService {
                 averageScoreForAllTeams);
     }
 
-    private Map<String, Integer> getTeamReportNums(List<Report> leagueReports, List<Team> teamsInCompetition) {
+    private Map<String, Integer> getTeamReportNums(String statName, List<Report> leagueReports, List<Team> teamsInCompetition) {
         Map<String, Integer> teamReportNums = new LinkedHashMap<>();
 
         for(Team team : teamsInCompetition) {
@@ -112,7 +112,9 @@ public class StatsService {
             for(Report report : leagueReports) {
                 if (report.getHomeTeamId().getName().equals(team.getName())) {
                     totalForTeam++;
-                } else if (report.getAwayTeamId().getName().equals(team.getName())) {
+                } else if (report.getAwayTeamId().getName().equals(team.getName()) &&
+                        !statName.equals("facilities") &&
+                        !statName.equals("hospitality")) {
                     totalForTeam++;
                 }
             }

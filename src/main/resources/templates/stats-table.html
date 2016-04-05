@@ -15,6 +15,14 @@
 <body background="/img/paper_2.png">
     <div class="padded-table-body">
         <h1 th:text="${tableData.competitionAndOrLeagueName}"></h1>
+        <div>
+            View By:
+            <a href="?statName=overall">Overall</a>(default) /
+            <a href="?statName=facilities">Facilities</a> /
+            <a href="?statName=assistants">Assistants</a> /
+            <a href="?statName=spectators">Spectators</a> /
+            <a href="?statName=hospitality">Hospitality</a>
+        </div>
         <h3>Average <span th:text="${tableData.statName}" /> score for competition/division: <span th:text="${tableData.competitionAverage}" /></h3>
         <table class="table table-bordered table-condensed">
             <thead>
