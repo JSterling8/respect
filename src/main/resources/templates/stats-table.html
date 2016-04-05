@@ -15,7 +15,7 @@
 <body background="/img/paper_2.png">
     <div class="padded-table-body">
         <h1 th:text="${tableData.competitionAndOrLeagueName}"></h1>
-        <h3>Average score for competition/division: <span th:text="${tableData.competitionAverage}" /></h3>
+        <h3>Average <span th:text="${tableData.statName}" /> score for competition/division: <span th:text="${tableData.competitionAverage}" /></h3>
         <table class="table table-bordered table-condensed">
             <thead>
                 <tr>
