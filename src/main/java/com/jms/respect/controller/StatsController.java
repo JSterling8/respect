@@ -9,6 +9,7 @@ import com.jms.respect.service.CompetitionService;
 import com.jms.respect.service.StatsService;
 import com.jms.respect.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.TreeMap;
 /**
  * Created by anon on 12/03/2016.
  */
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller
 public class StatsController {
     private final StatsService statsService;
