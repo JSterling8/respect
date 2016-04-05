@@ -8,12 +8,14 @@ import java.util.Map;
  * Created by anon on 12/03/2016.
  */
 public class StatsTableDataDto {
+    private String statName;
     private String competitionAndOrLeagueName;
     private Map<Team, Double> teamAverages;
     private Map<String, Integer> teamReportNums;
     private double competitionAverage;
 
-    public StatsTableDataDto(String competitionAndOrLeagueName, Map<Team, Double> teamAverages, Map<String, Integer> teamReportNums, double competitionAverage) {
+    public StatsTableDataDto(String statName, String competitionAndOrLeagueName, Map<Team, Double> teamAverages, Map<String, Integer> teamReportNums, double competitionAverage) {
+        this.statName = statName;
         this.competitionAndOrLeagueName = competitionAndOrLeagueName;
         this.teamReportNums = teamReportNums;
         this.teamAverages = teamAverages;
@@ -21,6 +23,14 @@ public class StatsTableDataDto {
     }
 
     public StatsTableDataDto() {
+    }
+
+    public String getStatName() {
+        return statName;
+    }
+
+    public void setStatName(String statName) {
+        this.statName = statName;
     }
 
     public Integer teamReportNums(String name) {

@@ -34,7 +34,7 @@ public class StatsService {
         this.leagueRepository = leagueRepository;
     }
 
-    public StatsTableDataDto getStatsForCompetitionId(Integer competitionId){
+    public StatsTableDataDto getStatsForCompetitionId(Integer competitionId, String statName){
         Competition competition = competitionRepository.findById(competitionId);
         List<Report> competitionReports = reportRepository.findByCompetition(competition);
         List<Team> teamsInCompetition = teamRepository.findByCompetition(competition);
@@ -43,17 +43,21 @@ public class StatsService {
             teamsInCompetition = Lists.newArrayList(teamRepository.findAll());
         }
 
-        Map<Team, Double> teamAverages = getTeamAverageScoreMap(competitionReports, teamsInCompetition);
+        Map<Team, Double> teamAverages = getTeamAverageScoreMap(statName, competitionReports, teamsInCompetition);
         Map<String, Integer> teamReportNums = getTeamReportNums(competitionReports, new ArrayList(teamAverages.keySet()));
 
         double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
         String competitionAndOrLeagueName = competition.getLeague().getName() + " - " + competition.getName();
 
-        return new StatsTableDataDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
+        return new StatsTableDataDto(statName,
+                competitionAndOrLeagueName,
+                teamAverages,
+                teamReportNums,
+                averageScoreForAllTeams);
     }
 
-    public StatsTableDataDto getStatsForLeagueId(Integer id) {
+    public StatsTableDataDto getStatsForLeagueId(Integer id, String statName) {
         League league = leagueRepository.findById(id);
         List<Competition> competitions = competitionRepository.findByLeague(league);
         List<Report> leagueReports = new ArrayList<>();
@@ -68,28 +72,36 @@ public class StatsService {
             teamsInCompetition = Lists.newArrayList(teamRepository.findAll());
         }
 
-        Map<Team, Double> teamAverages = getTeamAverageScoreMap(leagueReports, teamsInCompetition);
+        Map<Team, Double> teamAverages = getTeamAverageScoreMap(statName, leagueReports, teamsInCompetition);
         Map<String, Integer> teamReportNums = getTeamReportNums(leagueReports, new ArrayList(teamAverages.keySet()));
 
         double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
         String competitionAndOrLeagueName = league.getName();
 
-        return new StatsTableDataDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
+        return new StatsTableDataDto(statName,
+                competitionAndOrLeagueName,
+                teamAverages,
+                teamReportNums,
+                averageScoreForAllTeams);
     }
 
-    public StatsTableDataDto getStatsForAllLeagues() {
+    public StatsTableDataDto getStatsForAllLeagues(String statName) {
         List<Report> reports = Lists.newArrayList(reportRepository.findAll());
         List<Team> teamsInCompetition = Lists.newArrayList(teamRepository.findAll());
 
-        Map<Team, Double> teamAverages = getTeamAverageScoreMap(reports, teamsInCompetition);
+        Map<Team, Double> teamAverages = getTeamAverageScoreMap(statName, reports, teamsInCompetition);
         Map<String, Integer> teamReportNums = getTeamReportNums(reports, new ArrayList(teamAverages.keySet()));
 
         double averageScoreForAllTeams = calculateAverageScoreAllTeams(teamAverages);
 
         String competitionAndOrLeagueName = ALL_LEAGUES;
 
-        return new StatsTableDataDto(competitionAndOrLeagueName, teamAverages, teamReportNums, averageScoreForAllTeams);
+        return new StatsTableDataDto(statName,
+                competitionAndOrLeagueName,
+                teamAverages,
+                teamReportNums,
+                averageScoreForAllTeams);
     }
 
     private Map<String, Integer> getTeamReportNums(List<Report> leagueReports, List<Team> teamsInCompetition) {
@@ -111,12 +123,12 @@ public class StatsService {
         return teamReportNums;
     }
 
-    private Map<Team, Double> getTeamAverageScoreMap(List<Report> leagueReports, List<Team> teamsInCompetitionAndOrLeague) {
+    private Map<Team, Double> getTeamAverageScoreMap(String statName, List<Report> leagueReports, List<Team> teamsInCompetitionAndOrLeague) {
         Map<Team, Double> teamAverages = new HashMap<>();
         for(Team team : teamsInCompetitionAndOrLeague) {
-            double averageScoreForTeam = calculateAverageScoreForTeam(leagueReports, team.getName());
+            double averageScoreForTeam = calculateAverageScoreForTeam(statName, leagueReports, team.getName());
             if(averageScoreForTeam >= 0) {
-                teamAverages.put(team, calculateAverageScoreForTeam(leagueReports, team.getName()));
+                teamAverages.put(team, calculateAverageScoreForTeam(statName, leagueReports, team.getName()));
             }
         }
 
@@ -126,17 +138,33 @@ public class StatsService {
         return teamAverages;
     }
 
-    public double calculateAverageScoreForTeam(List<Report> reports, String teamName) {
+    public double calculateAverageScoreForTeam(String statName, List<Report> reports, String teamName) {
         double totalScore = 0d;
         double size = reports.size();
 
-        for(Report report : reports) {
-            if(report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
-                for(OverallScore overallScore : report.getOverallScores()) {
+        if(statName.equals("overall")) {
+            return getOverallAverage(reports, teamName, totalScore, size);
+        } else if (statName.equals("facilities")) {
+            return getFacilitiesAverage(reports, teamName, totalScore, size);
+        } else if (statName.equals("spectators")) {
+            return getSpectatorsAverage(reports, teamName, totalScore, size);
+        } else if (statName.equals("assistants")) {
+            return getAssistantsAverage(reports, teamName, totalScore, size);
+        } else if (statName.equals("hospitality")) {
+            return getHospitalityAverage(reports, teamName, totalScore, size);
+        } else {
+            return -1d;
+        }
+    }
+
+    private double getOverallAverage(List<Report> reports, String teamName, double totalScore, double size) {
+        for (Report report : reports) {
+            if (report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (OverallScore overallScore : report.getOverallScores()) {
                     totalScore += overallScore.getHomeScore();
                 }
             } else if (report.getAwayTeamId().getName().equalsIgnoreCase(teamName)) {
-                for(OverallScore overallScore : report.getOverallScores()) {
+                for (OverallScore overallScore : report.getOverallScores()) {
                     totalScore += overallScore.getAwayScore();
                 }
             } else {
@@ -144,14 +172,98 @@ public class StatsService {
             }
         }
 
-        if(totalScore == 0 || size == 0) {
+        if (totalScore == 0 || size == 0) {
             return -1d;
         } else {
-            DecimalFormat formatter = new DecimalFormat("#.00");
-            Double average = Double.parseDouble(formatter.format(totalScore / size));
-
-            return average;
+            return formatScoreDecimal(totalScore, size);
         }
+    }
+
+    private double getFacilitiesAverage(List<Report> reports, String teamName, double totalScore, double size) {
+        for (Report report : reports) {
+            if (report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (ChangingFacility changingFacility : report.getChangingFacilities()) {
+                    totalScore += changingFacility.getScore();
+                }
+            } else {
+                size--;
+            }
+        }
+
+        if (totalScore == 0 || size == 0) {
+            return -1d;
+        } else {
+            return formatScoreDecimal(totalScore, size);
+        }
+    }
+
+    private double getSpectatorsAverage(List<Report> reports, String teamName, double totalScore, double size) {
+        for (Report report : reports) {
+            if (report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (Spectator spectator : report.getSpectators()) {
+                    totalScore += spectator.getHomeScore();
+                }
+            } else if (report.getAwayTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (Spectator spectator : report.getSpectators()) {
+                    totalScore += spectator.getAwayScore();
+                }
+            } else {
+                size--;
+            }
+        }
+
+        if (totalScore == 0 || size == 0) {
+            return -1d;
+        } else {
+            return formatScoreDecimal(totalScore, size);
+        }
+    }
+
+    private double getAssistantsAverage(List<Report> reports, String teamName, double totalScore, double size) {
+        for (Report report : reports) {
+            if (report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (Assistant assistant : report.getAssistants()) {
+                    totalScore += assistant.getHomeScore();
+                }
+            } else if (report.getAwayTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (Assistant assistant : report.getAssistants()) {
+                    totalScore += assistant.getAwayScore();
+                }
+            } else {
+                size--;
+            }
+        }
+
+        if (totalScore == 0 || size == 0) {
+            return -1d;
+        } else {
+            return formatScoreDecimal(totalScore, size);
+        }
+    }
+
+    private double getHospitalityAverage(List<Report> reports, String teamName, double totalScore, double size) {
+        for (Report report : reports) {
+            if (report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (HomeHospitality homeHospitality : report.getHomeHospitalities()) {
+                    totalScore += homeHospitality.getScore();
+                }
+            } else {
+                size--;
+            }
+        }
+
+        if (totalScore == 0 || size == 0) {
+            return -1d;
+        } else {
+            return formatScoreDecimal(totalScore, size);
+        }
+    }
+
+    private double formatScoreDecimal(double totalScore, double size) {
+        DecimalFormat formatter = new DecimalFormat("#.00");
+        Double average = Double.parseDouble(formatter.format(totalScore / size));
+
+        return average;
     }
 
     private double calculateAverageScoreAllTeams(Map<Team, Double> averages) {
@@ -164,10 +276,7 @@ public class StatsService {
         if(total == 0d || averages.size() == 0) {
             return -1d;
         } else {
-            DecimalFormat formatter = new DecimalFormat("#.00");
-            Double average = Double.parseDouble(formatter.format(total / (double) averages.size()));
-
-            return average;
+            return formatScoreDecimal(total, (double) averages.size());
         }
     }
 

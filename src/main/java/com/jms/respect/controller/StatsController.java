@@ -57,11 +57,11 @@ public class StatsController {
 
     @RequestMapping(value = "/stats/competition/{id}", method = RequestMethod.GET)
     public ModelAndView getStatsForCompetitionId(@PathVariable("id") Integer id,
-                                                 @RequestParam(value = "sortedby",
+                                                 @RequestParam(value = "statName",
                                                          defaultValue = "overall",
                                                          required = false)
-                                                            String sortedBy) {
-        StatsTableDataDto statsTableDataDto = statsService.getStatsForCompetitionId(id);
+                                                            String statName) {
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForCompetitionId(id, statName);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
@@ -70,11 +70,11 @@ public class StatsController {
 
     @RequestMapping(value = "/stats/league/{id}", method = RequestMethod.GET)
     public ModelAndView getStatsForLeagueId(@PathVariable("id") Integer id,
-                                            @RequestParam(value = "sortedby",
+                                            @RequestParam(value = "statName",
                                                     defaultValue = "overall",
                                                     required = false)
-                                                        String sortedBy) {
-        StatsTableDataDto statsTableDataDto = statsService.getStatsForLeagueId(id);
+                                                        String statName) {
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForLeagueId(id, statName);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
@@ -82,11 +82,11 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats/all", method = RequestMethod.GET)
-    public ModelAndView getStatsForAllLeagues(@RequestParam(value = "sortedby",
+    public ModelAndView getStatsForAllLeagues(@RequestParam(value = "statName",
                                                             defaultValue = "overall",
                                                             required = false)
-                                                                String sortedBy) {
-        StatsTableDataDto statsTableDataDto = statsService.getStatsForAllLeagues();
+                                                                String statName) {
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForAllLeagues(statName);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
@@ -94,15 +94,10 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats/team/{id}", method = RequestMethod.GET)
-    public ModelAndView getStatsForTeamId(@PathVariable("id") Integer id,
-                                          @RequestParam(value = "sortedby",
-                                                  defaultValue = "overall",
-                                                  required = false)
-                                                    String sortedBy) {
-        System.out.println(sortedBy);
+    public ModelAndView getStatsForTeamId(@PathVariable("id") Integer id) {
         Team team = teamService.getTeamById(id);
         List<Report> reports = statsService.getReportsForTeam(team);
-        Double averageOverallScore = statsService.calculateAverageScoreForTeam(reports, team.getName());
+        Double averageOverallScore = statsService.calculateAverageScoreForTeam("overall", reports, team.getName());
 
         ModelAndView modelAndView = new ModelAndView("stats-team");
         modelAndView.addObject("reports", reports);
