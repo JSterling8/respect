@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -62,11 +63,26 @@ public class StatsController {
                                                  @RequestParam(value = "statName",
                                                          defaultValue = "overall",
                                                          required = false)
-                                                            String statName) {
-        StatsTableDataDto statsTableDataDto = statsService.getStatsForCompetitionId(id, statName);
+                                                    String statName,
+                                                    @RequestParam(value = "startDate",
+                                                            required = false)
+                                                     Date startDate,
+                                                    @RequestParam(value = "endDate",
+                                                            required = false)
+                                                     Date endDate){
+        if(startDate == null) {
+            startDate = new Date(0l);
+        }
+        if(endDate == null) {
+            endDate = new Date(System.currentTimeMillis());
+        }
+
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForCompetitionId(id, statName, startDate, endDate);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("startDate", startDate);
+        modelAndView.addObject("endDate", endDate);
         return modelAndView;
     }
 
@@ -75,11 +91,26 @@ public class StatsController {
                                             @RequestParam(value = "statName",
                                                     defaultValue = "overall",
                                                     required = false)
-                                                        String statName) {
-        StatsTableDataDto statsTableDataDto = statsService.getStatsForLeagueId(id, statName);
+                                                        String statName,
+                                            @RequestParam(value = "startDate",
+                                                    required = false)
+                                                Date startDate,
+                                            @RequestParam(value = "endDate",
+                                                    required = false)
+                                                Date endDate) {
+        if(startDate == null) {
+            startDate = new Date(0l);
+        }
+        if(endDate == null) {
+            endDate = new Date(System.currentTimeMillis());
+        }
+
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForLeagueId(id, statName, startDate, endDate);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("startDate", startDate);
+        modelAndView.addObject("endDate", endDate);
         return modelAndView;
     }
 
@@ -87,11 +118,26 @@ public class StatsController {
     public ModelAndView getStatsForAllLeagues(@RequestParam(value = "statName",
                                                             defaultValue = "overall",
                                                             required = false)
-                                                                String statName) {
-        StatsTableDataDto statsTableDataDto = statsService.getStatsForAllLeagues(statName);
+                                                                String statName,
+                                              @RequestParam(value = "startDate",
+                                                      required = false)
+                                              Date startDate,
+                                              @RequestParam(value = "endDate",
+                                                      required = false)
+                                              Date endDate) {
+        if(startDate == null) {
+            startDate = new Date(0l);
+        }
+        if(endDate == null) {
+            endDate = new Date(System.currentTimeMillis());
+        }
+
+        StatsTableDataDto statsTableDataDto = statsService.getStatsForAllLeagues(statName, startDate, endDate);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("startDate", startDate);
+        modelAndView.addObject("endDate", endDate);
         return modelAndView;
     }
 

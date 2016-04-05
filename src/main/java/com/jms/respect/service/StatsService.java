@@ -10,6 +10,7 @@ import com.jms.respect.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,9 +35,9 @@ public class StatsService {
         this.leagueRepository = leagueRepository;
     }
 
-    public StatsTableDataDto getStatsForCompetitionId(Integer competitionId, String statName){
+    public StatsTableDataDto getStatsForCompetitionId(Integer competitionId, String statName, Date startDate, Date endDate){
         Competition competition = competitionRepository.findById(competitionId);
-        List<Report> competitionReports = reportRepository.findByCompetition(competition);
+        List<Report> competitionReports = reportRepository.findByCompetitionAndMatchDateBetween(competition, startDate, endDate);
         List<Team> teamsInCompetition = teamRepository.findByCompetition(competition);
 
         if(competition.getLeague().getName().equalsIgnoreCase("Cup Competition")) {
@@ -54,17 +55,19 @@ public class StatsService {
                 competitionAndOrLeagueName,
                 teamAverages,
                 teamReportNums,
-                averageScoreForAllTeams);
+                averageScoreForAllTeams,
+                startDate,
+                endDate);
     }
 
-    public StatsTableDataDto getStatsForLeagueId(Integer id, String statName) {
+    public StatsTableDataDto getStatsForLeagueId(Integer id, String statName, Date startDate, Date endDate) {
         League league = leagueRepository.findById(id);
         List<Competition> competitions = competitionRepository.findByLeague(league);
         List<Report> leagueReports = new ArrayList<>();
         List<Team> teamsInCompetition = new ArrayList<>();
 
         for(Competition competition : competitions) {
-            leagueReports.addAll(reportRepository.findByCompetition(competition));
+            leagueReports.addAll(reportRepository.findByCompetitionAndMatchDateBetween(competition, startDate, endDate));
             teamsInCompetition.addAll(teamRepository.findByCompetition(competition));
         }
 
@@ -83,11 +86,13 @@ public class StatsService {
                 competitionAndOrLeagueName,
                 teamAverages,
                 teamReportNums,
-                averageScoreForAllTeams);
+                averageScoreForAllTeams,
+                startDate,
+                endDate);
     }
 
-    public StatsTableDataDto getStatsForAllLeagues(String statName) {
-        List<Report> reports = Lists.newArrayList(reportRepository.findAll());
+    public StatsTableDataDto getStatsForAllLeagues(String statName, Date startDate, Date endDate) {
+        List<Report> reports = Lists.newArrayList(reportRepository.findAllByMatchDateBetween(startDate, endDate));
         List<Team> teamsInCompetition = Lists.newArrayList(teamRepository.findAll());
 
         Map<Team, Double> teamAverages = getTeamAverageScoreMap(statName, reports, teamsInCompetition);
@@ -101,7 +106,9 @@ public class StatsService {
                 competitionAndOrLeagueName,
                 teamAverages,
                 teamReportNums,
-                averageScoreForAllTeams);
+                averageScoreForAllTeams,
+                startDate,
+                endDate);
     }
 
     private Map<String, Integer> getTeamReportNums(String statName, List<Report> leagueReports, List<Team> teamsInCompetition) {

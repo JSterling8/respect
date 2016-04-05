@@ -13,6 +13,7 @@ import java.util.List;
  * Created by anon on 26/02/2016.
  */
 public interface ReportRepository extends CrudRepository<Report, Long> {
+    List<Report> findAllByMatchDateBetween(Date start, Date end);
     List<Report> findByHomeTeamIdName(String team);
     List<Report> findByAwayTeamIdName(String team);
     List<Report> findByRefereeId(Referee referee);
@@ -20,7 +21,7 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
                                                                  Date matchDateCheck,
                                                                  Team homeTeam,
                                                                  Team awayTeam);
-    List<Report> findByCompetition(Competition competition);
+    List<Report> findByCompetitionAndMatchDateBetween(Competition competition, Date start, Date end);
     List<Report> findByHomeTeamId(Team team);
     List<Report> findByAwayTeamId(Team team);
 }

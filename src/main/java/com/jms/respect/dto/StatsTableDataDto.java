@@ -2,6 +2,7 @@ package com.jms.respect.dto;
 
 import com.jms.respect.dao.Team;
 
+import java.sql.Date;
 import java.util.Map;
 
 /**
@@ -13,13 +14,23 @@ public class StatsTableDataDto {
     private Map<Team, Double> teamAverages;
     private Map<String, Integer> teamReportNums;
     private double competitionAverage;
+    private Date startDate;
+    private Date endDate;
 
-    public StatsTableDataDto(String statName, String competitionAndOrLeagueName, Map<Team, Double> teamAverages, Map<String, Integer> teamReportNums, double competitionAverage) {
+    public StatsTableDataDto(String statName,
+                             String competitionAndOrLeagueName,
+                             Map<Team, Double> teamAverages,
+                             Map<String, Integer> teamReportNums,
+                             double competitionAverage,
+                             Date startDate,
+                             Date endDate) {
         this.statName = statName;
         this.competitionAndOrLeagueName = competitionAndOrLeagueName;
         this.teamReportNums = teamReportNums;
         this.teamAverages = teamAverages;
         this.competitionAverage = competitionAverage;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public StatsTableDataDto() {
@@ -67,5 +78,21 @@ public class StatsTableDataDto {
 
     public void setTeamReportNums(Map<String, Integer> teamReportNums) {
         this.teamReportNums = teamReportNums;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

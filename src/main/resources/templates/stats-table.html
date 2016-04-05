@@ -10,19 +10,41 @@
           th:href="@{/css/general.css}" rel="stylesheet" media="screen"/>
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+    <link href="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.css"
+          th:href="@{/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css}" rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}" />
+    <script src="https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.js"
+            th:src="@{/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.min.js}" />
+    <script type="text/javascript">
+        $(function () {
+            $('#startDate').datepicker({ dateFormat: 'yy-mm-dd' });
+            $('#endDate').datepicker({ dateFormat: 'yy-mm-dd' });
+        });
+    </script>
     <div th:replace="fragments/navigation-header :: nav-header" />
 </head>
 <body background="/img/paper_2.png">
     <div class="padded-table-body">
         <h1 th:text="${tableData.competitionAndOrLeagueName}"></h1>
         <div>
-            View By:
-            <a href="?statName=overall">Overall</a>(default) /
-            <a href="?statName=facilities">Facilities</a> /
-            <a href="?statName=assistants">Assistants</a> /
-            <a href="?statName=spectators">Spectators</a> /
-            <a href="?statName=hospitality">Hospitality</a> /
-            <a href="?statName=captain">Captain's Liaison</a>
+            <h3>Options:</h3>
+            <form method="get" id="stats-form" action="">
+                <label class="label-spacer" for="statName">View By:</label>
+                <select name="statName" id="statName" class="form-control" required="required">
+                    <option th:value="overall" th:selected="${tableData.statName == 'overall'}">Overall</option>
+                    <option th:value="facilities" th:selected="${tableData.statName == 'facilities'}">Facilities</option>
+                    <option th:value="assistants" th:selected="${tableData.statName == 'assistants'}">Assistants</option>
+                    <option th:value="spectators" th:selected="${tableData.statName == 'spectators'}">Spectators</option>
+                    <option th:value="hospitality" th:selected="${tableData.statName == 'hospitality'}">Hospitality</option>
+                    <option th:value="captain" th:selected="${tableData.statName == 'captain'}">Captain's Liaison</option>
+                </select>
+                <label class="label-spacer" for="startDate">Start Date:</label>
+                <input name="startDate" id="startDate" type="text" class="form-control" th:value="${tableData.startDate}" required="required" />
+                <label class="label-spacer" for="endDate">End Date:</label>
+                <input name="endDate" id="endDate" type="text" class="form-control" th:value="${tableData.endDate}" required="required" />
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
         </div>
         <h3>Average <span th:text="${tableData.statName}" /> score for competition/division: <span th:text="${tableData.competitionAverage}" /></h3>
         <table class="table table-bordered table-condensed">
