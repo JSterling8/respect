@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -55,7 +56,11 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats/competition/{id}", method = RequestMethod.GET)
-    public ModelAndView getStatsForCompetitionId(@PathVariable("id") Integer id) {
+    public ModelAndView getStatsForCompetitionId(@PathVariable("id") Integer id,
+                                                 @RequestParam(value = "sortedby",
+                                                         defaultValue = "overall",
+                                                         required = false)
+                                                            String sortedBy) {
         StatsTableDataDto statsTableDataDto = statsService.getStatsForCompetitionId(id);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
@@ -64,7 +69,11 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats/league/{id}", method = RequestMethod.GET)
-    public ModelAndView getStatsForLeagueId(@PathVariable("id") Integer id) {
+    public ModelAndView getStatsForLeagueId(@PathVariable("id") Integer id,
+                                            @RequestParam(value = "sortedby",
+                                                    defaultValue = "overall",
+                                                    required = false)
+                                                        String sortedBy) {
         StatsTableDataDto statsTableDataDto = statsService.getStatsForLeagueId(id);
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
@@ -73,7 +82,10 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats/all", method = RequestMethod.GET)
-    public ModelAndView getStatsForAllLeagues() {
+    public ModelAndView getStatsForAllLeagues(@RequestParam(value = "sortedby",
+                                                            defaultValue = "overall",
+                                                            required = false)
+                                                                String sortedBy) {
         StatsTableDataDto statsTableDataDto = statsService.getStatsForAllLeagues();
         ModelAndView modelAndView = new ModelAndView("stats-table");
         modelAndView.addObject("tableData", statsTableDataDto);
@@ -82,7 +94,12 @@ public class StatsController {
     }
 
     @RequestMapping(value = "/stats/team/{id}", method = RequestMethod.GET)
-    public ModelAndView getStatsForTeamId(@PathVariable("id") Integer id) {
+    public ModelAndView getStatsForTeamId(@PathVariable("id") Integer id,
+                                          @RequestParam(value = "sortedby",
+                                                  defaultValue = "overall",
+                                                  required = false)
+                                                    String sortedBy) {
+        System.out.println(sortedBy);
         Team team = teamService.getTeamById(id);
         List<Report> reports = statsService.getReportsForTeam(team);
         Double averageOverallScore = statsService.calculateAverageScoreForTeam(reports, team.getName());
