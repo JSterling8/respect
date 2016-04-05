@@ -154,8 +154,10 @@ public class StatsService {
             return getAssistantsAverage(reports, teamName, totalScore, size);
         } else if (statName.equals("hospitality")) {
             return getHospitalityAverage(reports, teamName, totalScore, size);
+        } else if (statName.equals("captain")) {
+            return getCaptainLiaisonAverage(reports, teamName, totalScore, size);
         } else {
-            return -1d;
+                return -1d;
         }
     }
 
@@ -248,6 +250,28 @@ public class StatsService {
             if (report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
                 for (HomeHospitality homeHospitality : report.getHomeHospitalities()) {
                     totalScore += homeHospitality.getScore();
+                }
+            } else {
+                size--;
+            }
+        }
+
+        if (totalScore == 0 || size == 0) {
+            return -1d;
+        } else {
+            return formatScoreDecimal(totalScore, size);
+        }
+    }
+
+    private double getCaptainLiaisonAverage(List<Report> reports, String teamName, double totalScore, double size) {
+        for (Report report : reports) {
+            if (report.getHomeTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (CaptainLiaison captainLiaison : report.getCaptainLiaisons()) {
+                    totalScore += captainLiaison.getHomeScore();
+                }
+            } else if (report.getAwayTeamId().getName().equalsIgnoreCase(teamName)) {
+                for (CaptainLiaison captainLiaison : report.getCaptainLiaisons()) {
+                    totalScore += captainLiaison.getAwayScore();
                 }
             } else {
                 size--;
