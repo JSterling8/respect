@@ -75,7 +75,7 @@ public class AccountManagementController {
     public ModelAndView getChangePasswordPage() {
         ModelAndView mav = new ModelAndView("change-password");
         mav.addObject("admin", controllerHelper.isAdmin());
-
+        mav.addObject("passwordUpdateDto", new PasswordUpdateDto());
         return mav;
     }
 
@@ -85,6 +85,7 @@ public class AccountManagementController {
         if(result.hasErrors()) {
             ModelAndView mav = new ModelAndView("change-password");
             mav.addObject("admin", controllerHelper.isAdmin());
+            mav.addObject("passwordUpdateDto", passwordUpdateDto);
 
             return mav;
         } else {
