@@ -66,6 +66,23 @@
                 <a th:if="${user.type} == 'DEFAULT'" th:href="'/respect/admin/user/make-admin/' + ${user.id}">Make Admin</a>
             </div>
             <div class="spacing" />
+            <div class="sorta-padded">
+                <form th:action="'/respect/admin/user/change-password/' + ${user.id}" method="post" th:object="${passwordUpdateDto}">
+                    <div th:if="${#fields.hasAnyErrors()}">
+                        <p th:each="err : ${#fields.allErrors()}" th:text="${err}">...</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password" class="sr-only">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" class="form-control" placeholder="Confirm Password" required="required" />
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
+                </form>
+            </div>
+            <div class="spacing" />
             <div>
                 <a th:href="'/respect/admin/user/delete/' + ${user.id}" class="red">Delete Account</a>
             </div>

@@ -4,6 +4,7 @@ import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dao.User;
 import com.jms.respect.dto.AccountUpdateDto;
+import com.jms.respect.dto.PasswordUpdateDto;
 import com.jms.respect.service.AccountService;
 import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,29 @@ public class AccountManagementController {
         mav.addObject("accountUpdateDto", getAccountUpdateDtoForUser(user));
 
         return mav;
+    }
+
+    @RequestMapping(value = {"/account/change-password"}, method = RequestMethod.GET)
+    public ModelAndView getChangePasswordPage() {
+        ModelAndView mav = new ModelAndView("change-password");
+        mav.addObject("admin", controllerHelper.isAdmin());
+
+        return mav;
+    }
+
+    @RequestMapping(value = {"/account/change-password"}, method = RequestMethod.POST)
+    public ModelAndView getChangePasswordPage(@ModelAttribute("passwordUpdateDto") @Valid PasswordUpdateDto passwordUpdateDto,
+                                              BindingResult result) {
+        if(result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("change-password");
+            mav.addObject("admin", controllerHelper.isAdmin());
+
+            return mav;
+        } else {
+            accountService.updatePassword(controllerHelper.getUser(), passwordUpdateDto);
+
+            return new ModelAndView("redirect:/account");
+        }
     }
 
     @RequestMapping(value = {"/account/update", "/my-account/update", "/user-account/update"}, method = RequestMethod.POST)

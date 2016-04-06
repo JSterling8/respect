@@ -5,6 +5,7 @@ import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.User;
 import com.jms.respect.dto.AccountCreationDto;
 import com.jms.respect.dto.AccountUpdateDto;
+import com.jms.respect.dto.PasswordUpdateDto;
 import com.jms.respect.repository.RefereeRepository;
 import com.jms.respect.repository.UserRepository;
 import com.sun.jersey.api.client.ClientResponse;
@@ -28,7 +29,6 @@ public class AccountService {
     private static final String DEFAULT_USER_TYPE = "DEFAULT";
     private static final boolean DEFAULT_APPROVED_STATUS = true;
     private static final boolean DEFAULT_VALIDATED_STATUS = false;
-    private static final boolean DEFAULT_REMIND_STATUS = true;
     private static final String ADMIN_ACCOUNT_TYPE = "ADMIN";
 
     private final UserComparator userComparator = new UserComparator();
@@ -102,7 +102,7 @@ public class AccountService {
         user.setApproved(DEFAULT_APPROVED_STATUS);
         user.setCreated(new Date(System.currentTimeMillis()));
         user.setValidated(DEFAULT_VALIDATED_STATUS);
-        user.setRemind(DEFAULT_REMIND_STATUS);
+        user.setRemind(accountCreationDto.getRemind());
         user.setValidationCode(getValidationCode());
         return user;
     }
@@ -239,6 +239,13 @@ public class AccountService {
                 throw new InvalidParameterException("Failed to send email");
             }
         }
+    }
+
+    public void updatePassword(User user, PasswordUpdateDto passwordUpdateDto) {
+        String encryptedPassword = passwordEncoder.encode(passwordUpdateDto.getPassword());
+        user.setPassword(encryptedPassword);
+
+        userRepository.save(user);
     }
 
     private class UserComparator implements Comparator<User>{

@@ -22,8 +22,6 @@ public class AdminDashboardController {
 
     @RequestMapping(value = "/respect/admin/dashboard", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
-        ModelAndView modelAndView = new ModelAndView("admin-dashboard");
-        modelAndView.addObject("admin", controllerHelper.isAdmin());
-        return modelAndView;
+        return new ModelAndView("redirect:/respect/admin/users");
     }
 }

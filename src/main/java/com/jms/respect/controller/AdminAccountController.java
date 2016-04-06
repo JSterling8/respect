@@ -4,17 +4,21 @@ import com.jms.respect.config.security.RespectUserDetails;
 import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dao.User;
+import com.jms.respect.dto.PasswordUpdateDto;
 import com.jms.respect.service.AccountService;
 import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -53,6 +57,7 @@ public class AdminAccountController {
 
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("passwordUpdateDto", new PasswordUpdateDto());
 
         return modelAndView;
     }
@@ -133,6 +138,25 @@ public class AdminAccountController {
         modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/respect/admin/user/change-password/{userId}", method = RequestMethod.POST)
+    public ModelAndView changePassword(@PathVariable("userId") Integer userId,
+                                       @ModelAttribute("passwordUpdateDto") @Valid PasswordUpdateDto passwordUpdateDto,
+                                       BindingResult result) {
+        User user = accountService.getUserById(userId);
+
+        if(result.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("admin-user");
+
+            modelAndView.addObject("user", user);
+            modelAndView.addObject("admin", controllerHelper.isAdmin());
+
+            return modelAndView;
+        }
+
+        accountService.updatePassword(user, passwordUpdateDto);
+        return new ModelAndView("redirect:/respect/admin/user/" + userId);
     }
 
     @RequestMapping(value = "/respect/admin/user/delete/{id}", method = RequestMethod.GET)

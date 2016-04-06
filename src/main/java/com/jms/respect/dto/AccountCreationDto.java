@@ -41,6 +41,8 @@ public class AccountCreationDto {
     @NotNull
     private String confirmPassword;
 
+    private Boolean remind;
+
     public String getFirstName() {
         return firstName;
     }
@@ -95,5 +97,13 @@ public class AccountCreationDto {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public Boolean getRemind() {
+        return remind;
+    }
+
+    public void setRemind(Boolean remind) {
+        this.remind = remind;
     }
 }

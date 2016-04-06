@@ -78,6 +78,10 @@ public class AccountController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@ModelAttribute("accountCreationDto") @Valid AccountCreationDto accountCreationDto,
                                  BindingResult result) throws ServletException {
+        if(accountCreationDto.getRemind() == null) {
+            accountCreationDto.setRemind(false);
+        }
+
         if(!isLoggedIn()) {
             if (result.hasErrors()) {
                 ModelAndView modelAndView = new ModelAndView("/register");
