@@ -2,6 +2,7 @@ package com.jms.respect.controller;
 
 import com.jms.respect.config.security.RespectUserDetails;
 import com.jms.respect.dao.User;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,5 +26,10 @@ public class ControllerHelper {
     public User getUser() {
         RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return respectUserDetails.getUser();
+    }
+
+    public void reloadUserFromDb() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
     }
 }

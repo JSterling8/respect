@@ -21,5 +21,4 @@ public class MvcConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

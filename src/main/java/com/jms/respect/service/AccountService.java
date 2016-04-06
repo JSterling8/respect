@@ -7,6 +7,7 @@ import com.jms.respect.dto.AccountCreationDto;
 import com.jms.respect.dto.AccountUpdateDto;
 import com.jms.respect.repository.RefereeRepository;
 import com.jms.respect.repository.UserRepository;
+import com.sun.jersey.api.client.ClientResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,12 +35,17 @@ public class AccountService {
     private final UserRepository userRepository;
     private final RefereeRepository refereeRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     @Autowired
-    public AccountService(UserRepository userRepository, RefereeRepository refereeRepository, PasswordEncoder passwordEncoder) {
+    public AccountService(UserRepository userRepository,
+                          RefereeRepository refereeRepository,
+                          PasswordEncoder passwordEncoder,
+                          MailService mailService) {
         this.userRepository = userRepository;
         this.refereeRepository = refereeRepository;
         this.passwordEncoder = passwordEncoder;
+        this.mailService = mailService;
     }
 
     @Transactional(rollbackOn = {Exception.class})
@@ -66,6 +72,7 @@ public class AccountService {
 
         User user = getUserFromAccountCreationDtoAndReferee(accountCreationDto, refereeEntryAssociatedWithUser);
         user = userRepository.save(user);
+        mailService.sendValidationEmail(user);
 
         return user;
     }
@@ -80,6 +87,7 @@ public class AccountService {
             user.setValidationCode(null);
             user.setValidated(true);
             userRepository.save(user);
+
             return true;
         }
     }
@@ -203,17 +211,20 @@ public class AccountService {
         }
     }
 
+    @Transactional(rollbackOn = Exception.class)
     private void updateRefereeLevel(User user, Short refereeLevel) {
         Referee referee = user.getRefereeId();
         referee.setLevel(refereeLevel);
         refereeRepository.save(referee);
     }
 
+    @Transactional(rollbackOn = Exception.class)
     private void updateRemind(User user, Boolean remind) {
         user.setRemind(remind);
         userRepository.save(user);
     }
 
+    @Transactional(rollbackOn = Exception.class)
     private void updateEmail(User user, String email) {
         if(userRepository.findByEmailIgnoreCase(email) != null) {
             throw new InvalidParameterException("Email already in use");
@@ -221,9 +232,12 @@ public class AccountService {
             user.setEmail(email);
             user.setValidationCode(UUID.randomUUID().toString());
             user.setValidated(false);
-            userRepository.save(user);
+            user = userRepository.save(user);
 
-            //FIXME Send validation email here
+            ClientResponse response = mailService.sendValidationEmail(user);
+            if (response.getStatus() != 200) {
+                throw new InvalidParameterException("Failed to send email");
+            }
         }
     }
 
