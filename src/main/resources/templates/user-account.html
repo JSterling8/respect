@@ -35,7 +35,7 @@
                             <input type="email" name="email" th:value="${accountUpdateDto.email}" th:required="required" />
                         </div>
                         <div>
-                            <span th:unless="${user.validated}" class="red">Not Validated</span>
+                            <span th:unless="${user.validated}" class="red">Not Validated <a href="/account/resend">Click here to resend  validation email</a>.</span>
                         </div>
                     </td>
                 </tr>

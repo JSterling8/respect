@@ -7,6 +7,7 @@ import com.jms.respect.dto.AccountUpdateDto;
 import com.jms.respect.dto.PasswordUpdateDto;
 import com.jms.respect.service.AccountService;
 import com.jms.respect.service.FormService;
+import com.jms.respect.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -30,12 +31,17 @@ public class AccountManagementController {
     private AccountService accountService;
     private FormService formService;
     private ControllerHelper controllerHelper;
+    private MailService mailService;
 
     @Autowired
-    public AccountManagementController(AccountService accountService, FormService formService, ControllerHelper controllerHelper) {
+    public AccountManagementController(AccountService accountService,
+                                       FormService formService,
+                                       ControllerHelper controllerHelper,
+                                       MailService mailService) {
         this.accountService = accountService;
         this.formService = formService;
         this.controllerHelper = controllerHelper;
+        this.mailService = mailService;
     }
 
     @RequestMapping(value = "/my-reports", method = RequestMethod.GET)
@@ -76,6 +82,14 @@ public class AccountManagementController {
         ModelAndView mav = new ModelAndView("change-password");
         mav.addObject("admin", controllerHelper.isAdmin());
         mav.addObject("passwordUpdateDto", new PasswordUpdateDto());
+        return mav;
+    }
+
+    @RequestMapping(value = "/account/resend", method = RequestMethod.GET)
+    public ModelAndView resendValidationEmail() {
+        mailService.sendValidationEmail(controllerHelper.getUser());
+        ModelAndView mav = new ModelAndView("validation-email-resent");
+        mav.addObject("admin", controllerHelper.isAdmin());
         return mav;
     }
 
