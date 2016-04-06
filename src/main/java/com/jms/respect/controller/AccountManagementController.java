@@ -70,7 +70,6 @@ public class AccountManagementController {
 
         User user = controllerHelper.getUser();
         // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
-        user.setValidationCode("REDACTED");
         mav.addObject("user", user);
         mav.addObject("accountUpdateDto", getAccountUpdateDtoForUser(user));
 
@@ -118,7 +117,6 @@ public class AccountManagementController {
 
             User user = controllerHelper.getUser();
             // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
-            user.setValidationCode("REDACTED");
             mav.addObject("accountUpdateDto", accountUpdateDto);
             mav.addObject("user", user);
 
@@ -141,7 +139,6 @@ public class AccountManagementController {
 
                 User user = controllerHelper.getUser();
                 // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
-                user.setValidationCode("REDACTED");
                 mav.addObject("accountUpdateDto", accountUpdateDto);
                 mav.addObject("user", user);
 

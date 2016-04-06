@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
     <title>Forbidden</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="/css/general.css"
+          th:href="@{/css/general.css}" rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
     <div th:replace="fragments/navigation-header :: nav-header" />
 </head>
-<body>
-    <h1>
-        Access Forbidden
-    </h1>
+<body background="/img/paper_2.png">
+    <div id="center">
+        <h1>
+            Forbidden
+        </h1>
+    </div>
 </body>
 </html>
