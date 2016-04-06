@@ -26,12 +26,13 @@
                 <tr>
                     <td><label>Email</label></td>
                     <td>
-                        <input type="email" name="email" th:value="${user.email}" th:required="required" />
+                        <div>
+                            <input type="email" name="email" th:value="${user.email}" th:required="required" />
+                        </div>
+                        <div>
+                            <span th:unless="${user.validated}" class="red">Not Validated</span>
+                        </div>
                     </td>
-                </tr>
-                <tr>
-                    <td><label>Validated</label></td>
-                    <td th:text="${user.validated}" />
                 </tr>
                 <tr>
                     <td><label>Level</label></td>
