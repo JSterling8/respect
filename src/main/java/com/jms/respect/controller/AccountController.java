@@ -84,7 +84,7 @@ public class AccountController {
 
         if(!isLoggedIn()) {
             if (result.hasErrors()) {
-                ModelAndView modelAndView = new ModelAndView("/register");
+                ModelAndView modelAndView = new ModelAndView("register");
                 modelAndView.addObject(accountCreationDto);
                 return modelAndView;
             }
@@ -96,7 +96,7 @@ public class AccountController {
                 ObjectError error = new ObjectError("accountCreationDto", e.getMessage());
                 result.addError(error);
 
-                ModelAndView modelAndView = new ModelAndView("/register");
+                ModelAndView modelAndView = new ModelAndView("register");
                 modelAndView.addObject(accountCreationDto);
                 return modelAndView;
             }
