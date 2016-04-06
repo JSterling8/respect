@@ -27,7 +27,7 @@ import java.util.TreeMap;
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller
 public class StatsController {
-    private static final long DEFAULT_START_DATE = 1433548800l;
+    private static final long DEFAULT_START_DATE = 1433548800000l;
     private final StatsService statsService;
     private final CompetitionService competitionService;
     private final TeamService teamService;
