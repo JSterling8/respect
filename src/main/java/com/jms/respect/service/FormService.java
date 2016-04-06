@@ -80,7 +80,7 @@ public class FormService {
 
     @Transactional(rollbackOn = {Exception.class})
     public void submitForm(CompletedForm completedForm) {
-        Date dateSubmittedCheck = completedForm.getDateFormSubmitted();
+        Date dateSubmittedCheck = new Date(System.currentTimeMillis());
         Date matchDateCheck = completedForm.getMatchDate();
         Team homeTeamCheck = teamRepository.findByName(completedForm.getHomeTeam());
         Team awayTeamCheck = teamRepository.findByName(completedForm.getAwayTeam());
@@ -274,7 +274,7 @@ public class FormService {
 
     public List<String> getReferees() {
         List<Referee> referees = Lists.newArrayList(refereeRepository.findAll());
-        
+
         referees = referees
                 .stream()
                 .sorted((r1, r2) -> r1.getFirstName()

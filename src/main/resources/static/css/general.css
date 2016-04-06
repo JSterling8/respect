@@ -88,3 +88,7 @@ label.radio {
 .register-table {
     width: 100%;
 }
+
+div#center {
+    text-align: center;
+}
