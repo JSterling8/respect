@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Validate</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="/css/general.css"
+          th:href="@{/css/general.css}" rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+    <div th:replace="fragments/navigation-header :: nav-header" />
+</head>
+<body background="/img/paper_2.png">
+    <div class="sorta-padded">
+        <h3>Account Created - Please Read Before Continuing</h3>
+        <p>
+            An email has been sent to the address you entered with a link to <b>validate your account</b>.
+            Please make sure to check your spam folder.
+        </p>
+        <p>
+            You can submit respect reports by clicking the "Form" link on the top right.
+        </p>
+        <p>
+            You can view all of your previously submitted reports by clicking "My Account"
+            and then "View Submitted Reports".
+        </p>
+        <p>
+            You can change your email address, referee level, and whether or not you
+            want reminder emails on the "My Account" page by changing the relevant field(s)
+            then clicking "Update Account Info".
+        </p>
+        <p>
+            You can change your password on the "My Account" page by clicking the "Change Password"
+            button and filling in your new password.  <b>If you forget your password and are unable to
+            log in</b>, please contact Jonathan Sterling at
+            <b><a href="mailto:Jon@thanCodes.com">Jon@thanCodes.com</a></b>.
+        </p>
+    </div>
+    </body>
+</html>

@@ -108,7 +108,7 @@ public class AccountController {
                 if (token.isAuthenticated()) {
                     SecurityContextHolder.getContext().setAuthentication(token);
 
-                    return new ModelAndView("redirect:/form");
+                    return new ModelAndView("redirect:/please-validate");
                 }
             }
 
@@ -118,6 +118,11 @@ public class AccountController {
         } else {
             return new ModelAndView("redirect:/form");
         }
+    }
+
+    @RequestMapping(value="please-validate")
+    public ModelAndView getPleaseValidatePage() {
+        return new ModelAndView("please-validate");
     }
 
     @RequestMapping(value = "/validate/{validationCode}", method = RequestMethod.GET)
