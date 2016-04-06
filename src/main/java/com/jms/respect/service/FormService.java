@@ -268,11 +268,18 @@ public class FormService {
     public List<String> getCompetitions() {
         List<Competition> competitions = Lists.newArrayList(competitionRepository.findAll());
 
-        return  competitions.stream().map(Competition::getName).collect(Collectors.toList());
+        return  competitions.stream().sorted((c1, c2) -> c1.getName().compareTo(c2.getName())).collect(Collectors.toList())
+                .stream().map(Competition::getName).collect(Collectors.toList());
     }
 
     public List<String> getReferees() {
         List<Referee> referees = Lists.newArrayList(refereeRepository.findAll());
+        
+        referees = referees
+                .stream()
+                .sorted((r1, r2) -> r1.getFirstName()
+                        .compareTo(r2.getFirstName()))
+                .collect(Collectors.toList());
 
         return  referees.stream().map(Referee::getName).collect(Collectors.toList());
     }
