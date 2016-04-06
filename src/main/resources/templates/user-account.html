@@ -18,7 +18,12 @@
             <h3>Account Information</h3>
         </div>
         <table class="table table-bordered table-condensed table-account">
-            <form action="/account/update" method="post">
+            <form action="/account/update" th:object="${accountUpdateDto}" method="post">
+                <div th:if="${#fields.hasAnyErrors()}">
+                    <tr th:each="err : ${#fields.allErrors()}">
+                        <td colspan="2" th:text="${err}" class="error red"></td>
+                    </tr>
+                </div>
                 <tr>
                     <td><label>Name</label></td>
                     <td th:text="${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}" />
@@ -27,7 +32,7 @@
                     <td><label>Email</label></td>
                     <td>
                         <div>
-                            <input type="email" name="email" th:value="${user.email}" th:required="required" />
+                            <input type="email" name="email" th:value="${accountUpdateDto.email}" th:required="required" />
                         </div>
                         <div>
                             <span th:unless="${user.validated}" class="red">Not Validated</span>
@@ -37,8 +42,8 @@
                 <tr>
                     <td><label>Level</label></td>
                     <td>
-                        <select name="level" th:required="required">
-                            <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" th:selected="${i == user.refereeId.level}"/>
+                        <select name="refereeLevel" th:required="required">
+                            <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" th:selected="${i == accountUpdateDto.refereeLevel}"/>
                         </select>
                     </td>
                 </tr>
@@ -53,7 +58,7 @@
                 <tr>
                     <td><label>Remind</label></td>
                     <td>
-                        <input type="checkbox" name="remind" th:checked="${user.remind}" th:required="required" />
+                        <input type="checkbox" name="remind" th:checked="${user.remind}" />
                     </td>
                 </tr>
                 <tr>
@@ -69,6 +74,13 @@
                         </form>
                     </td>
                 </tr>
+            <tr>
+                <td colspan="2">
+                    <form action="/change-password" method="get">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
+                    </form>
+                </td>
+            </tr>
         </table>
     </div>
 </body>

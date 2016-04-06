@@ -3,15 +3,21 @@ package com.jms.respect.controller;
 import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dao.User;
+import com.jms.respect.dto.AccountUpdateDto;
 import com.jms.respect.service.AccountService;
 import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import java.security.InvalidParameterException;
 import java.util.List;
 
 /**
@@ -59,7 +65,58 @@ public class AccountManagementController {
         // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
         user.setValidationCode("REDACTED");
         mav.addObject("user", user);
+        mav.addObject("accountUpdateDto", getAccountUpdateDtoForUser(user));
 
         return mav;
+    }
+
+    @RequestMapping(value = {"/account/update", "/my-account/update", "/user-account/update"}, method = RequestMethod.POST)
+    public ModelAndView updateUserAccount(@ModelAttribute("accountUpdateDto") @Valid AccountUpdateDto accountUpdateDto,
+                                          BindingResult result) {
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/user-account");
+            mav.addObject("admin", controllerHelper.isAdmin());
+
+            User user = controllerHelper.getUser();
+            // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
+            user.setValidationCode("REDACTED");
+            mav.addObject("accountUpdateDto", accountUpdateDto);
+            mav.addObject("user", user);
+
+            return mav;
+        } else {
+            if(accountUpdateDto.getRemind() == null) {
+                accountUpdateDto.setRemind(false);
+            }
+
+            try {
+                accountService.update(accountUpdateDto, controllerHelper.getUser());
+            } catch (InvalidParameterException e) {
+                ObjectError error = new ObjectError("accountUpdateDto", e.getMessage());
+                result.addError(error);
+
+                ModelAndView mav = new ModelAndView("/user-account");
+                mav.addObject("admin", controllerHelper.isAdmin());
+
+                User user = controllerHelper.getUser();
+                // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
+                user.setValidationCode("REDACTED");
+                mav.addObject("accountUpdateDto", accountUpdateDto);
+                mav.addObject("user", user);
+
+                return mav;
+            }
+
+            return new ModelAndView("redirect:/account");
+        }
+    }
+
+    private AccountUpdateDto getAccountUpdateDtoForUser(User user) {
+        AccountUpdateDto accountUpdateDto = new AccountUpdateDto();
+        accountUpdateDto.setRemind(user.getRemind());
+        accountUpdateDto.setEmail(user.getEmail());
+        accountUpdateDto.setRefereeLevel(user.getRefereeId().getLevel());
+
+        return accountUpdateDto;
     }
 }

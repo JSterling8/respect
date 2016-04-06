@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.User;
 import com.jms.respect.dto.AccountCreationDto;
+import com.jms.respect.dto.AccountUpdateDto;
 import com.jms.respect.repository.RefereeRepository;
 import com.jms.respect.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,6 +185,45 @@ public class AccountService {
             user.setType(ADMIN_ACCOUNT_TYPE);
 
             userRepository.save(user);
+        }
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public void update(AccountUpdateDto accountUpdateDto, User user) {
+        if(!accountUpdateDto.getEmail().equalsIgnoreCase(user.getEmail())) {
+            updateEmail(user, accountUpdateDto.getEmail());
+        }
+
+        if(accountUpdateDto.getRemind() != user.getRemind()) {
+            updateRemind(user, accountUpdateDto.getRemind());
+        }
+
+        if(!accountUpdateDto.getRefereeLevel().equals(user.getRefereeId().getLevel())) {
+            updateRefereeLevel(user, accountUpdateDto.getRefereeLevel());
+        }
+    }
+
+    private void updateRefereeLevel(User user, Short refereeLevel) {
+        Referee referee = user.getRefereeId();
+        referee.setLevel(refereeLevel);
+        refereeRepository.save(referee);
+    }
+
+    private void updateRemind(User user, Boolean remind) {
+        user.setRemind(remind);
+        userRepository.save(user);
+    }
+
+    private void updateEmail(User user, String email) {
+        if(userRepository.findByEmailIgnoreCase(email) != null) {
+            throw new InvalidParameterException("Email already in use");
+        } else {
+            user.setEmail(email);
+            user.setValidationCode(UUID.randomUUID().toString());
+            user.setValidated(false);
+            userRepository.save(user);
+
+            //FIXME Send validation email here
         }
     }
 
