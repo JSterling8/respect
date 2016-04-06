@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5beta1
 -- Dumped by pg_dump version 9.5beta1
 
--- Started on 2016-03-12 20:39:23
+-- Started on 2016-04-07 00:17:28
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -13,6 +13,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 DROP DATABASE respect;
 --
@@ -20,7 +21,7 @@ DROP DATABASE respect;
 -- Name: respect; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8';
+CREATE DATABASE respect WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United Kingdom.1252' LC_CTYPE = 'English_United Kingdom.1252';
 
 
 ALTER DATABASE respect OWNER TO postgres;
@@ -2076,6 +2077,14 @@ COPY assistant (id, home_score, away_score, comment, report_id) FROM stdin;
 1704	9	9	\N	1706
 1705	10	10	\N	1707
 1706	9	9	\N	1708
+1707	8	10		1709
+1708	8	9	Assistant comment	1710
+1709	9	9	asdfsfd	1711
+1710	1	1	asdfsf	1712
+1711	10	7	fsadfsfdsdf	1713
+1712	9	10		1714
+1713	10	10		1715
+1714	10	10		1716
 \.
 
 
@@ -2085,7 +2094,7 @@ COPY assistant (id, home_score, away_score, comment, report_id) FROM stdin;
 -- Name: assistant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('assistant_id_seq', 1706, true);
+SELECT pg_catalog.setval('assistant_id_seq', 1714, true);
 
 
 --
@@ -2670,6 +2679,14 @@ COPY ball (id, provided, report_id) FROM stdin;
 1704	t	1706
 1705	f	1707
 1706	t	1708
+1707	t	1709
+1708	t	1710
+1709	t	1711
+1710	t	1712
+1711	t	1713
+1712	t	1714
+1713	t	1715
+1714	t	1716
 \.
 
 
@@ -2679,7 +2696,7 @@ COPY ball (id, provided, report_id) FROM stdin;
 -- Name: ball_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('ball_id_seq', 1706, true);
+SELECT pg_catalog.setval('ball_id_seq', 1714, true);
 
 
 --
@@ -3264,6 +3281,14 @@ COPY captain_armband (id, report_id, home_away_both_neither) FROM stdin;
 1913	1706	Both
 1914	1707	Both
 1915	1708	Both
+1950	1709	both
+2000	1710	both
+2050	1711	both
+2051	1712	both
+2100	1713	home
+2150	1714	both
+2200	1715	both
+2201	1716	both
 \.
 
 
@@ -3273,7 +3298,7 @@ COPY captain_armband (id, report_id, home_away_both_neither) FROM stdin;
 -- Name: captain_armband_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('captain_armband_id_seq', 38, true);
+SELECT pg_catalog.setval('captain_armband_id_seq', 44, true);
 
 
 --
@@ -3858,6 +3883,14 @@ COPY captain_liaison (id, home_score, away_score, comment, report_id) FROM stdin
 1913	9	9	\N	1706
 1914	10	10	\N	1707
 1915	6	6	\N	1708
+1950	10	8		1709
+2000	9	9	Captain's liaison comment	1710
+2050	9	9	asdfsf	1711
+2051	1	1	asdf	1712
+2100	9	1	asfdsfsdf	1713
+2150	10	9		1714
+2200	10	10		1715
+2201	10	10		1716
 \.
 
 
@@ -3867,7 +3900,7 @@ COPY captain_liaison (id, home_score, away_score, comment, report_id) FROM stdin
 -- Name: captain_liaison_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('captain_liaison_id_seq', 38, true);
+SELECT pg_catalog.setval('captain_liaison_id_seq', 44, true);
 
 
 --
@@ -4461,6 +4494,14 @@ COPY changing_facility (id, report_id, score, comment) FROM stdin;
 1913	1706	8	\N
 1914	1707	10	\N
 1915	1708	9	\N
+1950	1709	10	
+2000	1710	10	Changing facilities comment
+2050	1711	10	asfd
+2051	1712	9	efgsfsdf
+2100	1713	10	asfsfasfsfdsdf
+2150	1714	9	sfdsf
+2200	1715	10	
+2201	1716	10	
 \.
 
 
@@ -4470,7 +4511,7 @@ COPY changing_facility (id, report_id, score, comment) FROM stdin;
 -- Name: changing_facility_score_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('changing_facility_score_id_seq', 38, true);
+SELECT pg_catalog.setval('changing_facility_score_id_seq', 44, true);
 
 
 --
@@ -4480,16 +4521,6 @@ SELECT pg_catalog.setval('changing_facility_score_id_seq', 38, true);
 --
 
 COPY competition (id, name, league) FROM stdin;
-850	Division 3	2
-851	Division 1	2
-852	Division 2	2
-853	Reserve Division 4	2
-854	Reserve Division 3	2
-855	Reserve Division 2	2
-856	Reserve Division 1	2
-857	Division 4	2
-858	Division 1	4
-859	Division 1	3
 860	Challenge Cup	5
 861	Challenge Trophy	5
 862	Groom Cup	5
@@ -4499,6 +4530,16 @@ COPY competition (id, name, league) FROM stdin;
 866	KSL Get Smart Challenge Cup	5
 867	KSL Lockwood Private Hire Trophy	5
 868	Hoyle Cup	5
+850	Hudd AFL - Division 3	2
+852	Hudd AFL - Division 2	2
+853	Hudd AFL - Reserve Division 4	2
+855	Hudd AFL - Reserve Division 2	2
+857	Hudd AFL - Division 4	2
+856	Hudd AFL - Reserve Division 1	2
+854	Hudd AFL - Reserve Division 3	2
+859	WL - Division 1	3
+858	KSL - Division 1	4
+851	Hudd AFL - Division 1	2
 \.
 
 
@@ -5093,6 +5134,14 @@ COPY contact (id, yes_no_club, report_id) FROM stdin;
 1963	Yes	1706
 1964	No	1707
 1965	Yes	1708
+2000	yes	1709
+2050	yes	1710
+2100	yes	1711
+2101	yes	1712
+2150	no	1713
+2200	yes	1714
+2250	yes	1715
+2251	yes	1716
 \.
 
 
@@ -5102,7 +5151,7 @@ COPY contact (id, yes_no_club, report_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 39, true);
+SELECT pg_catalog.setval('contact_id_seq', 45, true);
 
 
 --
@@ -5687,6 +5736,14 @@ COPY home_hospitality (id, score, report_id) FROM stdin;
 1963	9	1706
 1964	10	1707
 1965	7	1708
+2000	9	1709
+2050	9	1710
+2100	9	1711
+2101	1	1712
+2150	7	1713
+2200	10	1714
+2250	10	1715
+2251	10	1716
 \.
 
 
@@ -5696,7 +5753,7 @@ COPY home_hospitality (id, score, report_id) FROM stdin;
 -- Name: home_hospitality_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('home_hospitality_id_seq', 39, true);
+SELECT pg_catalog.setval('home_hospitality_id_seq', 45, true);
 
 
 --
@@ -6281,6 +6338,14 @@ COPY kick_off (id, report_id, late, how_late, fault) FROM stdin;
 1705	1706	f	\N	\N
 1706	1707	f	\N	\N
 1707	1708	f	\N	\N
+1708	1709	f		neither
+1709	1710	t	how late comment	both
+1710	1711	t	asfd	both
+1711	1712	t	asdf	both
+1712	1713	t	33	home
+1713	1714	f		
+1714	1715	t	2 mins	neither
+1715	1716	t	2 mins	neither
 \.
 
 
@@ -6290,7 +6355,7 @@ COPY kick_off (id, report_id, late, how_late, fault) FROM stdin;
 -- Name: late_kick_off_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('late_kick_off_id_seq', 1707, true);
+SELECT pg_catalog.setval('late_kick_off_id_seq', 1715, true);
 
 
 --
@@ -6898,6 +6963,14 @@ COPY overall_score (id, report_id, home_score, away_score, comment) FROM stdin;
 1705	1706	9	9	\N
 1706	1707	10	10	\N
 1707	1708	7	6	\N
+1708	1709	10	9	Test additional comment
+1709	1710	9	9	An additional comment
+1710	1711	9	9	fdsafsdf
+1711	1712	1	1	
+1712	1713	8	10	asfsfsdfsdf
+1713	1714	10	9	asfsdf
+1714	1715	10	10	
+1715	1716	10	10	
 \.
 
 
@@ -6907,7 +6980,7 @@ COPY overall_score (id, report_id, home_score, away_score, comment) FROM stdin;
 -- Name: overall_score_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('overall_score_id_seq', 1707, true);
+SELECT pg_catalog.setval('overall_score_id_seq', 1715, true);
 
 
 --
@@ -6926,6 +6999,8 @@ SELECT pg_catalog.setval('overall_score_report_id_seq', 1, false);
 --
 
 COPY referee (id, first_name, last_name, level) FROM stdin;
+107	First2	Last2	6
+108	First3	Last3	1
 20	David	Armitage	7
 21	Eddie	Aspin	7
 22	Matt	Barber	7
@@ -7012,8 +7087,6 @@ COPY referee (id, first_name, last_name, level) FROM stdin;
 86	Jonathan	Sterling	6
 80	Stephen	Rushworth	5
 106	TestFirst	TestLast	6
-107	First2	Last2	6
-108	First3	Last3	-1
 63	Jonny	Martin	7
 179	Andy	Noble	7
 180	Mike	Stoddart	7
@@ -7609,6 +7682,14 @@ COPY report (id, match_date, competition, referee_id, home_team_id, away_team_id
 1706	2016-03-05	855	48	293	342	2016-03-06
 1707	2016-03-06	866	86	368	357	2016-03-06
 1708	2016-03-05	860	34	278	325	2016-03-07
+1709	2016-03-17	851	106	330	365	2016-03-17
+1710	2016-03-12	868	106	336	350	2016-03-17
+1711	2016-03-12	868	106	360	303	2016-03-17
+1712	2016-03-12	868	106	330	365	2016-03-17
+1713	2016-04-06	851	107	330	365	2016-04-06
+1714	2016-04-02	851	20	336	273	2016-04-06
+1715	2016-04-30	851	106	350	336	2016-04-06
+1716	2016-04-30	851	106	350	336	2016-04-06
 \.
 
 
@@ -7645,7 +7726,7 @@ SELECT pg_catalog.setval('report_home_team_id_seq', 1, false);
 -- Name: report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('report_id_seq', 1708, true);
+SELECT pg_catalog.setval('report_id_seq', 1716, true);
 
 
 --
@@ -8230,6 +8311,14 @@ COPY shirt (id, report_id, did_wear) FROM stdin;
 1705	1706	Both
 1706	1707	Both
 1707	1708	Both
+1708	1709	both
+1709	1710	both
+1710	1711	both
+1711	1712	both
+1712	1713	both
+1713	1714	both
+1714	1715	both
+1715	1716	both
 \.
 
 
@@ -8239,7 +8328,7 @@ COPY shirt (id, report_id, did_wear) FROM stdin;
 -- Name: shirt_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('shirt_id_seq', 1707, true);
+SELECT pg_catalog.setval('shirt_id_seq', 1715, true);
 
 
 --
@@ -8824,6 +8913,14 @@ COPY spectator (id, home_score, away_score, report_id, comment) FROM stdin;
 1705	9	9	1706	\N
 1706	10	10	1707	\N
 1707	6	9	1708	\N
+1708	10	8	1709	Test comment
+1709	9	10	1710	Spectator comment
+1710	9	10	1711	asfdasdf
+1711	1	1	1712	asdfsf
+1712	8	1	1713	asdfsfsf
+1713	7	7	1714	safd
+1714	10	10	1715	
+1715	10	10	1716	
 \.
 
 
@@ -8833,7 +8930,7 @@ COPY spectator (id, home_score, away_score, report_id, comment) FROM stdin;
 -- Name: spectator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('spectator_id_seq', 1707, true);
+SELECT pg_catalog.setval('spectator_id_seq', 1715, true);
 
 
 --
@@ -8972,11 +9069,11 @@ COPY team (id, name, competition) FROM stdin;
 387	Lepton Highlanders (W/R)	860
 388	YMCA (W/R)	860
 389	Newsome (W/R)	860
-390	Cumberworth A	861
 391	Golcar United (W/R)	860
 392	Shelley (WYL)	860
 393	WL Royal Dolphins	859
-394	 KKS Spartans Reserves	855
+390	Cumberworth A	854
+394	KKS Spartans Reserves	855
 \.
 
 
@@ -9562,6 +9659,14 @@ COPY team_sheet (id, received, report_id) FROM stdin;
 1705	Both	1706
 1706	Both	1707
 1707	Both	1708
+1708	both	1709
+1709	both	1710
+1710	both	1711
+1711	both	1712
+1712	both	1713
+1713	both	1714
+1714	both	1715
+1715	both	1716
 \.
 
 
@@ -9571,7 +9676,7 @@ COPY team_sheet (id, received, report_id) FROM stdin;
 -- Name: team_sheet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('team_sheet_id_seq', 1707, true);
+SELECT pg_catalog.setval('team_sheet_id_seq', 1715, true);
 
 
 --
@@ -9590,9 +9695,10 @@ SELECT pg_catalog.setval('team_sheet_report_id_seq', 1, false);
 --
 
 COPY use (id, referee_id, email, password, type, created, approved, remind, validated, validation_code) FROM stdin;
-23	106	a@a.com	$2a$10$EKD.X3iuYjnEZaOJ957bx.ZEDD58NqZ6DRryxHwCxK9/TuD.OtLcy	ADMIN	2016-03-11	t	t	t	\N
-24	107	b@b.com	$2a$10$0CbS/X0OZSvW8ocHWnT7s.kEbQdeYIGuphI7wg4B4HGwf.bp6N6Yq	DEFAULT	2016-03-11	t	t	f	db8579d9-912c-4da1-9699-c18328a29c54
-25	108	c@c.com	$2a$10$MiTwunGmo.6a668Cb6myoe3joXSmWTC24kWE.Cv485BGfrRVjQ6aG	DEFAULT	2016-03-11	f	t	f	33628a37-2e05-4e59-b839-2ac42220de4f
+24	107	b@b.com	$2a$10$0CbS/X0OZSvW8ocHWnT7s.kEbQdeYIGuphI7wg4B4HGwf.bp6N6Yq	ADMIN	2016-03-11	t	f	f	REDACTED
+26	86	JSterling8@gmail.com	$2a$10$wIk.CbUhJKryN7GkiyUtmOBrpm4SfCVRah60JwNapZl.PUsxpWtEm	ADMIN	2016-04-06	t	t	t	REDACTED
+23	106	a@a.com	$2a$10$EKD.X3iuYjnEZaOJ957bx.ZEDD58NqZ6DRryxHwCxK9/TuD.OtLcy	ADMIN	2016-03-11	t	f	t	REDACTED
+25	108	c@c.com	$2a$10$MiTwunGmo.6a668Cb6myoe3joXSmWTC24kWE.Cv485BGfrRVjQ6aG	DEFAULT	2016-03-11	f	f	f	REDACTED
 \.
 
 
@@ -9602,7 +9708,7 @@ COPY use (id, referee_id, email, password, type, created, approved, remind, vali
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_id_seq', 25, true);
+SELECT pg_catalog.setval('user_id_seq', 26, true);
 
 
 --
@@ -9968,7 +10074,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-03-12 20:39:23
+-- Completed on 2016-04-07 00:17:29
 
 --
 -- PostgreSQL database dump complete
