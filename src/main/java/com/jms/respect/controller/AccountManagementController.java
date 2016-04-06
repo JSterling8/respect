@@ -1,6 +1,5 @@
 package com.jms.respect.controller;
 
-import com.jms.respect.config.security.RespectUserDetails;
 import com.jms.respect.dao.Referee;
 import com.jms.respect.dao.Report;
 import com.jms.respect.dao.User;
@@ -8,7 +7,6 @@ import com.jms.respect.service.AccountService;
 import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,8 +34,7 @@ public class AccountManagementController {
     @RequestMapping(value = "/my-reports", method = RequestMethod.GET)
     public ModelAndView getReportsForUser() {
         ModelAndView modelAndView = new ModelAndView("user-reports");
-        RespectUserDetails respectUserDetails = (RespectUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = respectUserDetails.getUser();
+        User user = controllerHelper.getUser();
 
         if(user == null) {
             return new ModelAndView("error");
@@ -51,5 +48,18 @@ public class AccountManagementController {
         modelAndView.addObject("admin", controllerHelper.isAdmin());
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = {"/my-account", "/account", "/user-account"}, method = RequestMethod.GET)
+    public ModelAndView getMyAccountPage() {
+        ModelAndView mav = new ModelAndView("user-account");
+        mav.addObject("admin", controllerHelper.isAdmin());
+
+        User user = controllerHelper.getUser();
+        // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
+        user.setValidationCode("REDACTED");
+        mav.addObject("user", user);
+
+        return mav;
     }
 }

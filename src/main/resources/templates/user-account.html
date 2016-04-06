@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Account</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="/css/general.css"
+          th:href="@{/css/general.css}" rel="stylesheet" media="screen"/>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+    <div th:replace="fragments/navigation-header :: nav-header" />
+</head>
+<body background="/img/paper_2.png">
+    <div class="super-padded">
+        <div>
+            <h3>Account Information</h3>
+        </div>
+        <table class="table table-bordered table-condensed table-account">
+            <form action="/account/update" method="post">
+                <tr>
+                    <td><label>Name</label></td>
+                    <td th:text="${user.refereeId.firstName} + ' ' + ${user.refereeId.lastName}" />
+                </tr>
+                <tr>
+                    <td><label>Email</label></td>
+                    <td>
+                        <input type="email" name="email" th:value="${user.email}" th:required="required" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Validated</label></td>
+                    <td th:text="${user.validated}" />
+                </tr>
+                <tr>
+                    <td><label>Level</label></td>
+                    <td>
+                        <select name="level" th:required="required">
+                            <option th:each="i : ${#numbers.sequence(1,10)}" th:value="${i}" th:text="${i}" th:selected="${i == user.refereeId.level}"/>
+                        </select>
+                    </td>
+                </tr>
+                <tr th:if="${admin}">
+                    <td><label>Account Type</label></td>
+                    <td th:text="${user.type}" />
+                </tr>
+                <tr>
+                    <td><label>Created</label></td>
+                    <td th:text="${user.created}" />
+                </tr>
+                <tr>
+                    <td><label>Remind</label></td>
+                    <td>
+                        <input type="checkbox" name="remind" th:checked="${user.remind}" th:required="required" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Update Account Info</button>
+                    </td>
+                </tr>
+            </form>
+                <tr>
+                    <td colspan="2">
+                        <form action="/my-reports" method="get">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">View Submitted Reports</button>
+                        </form>
+                    </td>
+                </tr>
+        </table>
+    </div>
+</body>
+</html>
