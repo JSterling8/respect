@@ -1,8 +1,11 @@
 package com.jms.respect.controller;
 
 import com.jms.respect.config.security.RespectUserDetails;
+import com.jms.respect.dao.Referee;
+import com.jms.respect.dao.Report;
 import com.jms.respect.dao.User;
 import com.jms.respect.service.AccountService;
+import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,12 +25,15 @@ import java.util.List;
 public class AdminAccountController {
     private final AccountService accountService;
     private final ControllerHelper controllerHelper;
+    private final FormService formService;
 
     @Autowired
     public AdminAccountController(AccountService accountService,
-                                  ControllerHelper controllerHelper) {
+                                  ControllerHelper controllerHelper,
+                                  FormService formService) {
         this.accountService = accountService;
         this.controllerHelper = controllerHelper;
+        this.formService = formService;
     }
 
     @RequestMapping(value = "/respect/admin/users", method = RequestMethod.GET)
@@ -45,6 +51,24 @@ public class AdminAccountController {
         ModelAndView modelAndView = new ModelAndView("admin-user");
         User user = accountService.getUserById(userId);
 
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("admin", controllerHelper.isAdmin());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/respect/admin/reports/user/{id}", method = RequestMethod.GET)
+    public ModelAndView getReportsForUser(@PathVariable("id") Integer userId) {
+        ModelAndView modelAndView = new ModelAndView("user-reports");
+        User user = accountService.getUserById(userId);
+        if(user == null) {
+            return new ModelAndView("error");
+        }
+
+        Referee referee = user.getRefereeId();
+
+        List<Report> reports = formService.getAllReportsByReferee(referee);
+        modelAndView.addObject("reports", reports);
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
 
