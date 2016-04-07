@@ -1,5 +1,7 @@
 package com.jms.respect.dto;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
@@ -8,14 +10,19 @@ import java.sql.Date;
  */
 public class CompletedForm {
     @NotNull
+    @NotEmpty
     private String league;
     @NotNull
+    @NotEmpty
     private String competition;
     @NotNull
+    @NotEmpty
     private String referee;
     @NotNull
+    @NotEmpty
     private String homeTeam;
     @NotNull
+    @NotEmpty
     private String awayTeam;
     @NotNull
     private Date matchDate;
@@ -23,12 +30,15 @@ public class CompletedForm {
     private Short changingFacilityScore;
     private String changingFacilityComment;
     @NotNull
+    @NotEmpty
     private String kickOffLate;
     private String kickOffHowLate;
     private String kickOffFault;
     @NotNull
+    @NotEmpty
     private String ball;
     @NotNull
+    @NotEmpty
     private String shirt;
     @NotNull
     private Short spectatorHome;
@@ -48,10 +58,13 @@ public class CompletedForm {
     @NotNull
     private Short hospitality;
     @NotNull
+    @NotEmpty
     private String teamSheet;
     @NotNull
+    @NotEmpty
     private String contact;
     @NotNull
+    @NotEmpty
     private String captainArmband;
     @NotNull
     private Short overallScoreHome;
