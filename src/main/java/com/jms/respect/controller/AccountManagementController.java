@@ -135,8 +135,6 @@ public class AccountManagementController {
                 ModelAndView mav = new ModelAndView("/user-account");
                 mav.addObject("admin", controllerHelper.isAdmin());
 
-                controllerHelper.reloadUserFromDb();
-
                 User user = controllerHelper.getUser();
                 // Overriding validation code so user can't grab it from the object in javascript and validate a fake email
                 mav.addObject("accountUpdateDto", accountUpdateDto);
