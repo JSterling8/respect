@@ -268,8 +268,14 @@ public class FormService {
     public List<String> getCompetitions() {
         List<Competition> competitions = Lists.newArrayList(competitionRepository.findAll());
 
-        return  competitions.stream().sorted((c1, c2) -> c1.getName().compareTo(c2.getName())).collect(Collectors.toList())
-                .stream().map(Competition::getName).collect(Collectors.toList());
+        return  competitions
+                    .stream()
+                        .sorted((c1, c2) -> c1.getName()
+                        .compareTo(c2.getName()))
+                        .collect(Collectors.toList())
+                    .stream()
+                        .map(Competition::getName)
+                        .collect(Collectors.toList());
     }
 
     public List<String> getReferees() {
