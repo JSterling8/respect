@@ -10,7 +10,7 @@ https://huddersfieldrespect.co.uk
 
 ##Running Locally##
 Add an application.properties file to the root of the /src/main/resources directory.  Here's an example:
-
+```
 server.port=8082
 
 spring.jpa.database=POSTGRESQL
@@ -27,3 +27,4 @@ spring.thymeleaf.cache=false
 spring.mvc.favicon.enabled=true
 
 mailgun.api.key=key-ed5efee53f1ac780c58c73643fde2733
+```
