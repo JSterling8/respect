@@ -1,38 +1,61 @@
 package com.jms.respect.dto;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 /**
  * Created by anon on 25/02/2016.
  */
 public class CompletedForm {
+    @NotNull
     private String league;
+    @NotNull
     private String competition;
+    @NotNull
     private String referee;
+    @NotNull
     private String homeTeam;
+    @NotNull
     private String awayTeam;
+    @NotNull
     private Date matchDate;
+    @NotNull
     private Short changingFacilityScore;
     private String changingFacilityComment;
+    @NotNull
     private String kickOffLate;
     private String kickOffHowLate;
     private String kickOffFault;
+    @NotNull
     private String ball;
+    @NotNull
     private String shirt;
+    @NotNull
     private Short spectatorHome;
+    @NotNull
     private Short spectatorAway;
     private String spectatorComment;
+    @NotNull
     private Short assistantHome;
+    @NotNull
     private Short assistantAway;
     private String assistantComment;
+    @NotNull
     private Short captainLiaisonHome;
+    @NotNull
     private Short captainLiaisonAway;
     private String captainLiaisonComment;
+    @NotNull
     private Short hospitality;
+    @NotNull
     private String teamSheet;
+    @NotNull
     private String contact;
+    @NotNull
     private String captainArmband;
+    @NotNull
     private Short overallScoreHome;
+    @NotNull
     private Short overallScoreAway;
     private String overallScoreComment;
     private Date dateFormSubmitted;

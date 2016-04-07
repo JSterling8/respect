@@ -10,11 +10,14 @@ import com.jms.respect.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 /**
  * Created by anon on 25/02/2016.
@@ -46,7 +49,11 @@ public class FormController {
     }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
-    public ModelAndView confirmForm(CompletedForm completedForm) {
+    public ModelAndView confirmForm(@Valid CompletedForm completedForm, BindingResult result) {
+        if(result.hasErrors()) {
+            return new ModelAndView("error");
+        }
+
         ModelAndView modelAndView = new ModelAndView("confirm");
 
         modelAndView.addObject("form", completedForm);
@@ -56,7 +63,10 @@ public class FormController {
     }
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public ModelAndView submitForm(CompletedForm completedForm) {
+    public ModelAndView submitForm(@Valid CompletedForm completedForm, BindingResult result) {
+        if(result.hasErrors()) {
+            return new ModelAndView("error");
+        }
         formService.submitForm(completedForm);
 
         return new ModelAndView("redirect:success");
