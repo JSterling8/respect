@@ -88,6 +88,7 @@ public class AdminAccountController {
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("passwordUpdateDto", new PasswordUpdateDto());
 
         return modelAndView;
     }
@@ -100,6 +101,7 @@ public class AdminAccountController {
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("passwordUpdateDto", new PasswordUpdateDto());
 
         return modelAndView;
     }
@@ -112,6 +114,7 @@ public class AdminAccountController {
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("passwordUpdateDto", new PasswordUpdateDto());
 
         return modelAndView;
     }
@@ -124,6 +127,7 @@ public class AdminAccountController {
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("passwordUpdateDto", new PasswordUpdateDto());
 
         return modelAndView;
     }
@@ -136,6 +140,7 @@ public class AdminAccountController {
         User user = accountService.getUserById(userId);
         modelAndView.addObject("user", user);
         modelAndView.addObject("admin", controllerHelper.isAdmin());
+        modelAndView.addObject("passwordUpdateDto", new PasswordUpdateDto());
 
         return modelAndView;
     }
