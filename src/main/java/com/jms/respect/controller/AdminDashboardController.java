@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by anon on 03/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 03/03/2016.
  */
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller

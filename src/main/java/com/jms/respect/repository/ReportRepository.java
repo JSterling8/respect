@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Created by anon on 26/02/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 26/02/2016.
  */
 public interface ReportRepository extends CrudRepository<Report, Long> {
     List<Report> findAllByMatchDateBetween(Date start, Date end);

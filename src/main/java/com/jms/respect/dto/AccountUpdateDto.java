@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by anon on 06/04/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 06/04/2016.
  */
 public class AccountUpdateDto {
     @NotNull

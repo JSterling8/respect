@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Created by anon on 06/04/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 06/04/2016.
  */
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),

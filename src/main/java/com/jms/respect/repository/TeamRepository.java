@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 /**
- * Created by anon on 05/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 05/03/2016.
  */
 public interface TeamRepository extends CrudRepository<Team, Long> {
     Team findByName(String name);

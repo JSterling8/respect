@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Created by anon on 02/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 02/03/2016.
  */
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
@@ -39,6 +39,7 @@ public class AccountCreationDto {
     private String password;
 
     @NotNull
+    @Size(min = 6, max = 100, message = "Password must be 6-100 characters long")
     private String confirmPassword;
 
     private Boolean remind;

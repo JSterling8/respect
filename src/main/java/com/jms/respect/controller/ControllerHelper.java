@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 /**
- * Created by anon on 12/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 12/03/2016.
  */
 @Controller
 public class ControllerHelper {

@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.Map;
 
 /**
- * Created by anon on 12/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 12/03/2016.
  */
 public class StatsTableDataDto {
     private String statName;

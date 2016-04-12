@@ -11,6 +11,8 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * Not my code: It's from https://stackoverflow.com/questions/1972933/cross-field-validation-with-hibernate-validator-jsr-303/2155576#2155576
+ *
  * Validation annotation to validate that 2 fields have the same value.
  * An array of fields and their matching confirmation fields can be supplied.
  *

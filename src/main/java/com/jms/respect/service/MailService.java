@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Created by anon on 06/04/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 06/04/2016.
  */
 @Service
 public class MailService {

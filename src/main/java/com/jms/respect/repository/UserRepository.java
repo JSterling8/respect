@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 /**
- * Created by anon on 02/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 02/03/2016.
  */
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmailIgnoreCase(String email);

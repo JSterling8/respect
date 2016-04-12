@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by anon on 05/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 05/03/2016.
  */
 @Repository
 public interface CompetitionRepository extends CrudRepository<Competition, Long> {

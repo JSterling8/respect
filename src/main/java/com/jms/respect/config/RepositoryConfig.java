@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * Created by anon on 30/01/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 30/01/2016.
  */
 @Configuration
 @EnableJpaRepositories(basePackages = "com.jms.respect.repository")

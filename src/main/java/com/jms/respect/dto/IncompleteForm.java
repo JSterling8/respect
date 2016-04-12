@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Created by anon on 07/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 07/03/2016.
  */
 public class IncompleteForm {
     private List<String> leagues;

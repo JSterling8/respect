@@ -1,7 +1,7 @@
 package com.jms.respect.config;
 
 /**
- * Created by anon on 30/01/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 30/01/2016.
  */
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

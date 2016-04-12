@@ -14,7 +14,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
- * Created by anon on 12/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 12/03/2016.
  */
 @Service
 public class CompetitionService {

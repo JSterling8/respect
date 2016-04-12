@@ -17,7 +17,7 @@ import java.io.FileInputStream;
 import java.sql.Date;
 
 /**
- * Created by anon on 12/03/2016.
+ * Created by Jonathan Sterling <Jon@thanCodes.com> on 12/03/2016.
  */
 @Service
 public class HistoricalImporterService {
