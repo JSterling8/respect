@@ -6,7 +6,8 @@
 Spring Boot
 
 ##Live Demo##
-https://huddersfieldrespect.co.uk
+https://huddersfieldrespect.co.uk  
+You can login with a@a.com/tester
 
 ##Running Locally##
 Add an application.properties file to the root of the /src/main/resources directory.  Here's an example:
