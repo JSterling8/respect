@@ -1,7 +1,5 @@
 # Huddersfield Respect
 
-@Author - Jonathan Sterling
-
 ## Framework
 Spring Boot
 
