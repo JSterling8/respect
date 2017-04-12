@@ -1,15 +1,15 @@
-#Huddersfield Respect#
+# Huddersfield Respect
 
 @Author - Jonathan Sterling
 
-##Framework##
+## Framework
 Spring Boot
 
-##Live Demo##
+## Live Demo
 https://huddersfieldrespect.co.uk  
 You can login with a@a.com/tester
 
-##Running Locally##
+## Running Locally
 Add an application.properties file to the root of the /src/main/resources directory.  Here's an example:
 ```
 server.port=PORT
@@ -31,8 +31,6 @@ spring.mvc.favicon.enabled=true
 
 mailgun.api.key=YOURKEY
 ```
-Create a PostgreSQL database (Spring will create the tables for you)
-
-Build the application by opening a command line and executing 'mvn clean package'
-
-Change to the /target directory and run the command 'java -jar respect-1.0-SNAPSHOT.jar
+* Create a PostgreSQL database (Spring will create the tables for you)  
+* Build the application by opening a command line and executing 'mvn clean package'    
+* Change to the /target directory and run the command 'java -jar respect-1.0-SNAPSHOT.jar
